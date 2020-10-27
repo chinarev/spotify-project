@@ -1,6 +1,6 @@
 import React from "react";
 import pic from '../../assets/img/test_user_icon.jpg'
-import '../../assets/AllPlaylistsStyle.css'
+import '../../assets/allPlaylistsStyle.css'
 
 class Header extends React.Component {
     render() {
