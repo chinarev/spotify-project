@@ -5,24 +5,14 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url(public/img/main_logo.jpg);
-  background-size: cover;
-  background-color: #FF7C30;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  /*background-image: url(public/img/main_logo.jpg);*/
+  /*background-size: cover;*/
+  /*background-color: #FF7C30;*/
+  /*background-repeat: no-repeat;*/
+  /*background-attachment: fixed;*/
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
-}
-
-.main_name {
-  height: 100px;
-  background-image: url(public/img/spotify_logo.png);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-right: -50%;
-  transform: translate(-50%, -50%);
 }
