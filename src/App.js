@@ -1,6 +1,6 @@
 import React from "react";
-import MainPage from "./components/MainPage/MainPage";
-import AutorizationForm from "./components/MainPage/AutorizationForm";
+import MainPage from "./components/MainPage/Head";
+import AuthorizationForm from "./components/MainPage/Body";
 import Head from "./components/all-playlists/Head";
 import Header from "./components/all-playlists/Header";
 import PlaylistContainer from "./components/all-playlists/PlaylistContainer";
@@ -14,7 +14,7 @@ class App extends React.Component {
                 <div className="App">
                     <Route path="/" exact component={MainPage}>
                         <div> <MainPage /> </div>
-                        <div> <AutorizationForm /> </div>
+                        <div> <AuthorizationForm /> </div>
                     </Route>
                     <Route path="/second" exact component={Head}>
                         <div> <Head /> </div>
