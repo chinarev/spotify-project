@@ -1,5 +1,4 @@
 import React from "react";
-import '../../assets/mainStyle.css'
 import pic from '../../assets/img/spotify_logo.png'
 
 class Body extends React.Component {

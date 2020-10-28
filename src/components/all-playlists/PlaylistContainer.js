@@ -1,6 +1,5 @@
 import React from "react";
 import pic from '../../assets/img/test_album_cover.jpg'
-import '../../assets/allPlaylistsStyle.css'
 
 class PlaylistContainer extends React.Component {
     render() {
