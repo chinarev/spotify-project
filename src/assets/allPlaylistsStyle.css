@@ -1,88 +1,86 @@
 * {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
-body {
-	background-color: #FF7C30;
-	background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), rgba(138, 51, 51, 0.67)), url(img/background2.jpg);
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	background-size: cover;
-	font-family: 'Comfortaa', cursive;
-	text-align: center;
+div.all-playlists-page {
+    background-color: #FF7C30;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), rgba(138, 51, 51, 0.67)), url(img/background2.jpg);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    font-family: 'Comfortaa', cursive;
+    text-align: center;
 }
 
-header{
-	position: fixed;
-	width: 100%;
-	background-color: rgba(255, 255, 255, 0.15);
+header.all-playlists-page {
+    position: fixed;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.15);
 }
 
-button, .user_info{
-	width: auto;
-	height: 60px;
-	border: none;
-	background-color: #DF8661;
-	color: white;
-	font-family: 'Comfortaa', cursive;
-	-webkit-border-radius:50px;
-	font-size: 30px;
-	margin: 5px;
-	padding-left: 10px;
-	padding-right: 10px;
+#log_out, #user_info {
+    width: auto;
+    height: 60px;
+    border: none;
+    background-color: #DF8661;
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    -webkit-border-radius: 50px;
+    font-size: 30px;
+    margin: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
-button{
-	box-shadow: 1px 1px 3px gray;
+#log_out {
+    box-shadow: 1px 1px 3px gray;
+
+    float: right;
 }
 
-.log_out{
-	float: right;
+#user_info {
+    float: left;
+    align-items: center;
+    display: flex;
 }
 
-.user_info{
-	float: left;
-	align-items: center;
-	display: flex;
-}
-
-.user_icon{
-	border-radius:50%;
-	margin-right: 10px;
-	float: left;
+#user_icon {
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
 }
 
 .grid-container {
-	justify-content: center;
-	margin: auto;
-//text-align: center;
-	display: grid;
-	grid-template-columns: repeat(auto-fill,400px);
-	grid-gap: 120px;
-	padding-top: 120px;
+    justify-content: center;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 400px);
+    grid-gap: 120px;
+    padding-top: 120px;
 
 }
+
 .grid-item {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-size: 30px;
-	color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    color: white;
 
 }
 
-.playlist-name{
-	color: white;
-	text-shadow: 3px 2px 2px black;
+.playlist-name {
+    color: white;
+    text-shadow: 3px 2px 2px black;
 }
 
 
-.album-cover{
-	max-width:100%;
-	max-height:100%;
-	box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.35);
-	margin-bottom: 10px;
+.album-cover {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.35);
+    margin-bottom: 10px;
 }
 

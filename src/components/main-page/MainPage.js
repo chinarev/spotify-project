@@ -8,10 +8,8 @@ class MainPage extends React.Component {
         document.title = 'SPALCO - Main page';
     }
 
-
     render() {
-        return <div>
-
+        return <div className="main-page">
             <Body/>
         </div>
     }

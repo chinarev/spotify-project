@@ -3,17 +3,16 @@ import pic from '../../assets/img/test_user_icon.jpg'
 
 class Header extends React.Component {
     render() {
-        return <header>
-            <div className="user_info">
-                <img src={pic} className="user_icon" width={50} height={50} />
-                <p>User name</p>
+        return <header className="all-playlists-page">
+            <div id="user_info">
+                <img src={pic} id="user_icon" width={50} height={50} alt="User profile picture"/>
+                <p id="user-name">User name</p>
             </div>
-            <button className="log_out">
+            <button id="log_out">
                 Log out
             </button>
         </header>;
     }
-
 }
 
 export default Header;
