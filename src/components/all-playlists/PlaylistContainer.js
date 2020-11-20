@@ -2,59 +2,39 @@ import React from "react";
 import pic from '../../assets/img/test_album_cover.jpg'
 
 class PlaylistContainer extends React.Component {
-    render() {
-        return <div className="grid-container all-playlists-page">
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 1</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 2</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 3</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 4</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 5</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 6</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 7</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 8</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 9</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 10</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 11</p>
-            </div>
-            <div className="grid-item">
-                <img src={pic} className="album-cover" alt="Album cover image"/>
-                <p className="playlist-name">playlist 12</p>
-            </div>
-        </div>;
+
+    GetPlaylist(album_cover, album_name) {
+        const cover = React.createElement(
+            'img',
+            {className: "album-cover", src: album_cover, alt: "Album cover image"}
+        )
+
+        const name = React.createElement(
+            'p',
+            {className: "playlist-name"},
+            album_name
+        )
+
+        return React.createElement(
+            'div',
+            {className: "grid-item"},
+            [cover, name]
+        );
     }
 
+    render() {
+        let albums = [];
+        let i;
+        let list_size = 50;
+        for (i = 1; i <= list_size; i++) {
+            albums[i] = this.GetPlaylist(pic, "playlist " + i);
+        }
+        return React.createElement(
+            'div',
+            {className: "grid-container all-playlists-page"},
+            albums
+        );
+    }
 }
 
 export default PlaylistContainer;
