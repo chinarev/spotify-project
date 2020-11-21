@@ -1,6 +1,6 @@
 import React from "react";
 import Body from "./Body";
-import '../../assets/mainStyle.css'
+import '../../assets/mainPageStyle.css'
 
 
 class MainPage extends React.Component {
