@@ -3,6 +3,7 @@ import pic from '../../assets/img/spotify_logo.png'
 import {authEndpoint, clientId, redirectUri, scopes} from "../../service/config.js";
 import hash from "../../service/hash.js";
 
+
 class Body extends React.Component {
     onclick() {
         window.location.assign(`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`);
@@ -19,8 +20,9 @@ class Body extends React.Component {
             });
 
         }
+
     }
-//href={`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`}
+
     render() {
         return <div id="main-container">
             <h1 className="main-page">Welcome to SPALCO</h1>
