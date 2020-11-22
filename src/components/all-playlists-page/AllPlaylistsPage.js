@@ -3,9 +3,11 @@ import Header from "./Header";
 import PlaylistContainer from "./PlaylistContainer";
 import '../../assets/allPlaylistsStyle.css'
 
+
 class AllPlaylistsPage extends React.Component {
     componentDidMount() {
         document.title = 'SPALCO - All playlists';
+
     }
 
     render() {
