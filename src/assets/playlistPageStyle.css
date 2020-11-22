@@ -1,9 +1,4 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-body {
+div.selected-playlist-page {
     background-color: #FF7C30;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), rgba(138, 51, 51, 0.67)), url(img/background2.jpg);
     background-repeat: no-repeat;
@@ -11,91 +6,63 @@ body {
     background-size: cover;
     font-family: 'Comfortaa', cursive;
     text-align: center;
+    display: block;
+    height: 100vh;
+    width: 100vw;
 }
 
-header{
-    position: fixed;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.15);
-}
-
-button, .user_info{
+button.side-options {
     width: auto;
     height: 60px;
     border: none;
     background-color: #DF8661;
     color: white;
     font-family: 'Comfortaa', cursive;
-    -webkit-border-radius:50px;
+    -webkit-border-radius: 50px;
     font-size: 30px;
-    margin: 5px;
     padding-left: 10px;
     padding-right: 10px;
-}
 
-button{
     box-shadow: 1px 1px 3px gray;
+    display: block;
+    margin-left: 15px;
+    margin-bottom: 15px;
 }
 
-.log_out{
-    float: right;
-}
-
-.Change_name{
-    float: right;
-}
-
-.Change_cover{
-    float: right;
-}
-
-.user_info{
-    float: left;
+#side-options-container {
+    display: block;
     align-items: center;
-    display: flex;
-}
-
-.user_icon{
-    border-radius:50%;
+    position: relative;
+    margin-left: auto;
     margin-right: 10px;
-    float: left;
 }
 
-.sidebar{
-    justify-content: right;
-    margin: auto;
-    text-align: right;
-    display: grid;
-}
-
-.img-container {
-    justify-content: center;
-    margin: auto;
-    text-align: center;
-    display: grid;
-    padding-top: 180px;
-
-}
-.grid-item {
-    display: flex;
-    flex-direction: column;
+.playlist-info {
+    display: inline-block;
     justify-content: center;
     align-items: center;
     font-size: 30px;
     color: white;
-
+    position: relative;
+    margin-left: auto;
 }
 
-.playlist-name{
+#playlist-name {
     color: white;
     text-shadow: 3px 2px 2px black;
 }
 
-
-.album-cover{
-    max-width:100%;
-    max-height:100%;
+#playlist-cover {
+    max-width: 100%;
+    max-height: 100%;
     box-shadow: 3px 3px 15px rgba(0, 0, 0, 0.35);
     margin-bottom: 10px;
 }
 
+#playlist-page-container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
