@@ -3,7 +3,7 @@ import pic from '../../assets/img/spotify_logo.png'
 
 class Body extends React.Component {
     onclick() {
-        window.location.assign('http://localhost:3000/second/');
+        window.location.assign('http://localhost:8888');
     }
 
     render() {
