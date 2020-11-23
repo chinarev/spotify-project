@@ -1,7 +1,19 @@
 import React from "react";
 import pic from '../../assets/img/test_album_cover.jpg'
+import SpotifyWebApi from "spotify-web-api-js";
+
+var spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 class PlaylistContainer extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            user_id: null,
+            playlists: null
+        };
+    }
+
     onclick() {
         window.location.assign('http://localhost:3000/playlist/');
     }
@@ -25,13 +37,40 @@ class PlaylistContainer extends React.Component {
         );
     }
 
+    getUserID = () => {
+        spotifyApi.getMe()
+            .then(data => this.setState({
+                user_id: data.id
+            }));
+    }
+
+    getPlaylists = () => {
+        spotifyApi.getUserPlaylists(this.state.user_id)
+            .then(data => this.setState({
+                playlists: data.items
+            }));
+    }
+
+    componentDidMount() {
+        this.getUserID();
+        this.getPlaylists();
+
+    }
+
     render() {
+        console.log("getUserID: " + this.state.user_id);
+        console.log("getPlaylists: " + this.state.playlists);
+
         let albums = [];
         let i;
-        let list_size = 4;
-        for (i = 1; i <= list_size; i++) {
-            albums[i] = this.GetPlaylist(pic, "playlist " + i);
+        let list_size = 0;
+        if (this.state.playlists != null) {
+            list_size = this.state.playlists.length;
+            for (i = 0; i < list_size; i++) {
+                albums[i] = this.GetPlaylist(this.state.playlists[i].images[0].url, this.state.playlists[i].name);
+            }
         }
+
         return React.createElement(
             'div',
             {className: "grid-container all-playlists-page"},
