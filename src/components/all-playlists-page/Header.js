@@ -11,7 +11,8 @@ class Header extends React.Component {
         super(props);
         this.state = {
             user_name: "<User name>",
-            image: null
+            image: null,
+            user_id: null
         };
 
     }
@@ -21,10 +22,10 @@ class Header extends React.Component {
         spotifyApi.getMe()
             .then(data => this.setState({
                 user_name: data.display_name,
-                image: data.images[0].url
+                image: data.images[0].url,
+                user_id: data.id
             }));
     }
-
 
     componentDidMount() {
         this.getUser();

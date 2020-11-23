@@ -55,7 +55,8 @@ header.all-playlists-page {
     justify-content: center;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 400px);
+    grid-template-columns: repeat(auto-fill, 500px);
+    min-height: 100vh;
     grid-gap: 120px;
     padding-top: 120px;
 

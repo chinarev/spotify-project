@@ -28,7 +28,7 @@ class PlaylistContainer extends React.Component {
     render() {
         let albums = [];
         let i;
-        let list_size = 50;
+        let list_size = 3;
         for (i = 1; i <= list_size; i++) {
             albums[i] = this.GetPlaylist(pic, "playlist " + i);
         }
