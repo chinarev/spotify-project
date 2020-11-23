@@ -27,6 +27,7 @@ class AllPlaylistsPage extends React.Component {
 
         return <div className="all-playlists-page">
             <Header/>
+            <h1 id="playlists_title">Your playlists</h1>
             <PlaylistContainer/>
         </div>
     }

@@ -59,17 +59,17 @@ header.all-playlists-page {
     min-height: 100vh;
     grid-gap: 120px;
     padding-top: 120px;
+    padding-bottom: 15px;
 
 }
 
 .grid-item {
-    display: flex;
+    display: block;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-size: 30px;
     color: white;
-
 }
 
 .playlist-name {
@@ -85,3 +85,9 @@ header.all-playlists-page {
     margin-bottom: 10px;
 }
 
+#playlists_title {
+    font-size: 50px;
+    padding-top: 150px;
+    text-shadow: 3px 2px 2px black;
+    color: white;
+}
