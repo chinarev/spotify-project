@@ -1,7 +1,5 @@
 import React from "react";
 import SpotifyWebApi from "spotify-web-api-js";
-import {authEndpoint, clientId, redirectUri, scopes} from "../../service/config";
-
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
@@ -19,6 +17,7 @@ class Header extends React.Component {
 
 
     getUser = () => {
+        spotifyApi.
         spotifyApi.getMe()
             .then(data => this.setState({
                 user_name: data.display_name,

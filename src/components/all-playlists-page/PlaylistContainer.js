@@ -14,7 +14,9 @@ class PlaylistContainer extends React.Component {
         };
     }
 
-    onclick() {
+    onclick(img, playlist_name) {
+        localStorage.setItem("selected_playlist_name", playlist_name);
+        localStorage.setItem("selected_playlist_image", img);
         window.location.assign('http://localhost:3000/playlist/');
     }
 
@@ -32,7 +34,7 @@ class PlaylistContainer extends React.Component {
 
         return React.createElement(
             'div',
-            {className: "grid-item playlist", onClick: () => this.onclick()},
+            {className: "grid-item playlist", onClick: () => this.onclick(album_cover, album_name)},
             [cover, name],
         );
     }

@@ -7,7 +7,6 @@ import '../../assets/allPlaylistsStyle.css'
 class AllPlaylistsPage extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             token: new URL(window.location).hash.split('&').filter(function (el) {
                 if (el.match('access_token') !== null) return true;
@@ -19,7 +18,6 @@ class AllPlaylistsPage extends React.Component {
 
     componentDidMount() {
         document.title = 'SPALCO - All playlists';
-
     }
 
     render() {
