@@ -12,7 +12,6 @@ class AllPlaylistsPage extends React.Component {
                 if (el.match('access_token') !== null) return true;
             })[0].split('=')[1],
         };
-
         localStorage.setItem('textToken', this.state.token);
     }
 
@@ -30,6 +29,5 @@ class AllPlaylistsPage extends React.Component {
         </div>
     }
 }
-
 
 export default AllPlaylistsPage;
