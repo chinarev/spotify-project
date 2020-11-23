@@ -2,52 +2,46 @@ import React from "react";
 import pic from '../../assets/img/test_user_icon.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
+const spotifyApi = new SpotifyWebApi();
+
 
 class Header extends React.Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            user_name: "<User name>"
+        };
+
         this.token = new URL(window.location).hash.split('&').filter(function (el) {
             if (el.match('access_token') !== null) return true;
         })[0].split('=')[1];
         console.log("My token: " + this.token);
+        spotifyApi.setAccessToken(this.token);
 
-        this.spotifyApi = new SpotifyWebApi();
-        this.spotifyApi.setAccessToken(this.token);
-        this.userName = this.getUserName();
-
-        console.log("API in constructor: " + this.spotifyApi);
+        console.log("API in constructor: " + spotifyApi);
         console.log("Token in constructor: " + this.token);
-        console.log("name in constructor: " + this.userName);
+        console.log("name in constructor: " + this.state.user_name);
+    }
+
+
+    getUser = () => {
+        spotifyApi.getMe()
+            .then(data => this.setState({user_name: data.display_name}));
     }
 
 
     componentDidMount() {
-        console.log("name in mount: " + this.userName);
+        this.getUser();
+        console.log("name in mount: " + this.state.user_name);
     }
 
-    getUserName() {
-        console.log("API in function: " + this.spotifyApi);
-        console.log("Token in function: " + this.token);
-
-        this.spotifyApi.getMe().then(
-            function (data) {
-                console.log('My name: ', data.display_name);
-            },
-            function (err) {
-                console.error(err);
-            }
-        );
-
-        return "kek";
-    }
 
     render() {
-        console.log("name in render: " + this.userName);
         return <header className="all-playlists-page">
             <div id="user_info">
                 <img src={pic} id="user_icon" width={50} height={50} alt="User profile picture"/>
-                <p id="user-name">{this.userName}</p>
+                <p id="user-name">{this.state.user_name}</p>
             </div>
             <button id="log_out">
                 Log out
