@@ -17,12 +17,16 @@ class SideOptionsSetBackground extends React.Component {
         });
     }
 
+    onClickBackgroundGallery() {
+        window.location.assign(`http://localhost:3000/background_gallery`);
+    }
+
     render() {
         if (localStorage.getItem("page_state") === PAGE_STATE.CREATE_CUSTOM_STYLE) {
             return <SideOptionsCreateCustomStyle/>
         } else {
             return <div id="side-options-container">
-                <button className="side-options">
+                <button className="side-options" onClick={(e) => this.onClickBackgroundGallery(e)}>
                     Choose image from gallery
                 </button>
                 <button className="side-options">

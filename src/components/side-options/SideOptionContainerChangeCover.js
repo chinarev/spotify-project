@@ -27,6 +27,11 @@ class SideOptionContainerChangeCover extends React.Component {
         });
     }
 
+    onClickChooseStyleTemplate(){
+        window.location.assign(`http://localhost:3000/style_gallery`);
+    }
+
+
     render() {
         switch (localStorage.getItem("page_state")) {
             case (PAGE_STATE.SELECTED_PLAYLIST): {
@@ -37,7 +42,7 @@ class SideOptionContainerChangeCover extends React.Component {
             }
             default: {
                 return <div id="side-options-container">
-                    <button className="side-options">
+                    <button className="side-options" onClick={(e) => this.onClickChooseStyleTemplate(e)}>
                         Choose style template
                     </button>
                     <button className="side-options" onClick={(e) => this.onClickCreateCustomStyle(e)}>
