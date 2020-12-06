@@ -12,7 +12,7 @@ div.selected-playlist-page {
 }
 
 button.side-options {
-    width: auto;
+    width: 450px;
     height: 60px;
     border: none;
     background-color: #DF8661;
