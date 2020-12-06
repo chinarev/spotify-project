@@ -1,5 +1,5 @@
 import React from "react";
-import SideOptionContainerChangeCover from "../change-cover/SideOptionContainerChangeCover";
+import SideOptionContainerChangeCover from "../side-options/SideOptionContainerChangeCover";
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
@@ -9,7 +9,8 @@ export const PAGE_STATE = {
     SELECTED_PLAYLIST : "selected_playlist",
     CHANGE_COVER : "change_cover",
     CREATE_CUSTOM_STYLE : "create_custom_style",
-    SET_BACKGROUND_COLOR : "set_background_color"
+    SET_BACKGROUND_IMAGE : "set_background_image",
+    EDIT_TEXT_PROPERTIES : "edit_text_properties"
 };
 
 class SideOptionsContainer extends React.Component {
