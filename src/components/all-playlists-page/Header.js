@@ -1,7 +1,5 @@
 import React from "react";
 import SpotifyWebApi from "spotify-web-api-js";
-import {authEndpoint, clientId, redirectUri, scopes} from "../../service/config";
-
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
@@ -17,7 +15,6 @@ class Header extends React.Component {
 
     }
 
-
     getUser = () => {
         spotifyApi.getMe()
             .then(data => this.setState({
@@ -28,6 +25,7 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
+        spotifyApi.getPlaylist()
         this.getUser();
         console.log("name in mount: " + this.state.user_name);
     }
