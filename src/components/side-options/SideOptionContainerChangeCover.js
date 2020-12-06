@@ -43,9 +43,6 @@ class SideOptionContainerChangeCover extends React.Component {
                     <button className="side-options" onClick={(e) => this.onClickCreateCustomStyle(e)}>
                         Create custom style
                     </button>
-                    <button className="side-options">
-                        Remove cover
-                    </button>
                     <button className="side-options" onClick={(e) => this.onclickBack(e)}>
                         Back
                     </button>
