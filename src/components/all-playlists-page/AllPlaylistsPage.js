@@ -3,7 +3,6 @@ import Header from "./Header";
 import PlaylistContainer from "./PlaylistContainer";
 import '../../assets/allPlaylistsStyle.css'
 
-
 class AllPlaylistsPage extends React.Component {
     constructor(props) {
         super(props);

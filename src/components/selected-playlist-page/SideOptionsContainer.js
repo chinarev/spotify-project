@@ -1,5 +1,9 @@
 import React from "react";
 import SideOptionContainerChangeCover from "../change-cover/SideOptionContainerChangeCover";
+import SpotifyWebApi from "spotify-web-api-js";
+
+var spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 export const PAGE_STATE = {
     SELECTED_PLAYLIST : "selected_playlist",
@@ -7,7 +11,6 @@ export const PAGE_STATE = {
     CREATE_CUSTOM_STYLE : "create_custom_style",
     SET_BACKGROUND_COLOR : "set_background_color"
 };
-
 
 class SideOptionsContainer extends React.Component {
     constructor(props) {
@@ -27,9 +30,20 @@ class SideOptionsContainer extends React.Component {
     }
 
     onclickName() {
-
+        var curr_name = localStorage.getItem("selected_playlist_name")
+        var playlist_id = localStorage.getItem("selected_playlist_id")
+        var new_name = prompt('Enter a new name', curr_name)
+        if (new_name) {
+            spotifyApi.changePlaylistDetails(
+                playlist_id,
+                {
+                    name: new_name
+                }
+            )
+            localStorage.setItem("selected_playlist_name", new_name);
+        }
+        document.location.reload()
     }
-
 
     render() {
         console.log("state in render: " + localStorage.getItem("page_state"))
