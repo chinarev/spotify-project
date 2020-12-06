@@ -15,9 +15,7 @@ class Header extends React.Component {
 
     }
 
-
     getUser = () => {
-        spotifyApi.
         spotifyApi.getMe()
             .then(data => this.setState({
                 user_name: data.display_name,
@@ -27,6 +25,7 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
+        spotifyApi.getPlaylist()
         this.getUser();
         console.log("name in mount: " + this.state.user_name);
     }

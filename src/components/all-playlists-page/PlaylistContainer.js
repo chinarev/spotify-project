@@ -1,5 +1,4 @@
 import React from "react";
-import pic from '../../assets/img/test_album_cover.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
