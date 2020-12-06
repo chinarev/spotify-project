@@ -1,5 +1,4 @@
 import React from "react";
-import pic from '../../assets/img/test_album_cover.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
@@ -12,6 +11,8 @@ class PlaylistContainer extends React.Component {
             user_id: null,
             playlists: null
         };
+        this.getUserID();
+        this.getPlaylists();
     }
 
     onclick(img, playlist_name) {
@@ -49,14 +50,13 @@ class PlaylistContainer extends React.Component {
     getPlaylists = () => {
         spotifyApi.getUserPlaylists(this.state.user_id)
             .then(data => this.setState({
-                playlists: data.items
+                playlists: data.items.filter(playlist =>  (playlist.owner.id === this.state.user_id))
             }));
     }
 
     componentDidMount() {
         this.getUserID();
         this.getPlaylists();
-
     }
 
     render() {
