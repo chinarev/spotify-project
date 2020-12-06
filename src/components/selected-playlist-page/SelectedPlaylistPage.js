@@ -13,6 +13,7 @@ class SelectedPlaylistPage extends React.Component {
     render() {
         console.log("selected_playlist_name: " + localStorage.getItem("selected_playlist_name"));
         console.log("selected_playlist_image: " + localStorage.getItem("selected_playlist_image"));
+        console.log("selected_playlist_id: " + localStorage.getItem("selected_playlist_id"));
         return <div className="selected-playlist-page">
             <Header/>
             <div id="playlist-page-container">

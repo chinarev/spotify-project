@@ -15,13 +15,14 @@ class PlaylistContainer extends React.Component {
         this.getPlaylists();
     }
 
-    onclick(img, playlist_name) {
+    onclick(img, playlist_name, playlist_id) {
         localStorage.setItem("selected_playlist_name", playlist_name);
         localStorage.setItem("selected_playlist_image", img);
+        localStorage.setItem("selected_playlist_id", playlist_id);
         window.location.assign('http://localhost:3000/playlist/');
     }
 
-    GetPlaylist(album_cover, album_name) {
+    GetPlaylist(album_cover, album_name, album_id) {
         const cover = React.createElement(
             'img',
             {className: "album-cover", src: album_cover, alt: "Album cover image"}
@@ -33,9 +34,10 @@ class PlaylistContainer extends React.Component {
             album_name
         )
 
+
         return React.createElement(
             'div',
-            {className: "grid-item playlist", onClick: () => this.onclick(album_cover, album_name)},
+            {className: "grid-item playlist", onClick: () => this.onclick(album_cover, album_name, album_id)},
             [cover, name],
         );
     }
@@ -69,7 +71,7 @@ class PlaylistContainer extends React.Component {
         if (this.state.playlists != null) {
             list_size = this.state.playlists.length;
             for (i = 0; i < list_size; i++) {
-                albums[i] = this.GetPlaylist(this.state.playlists[i].images[0].url, this.state.playlists[i].name);
+                albums[i] = this.GetPlaylist(this.state.playlists[i].images[0].url, this.state.playlists[i].name, this.state.playlists[i].id);
             }
         }
 
