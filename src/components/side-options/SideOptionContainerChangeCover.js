@@ -2,7 +2,7 @@ import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
-import pic from '../../assets/img/background_gallery/background_gallery2.jpg'
+import pic from '../../assets/img/test_user_icon.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
@@ -58,11 +58,11 @@ class SideOptionContainerChangeCover extends React.Component {
         getBase64Image(
             pic,
             function(dataUrl) {
-                localStorage.setItem("selected_playlist_cover", dataUrl);
+                localStorage.setItem("selected_playlist_image", dataUrl);
                 spotifyApi.uploadCustomPlaylistCoverImage(
                     playlist_id,
                     dataUrl.substring(dataUrl.indexOf(",") + 1)
-                ).then(r => console.log("r: " + r))
+                ).then(() => document.location.reload())
             }
         );
     }
