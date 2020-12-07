@@ -2,7 +2,8 @@ import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
-import pic from '../../assets/img/test_user_icon.jpg'
+import pic from '../../assets/img/test_album_cover.jpg'
+import pic2 from '../../assets/img/demo2.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
@@ -16,9 +17,16 @@ function getBase64Image(src, callback) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         let dataURL;
-        canvas.height = img.naturalHeight;
-        canvas.width = img.naturalWidth;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        //to crop image into square:
+        let size = img.naturalHeight;
+        if (size > img.naturalWidth) {
+            size = img.naturalWidth;
+        }
+        canvas.height = size;
+        canvas.width = size;
+        ctx.drawImage(img, -(img.naturalWidth/2 - size/2),
+            -(img.naturalHeight/2 - size/2));
         dataURL = canvas.toDataURL('image/jpeg');
         callback(dataURL);
     };
@@ -56,7 +64,7 @@ class SideOptionContainerChangeCover extends React.Component {
         var playlist_id = localStorage.getItem("selected_playlist_id")
 
         getBase64Image(
-            pic,
+            pic2,
             function(dataUrl) {
                 localStorage.setItem("selected_playlist_image", dataUrl);
                 spotifyApi.uploadCustomPlaylistCoverImage(
