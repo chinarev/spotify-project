@@ -34,6 +34,10 @@ class SideOptionsCreateCustomStyle extends React.Component {
         });
     }
 
+    onclickSave() {
+        window.location.assign(`http://localhost:3000/playlist`);
+    }
+
     render() {
         switch (localStorage.getItem("page_state")) {
             case (PAGE_STATE.CHANGE_COVER): {
@@ -53,7 +57,7 @@ class SideOptionsCreateCustomStyle extends React.Component {
                     <button className="side-options" onClick={(e) => this.onclickEditText(e)}>
                         Edit text properties
                     </button>
-                    <button className="side-options">
+                    <button className="side-options" onClick={(e) => this.onclickSave(e)}>
                         Save
                     </button>
                     <button className="side-options" onClick={(e) => this.onclickBack(e)}>

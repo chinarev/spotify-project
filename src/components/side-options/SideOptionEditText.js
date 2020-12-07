@@ -10,6 +10,10 @@ class SideOptionEditText extends React.Component {
         };
     }
 
+    onclickSave() {
+        window.location.assign(`http://localhost:3000/playlist`);
+    }
+
     onclickBack() {
         localStorage.setItem("page_state", PAGE_STATE.CREATE_CUSTOM_STYLE);
         this.setState({
@@ -31,7 +35,7 @@ class SideOptionEditText extends React.Component {
                 <button className="side-options">
                     Set text size
                 </button>
-                <button className="side-options">
+                <button className="side-options" onClick={(e) => this.onclickSave(e)}>
                     Save
                 </button>
                 <button className="side-options" onClick={(e) => this.onclickBack(e)}>

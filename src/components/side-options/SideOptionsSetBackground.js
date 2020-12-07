@@ -17,6 +17,10 @@ class SideOptionsSetBackground extends React.Component {
         });
     }
 
+    onclickSave() {
+        window.location.assign(`http://localhost:3000/playlist`);
+    }
+
     onClickBackgroundGallery() {
         window.location.assign(`http://localhost:3000/background_gallery`);
     }
@@ -32,7 +36,7 @@ class SideOptionsSetBackground extends React.Component {
                 <button className="side-options">
                     Upload image
                 </button>
-                <button className="side-options">
+                <button className="side-options" onClick={(e) => this.onclickSave(e)}>
                     Save
                 </button>
                 <button className="side-options" onClick={(e) => this.onclickBack(e)}>
