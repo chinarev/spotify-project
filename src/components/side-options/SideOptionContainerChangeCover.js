@@ -2,13 +2,13 @@ import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
-import pic from '../../assets/img/test_user_icon.jpg'
+import pic from '../../assets/img/background_gallery/background_gallery2.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
-function getBase64Image(src, callback, outputFormat) {
+function getBase64Image(src, callback) {
     const img = new Image();
     img.crossOrigin = 'Anonymous';
     img.src = src;
@@ -16,7 +16,7 @@ function getBase64Image(src, callback, outputFormat) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         let dataURL;
-        canvas.height = img.naturalHeight; //Можно сделать 560, тогда фон будет большим, но картинка все еще 260 на 260
+        canvas.height = img.naturalHeight;
         canvas.width = img.naturalWidth;
         ctx.drawImage(img, 0, 0, img.width, img.height);
         dataURL = canvas.toDataURL('image/jpeg');
@@ -27,8 +27,8 @@ function getBase64Image(src, callback, outputFormat) {
         img.src = "data:image/jpeg;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
         img.src = src;
     }
-
 }
+
 class SideOptionContainerChangeCover extends React.Component {
     constructor(props) {
         super(props);
@@ -54,23 +54,17 @@ class SideOptionContainerChangeCover extends React.Component {
 
     onclickUploadCover(){
         var playlist_id = localStorage.getItem("selected_playlist_id")
-        var new_img;
 
         getBase64Image(
             pic,
             function(dataUrl) {
-                localStorage.setItem("new_playlist_cover", dataUrl);
+                localStorage.setItem("selected_playlist_cover", dataUrl);
+                spotifyApi.uploadCustomPlaylistCoverImage(
+                    playlist_id,
+                    dataUrl.substring(dataUrl.indexOf(",") + 1)
+                ).then(r => console.log("r: " + r))
             }
         );
-
-        new_img = localStorage.getItem("new_playlist_cover");
-        localStorage.setItem("selected_playlist_cover", new_img);
-        spotifyApi.uploadCustomPlaylistCoverImage(
-            playlist_id,
-            new_img.substring(new_img.indexOf(",") + 1)
-        ).then(r => console.log("r: " + r))
-        console.log(localStorage.getItem("selected_playlist_cover"));
-
     }
 
     render() {
