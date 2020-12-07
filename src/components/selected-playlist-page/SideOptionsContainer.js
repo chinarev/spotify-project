@@ -28,6 +28,7 @@ class SideOptionsContainer extends React.Component {
         });
         localStorage.setItem("page_state", PAGE_STATE.CHANGE_COVER);
         console.log("onclickChangeCover state:" + localStorage.getItem("page_state"));
+
     }
 
     onclickName() {

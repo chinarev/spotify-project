@@ -2,7 +2,7 @@ import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
-import pic from '../../assets/img/background_gallery/background_gallery2.jpg'
+import pic from '../../assets/img/test_album_cover.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 
 var spotifyApi = new SpotifyWebApi();
@@ -54,17 +54,32 @@ class SideOptionContainerChangeCover extends React.Component {
 
     onclickUploadCover(){
         var playlist_id = localStorage.getItem("selected_playlist_id")
-
+        let myImage = document.getElementById("myimage").src;
         getBase64Image(
-            pic,
+            myImage,
             function(dataUrl) {
-                localStorage.setItem("selected_playlist_cover", dataUrl);
+                localStorage.setItem("selected_playlist_image", dataUrl);
                 spotifyApi.uploadCustomPlaylistCoverImage(
                     playlist_id,
                     dataUrl.substring(dataUrl.indexOf(",") + 1)
-                ).then(r => console.log("r: " + r))
+                ).then(() => document.location.reload())
             }
         );
+
+    }
+
+    onFileSelected(event) {
+        var selectedFile = event.target.files[0];
+        var reader = new FileReader();
+
+        var imgtag = document.getElementById("myimage");
+        imgtag.title = selectedFile.name;
+
+        reader.onload = function(event) {
+            imgtag.src = event.target.result;
+        };
+
+        reader.readAsDataURL(selectedFile);
     }
 
     render() {
@@ -77,6 +92,8 @@ class SideOptionContainerChangeCover extends React.Component {
             }
             default: {
                 return <div id="side-options-container">
+                    <input type="file" onChange={this.onFileSelected} name="photo" multiple accept="image/*,image/jpeg" id = "myInput"/>
+                    <img id="myimage" alt="Test image"/>
                     <button className="side-options" onClick={(e) => this.onclickUploadCover(e)}>
                         Upload cover
                     </button>
