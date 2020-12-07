@@ -16,9 +16,16 @@ function getBase64Image(src, callback) {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         let dataURL;
-        canvas.height = img.naturalHeight;
-        canvas.width = img.naturalWidth;
-        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        //to crop image into square:
+        let size = img.naturalHeight;
+        if (size > img.naturalWidth) {
+            size = img.naturalWidth;
+        }
+        canvas.height = size;
+        canvas.width = size;
+        ctx.drawImage(img, -(img.naturalWidth/2 - size/2),
+            -(img.naturalHeight/2 - size/2));
         dataURL = canvas.toDataURL('image/jpeg');
         callback(dataURL);
     };
@@ -82,6 +89,10 @@ class SideOptionContainerChangeCover extends React.Component {
         reader.readAsDataURL(selectedFile);
     }
 
+    onClickChooseStyle(){
+        window.location.assign(`http://localhost:3000/style_gallery`);
+    }
+
     render() {
         switch (localStorage.getItem("page_state")) {
             case (PAGE_STATE.SELECTED_PLAYLIST): {
@@ -97,7 +108,7 @@ class SideOptionContainerChangeCover extends React.Component {
                     <button className="side-options" onClick={(e) => this.onclickUploadCover(e)}>
                         Upload cover
                     </button>
-                    <button className="side-options">
+                    <button className="side-options" onClick={(e) => this.onClickChooseStyle(e)}>
                         Choose style template
                     </button>
                     <button className="side-options" onClick={(e) => this.onClickCreateCustomStyle(e)}>
