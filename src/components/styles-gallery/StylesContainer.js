@@ -11,30 +11,24 @@ import SpotifyWebApi from "spotify-web-api-js";
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
-function getBase64Image(src) {
+function getBase64Image(src, font_size, text_color, font) {
     return new Promise((resolve, reject) => {
         let playlist_name = localStorage.getItem("selected_playlist_name");
-        let font_size = 60;
-        let text_color = "black";
+        let align = "center";
         const img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = () => {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             let dataURL;
-
-            //to crop image into square:
-            let size = img.naturalHeight;
-            if (size > img.naturalWidth) {
-                size = img.naturalWidth;
-            }
+            //to resize image into 300x300 square:
+            let size = 300;
             canvas.height = size;
             canvas.width = size;
-            ctx.drawImage(img, -(img.naturalWidth / 2 - size / 2),
-                -(img.naturalHeight / 2 - size / 2));
-            ctx.font = font_size + "px Comic Sans MS";
+            ctx.drawImage(img, 0, 0, size, size);
+            ctx.font = font_size + "px " + font;
             ctx.fillStyle = text_color;
-            ctx.textAlign = "center";
+            ctx.textAlign = align;
             ctx.fillText(playlist_name, size / 2, size / 2 + font_size / 2);
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
@@ -85,8 +79,53 @@ class StylesContainer extends React.Component {
 
     componentDidMount() {
         console.log("component did mount container")
+        //TODO: перенести эти стили в файл и импортировать сюда массив
+        //предопределенные вручную стили для галереи готовых стилей
+        let text_prop1 = {
+            font_size: 40,
+            text_color: "SlateBlue",
+            font: "Brush Script MT",
+        }
+
+        //блестящие штуки
+        let text_prop2 = {
+            font_size: 30,
+            text_color: "#625c8a",
+            font: "Lucida Handwriting",
+        }
+
+        //гора
+        let text_prop3 = {
+            font_size: 70,
+            text_color: "black",
+            font: "Copperplate",
+        }
+
+        //лес
+        let text_prop4 = {
+            font_size: 50,
+            text_color: "WhiteSmoke",
+            font: "Papyrus",
+        }
+
+        //небо
+        let text_prop5 = {
+            font_size: 60,
+            text_color: "white",
+            font: "Brush Script MT",
+        }
+
+        //кислотный микс
+        let text_prop6 = {
+            font_size: 40,
+            text_color: "#3366cc",
+            font: "Comic Sans MS",
+        }
+
+        let text_properties = [text_prop1, text_prop2, text_prop3, text_prop4, text_prop5, text_prop6];
         for (let i = 0; i < this.state.pictures.length; i++) {
-            getBase64Image(this.state.pictures[i]).then(url => {
+            getBase64Image(this.state.pictures[i], text_properties[i].font_size,
+                text_properties[i].text_color, text_properties[i].font).then(url => {
                 let joined = this.state.styles.concat(url);
                 this.setState({styles: joined})
             })
@@ -96,6 +135,8 @@ class StylesContainer extends React.Component {
     render() {
         console.log("render container")
         let styles_elements = [];
+
+
         for (let i = 1; i <= this.state.styles.length; i++) {
             styles_elements[i - 1] = this.GetStyle(this.state.styles[i - 1], i);
         }
