@@ -1,6 +1,7 @@
 import React from "react";
 import SideOptionContainerChangeCover from "../side-options/SideOptionContainerChangeCover";
 import SpotifyWebApi from "spotify-web-api-js";
+import '../../assets/editTextModal.css'
 import Popup from "reactjs-popup";
 
 var spotifyApi = new SpotifyWebApi();

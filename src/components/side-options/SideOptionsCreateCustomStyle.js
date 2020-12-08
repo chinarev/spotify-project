@@ -3,6 +3,10 @@ import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionContainerChangeCover from "./SideOptionContainerChangeCover";
 import SideOptionsSetBackground from "./SideOptionsSetBackground";
 import SideOptionEditText from "./SideOptionEditText";
+import SetColorForm from "../text-edit-model/SetColorForm";
+import Popup from "reactjs-popup";
+import SetTextFont from "../text-edit-model/SetTextFont";
+import SetTextSize from "../text-edit-model/SetTextSize";
 
 class SideOptionsCreateCustomStyle extends React.Component {
     constructor(props) {
@@ -25,6 +29,7 @@ class SideOptionsCreateCustomStyle extends React.Component {
         this.setState({
             curr_page_state: PAGE_STATE.SET_BACKGROUND_IMAGE
         });
+
     }
 
     onclickEditText() {
@@ -37,6 +42,7 @@ class SideOptionsCreateCustomStyle extends React.Component {
     onclickSave() {
         window.location.assign(`http://localhost:3000/playlist`);
     }
+
 
     render() {
         switch (localStorage.getItem("page_state")) {
@@ -54,9 +60,40 @@ class SideOptionsCreateCustomStyle extends React.Component {
                     <button className="side-options" onClick={(e) => this.onclickSetBackgroundImage(e)}>
                         Set background image
                     </button>
-                    <button className="side-options" onClick={(e) => this.onclickEditText(e)}>
-                        Edit text properties
-                    </button>
+                    <Popup
+                        trigger={<button className="side-options"> Edit text properties </button>}
+                        modal
+                        nested>
+                        {close => (
+                            <div className="modal_text">
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="header"> Edit text</div>
+                                <div className="content">
+                                    {' '}
+                                    <img id="myimage"/>
+                                    <div id="side-options-editText-container">
+                                        <button className="buttonEditText">
+                                            <SetColorForm/>
+                                        </button>
+                                        <button className="buttonEditText">
+                                            <SetTextFont/>
+                                        </button>
+                                        <button className="buttonEditText">
+                                            <SetTextSize/>
+                                        </button>
+                                        <button className="buttonEditText" onClick={(e) => this.onclickEditText(e)}>
+                                            Apply
+                                        </button>
+                                        <button className="buttonEditText" onClick={() => {close();}}>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </Popup>
                     <button className="side-options" onClick={(e) => this.onclickSave(e)}>
                         Save
                     </button>
