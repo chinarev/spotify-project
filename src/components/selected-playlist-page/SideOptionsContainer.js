@@ -6,11 +6,11 @@ import Popup from "reactjs-popup";
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 export const PAGE_STATE = {
-    SELECTED_PLAYLIST : "selected_playlist",
-    CHANGE_COVER : "change_cover",
-    CREATE_CUSTOM_STYLE : "create_custom_style",
-    SET_BACKGROUND_IMAGE : "set_background_image",
-    EDIT_TEXT_PROPERTIES : "edit_text_properties"
+    SELECTED_PLAYLIST: "selected_playlist",
+    CHANGE_COVER: "change_cover",
+    CREATE_CUSTOM_STYLE: "create_custom_style",
+    SET_BACKGROUND_IMAGE: "set_background_image",
+    EDIT_TEXT_PROPERTIES: "edit_text_properties"
 };
 
 class SideOptionsContainer extends React.Component {
@@ -33,16 +33,13 @@ class SideOptionsContainer extends React.Component {
 
     onclickName() {
         var playlist_id = localStorage.getItem("selected_playlist_id")
-        var new_name=document.getElementById("nameInput").value;
-        if (new_name) {
-            spotifyApi.changePlaylistDetails(
-                playlist_id,
-                {
-                    name: new_name
-                }
-            )
-            localStorage.setItem("selected_playlist_name", new_name);
-        }
+        spotifyApi.changePlaylistDetails(
+            playlist_id,
+            {
+                name: document.getElementById("nameInput").value
+            }
+        )
+        localStorage.setItem("selected_playlist_name", document.getElementById("nameInput").value);
         document.location.reload()
     }
 
@@ -52,7 +49,7 @@ class SideOptionsContainer extends React.Component {
 
     render() {
         console.log("state in render: " + localStorage.getItem("page_state"))
-        switch (localStorage.getItem("page_state")){
+        switch (localStorage.getItem("page_state")) {
             case (PAGE_STATE.CHANGE_COVER): {
                 return <SideOptionContainerChangeCover/>
             }
@@ -76,7 +73,9 @@ class SideOptionsContainer extends React.Component {
                                     <button className="button" onClick={(e) => this.onclickName(e)}>
                                         SAVE
                                     </button>
-                                    <button className="button" onClick={() => {close();}}>
+                                    <button className="button" onClick={() => {
+                                        close();
+                                    }}>
                                         CANCEL
                                     </button>
                                 </div>
@@ -84,10 +83,10 @@ class SideOptionsContainer extends React.Component {
                         )}
                     </Popup>
 
-                    <button onClick={(e) => this.onclickChangeCover(e)} className="side-options" >
+                    <button onClick={(e) => this.onclickChangeCover(e)} className="side-options">
                         Change cover
                     </button>
-                    <button onClick={(e) => this.onclickChangeBackToAll(e)} className="side-options" >
+                    <button onClick={(e) => this.onclickChangeBackToAll(e)} className="side-options">
                         Back to all playlists
                     </button>
                 </div>
