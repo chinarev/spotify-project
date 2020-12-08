@@ -47,6 +47,10 @@ class SideOptionsContainer extends React.Component {
         document.location.reload()
     }
 
+    onclickChangeBackToAll() {
+        window.location.assign(`http://localhost:3000/second/`);
+    }
+
     render() {
         console.log("state in render: " + localStorage.getItem("page_state"))
         switch (localStorage.getItem("page_state")){
@@ -60,6 +64,9 @@ class SideOptionsContainer extends React.Component {
                     </button>
                     <button onClick={(e) => this.onclickChangeCover(e)} className="side-options" >
                         Change cover
+                    </button>
+                    <button onClick={(e) => this.onclickChangeBackToAll(e)} className="side-options" >
+                        Back to all playlists
                     </button>
                 </div>
             }

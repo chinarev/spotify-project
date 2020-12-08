@@ -66,3 +66,60 @@ button.side-options {
     align-items: center;
     justify-content: center;
 }
+.modal {
+    font-size: 12px;
+    background-color: bisque;
+}
+.modal > .header {
+    color: black;
+    font-family: 'Comfortaa', cursive;
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+    padding: 5px;
+}
+.modal > .content {
+    width: 100%;
+    padding: 10px 5px;
+}
+.modal > .actions {
+    width: 100%;
+    padding: 10px 5px;
+    margin: auto;
+    text-align: center;
+}
+.modal > .close {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    padding: 2px 5px;
+    line-height: 20px;
+    right: -10px;
+    top: -10px;
+    font-size: 24px;
+    background: #ffffff;
+    border-radius: 18px;
+    border: 1px solid #cfcece;
+}
+.actions > .button {
+    width: 450px;
+    height: 60px;
+    border: none;
+    background-color: #DF8661;
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    -webkit-border-radius: 50px;
+    font-size: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+
+    box-shadow: 1px 1px 3px gray;
+    display: block;
+    margin-left: 15px;
+    margin-bottom: 15px;
+}
+
+#myimage {
+    width: 200px;
+    height: 200px;
+}

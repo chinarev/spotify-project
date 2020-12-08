@@ -4,6 +4,7 @@ import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer
 import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
 import pic from '../../assets/img/test_album_cover.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
+import Popup from "reactjs-popup";
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
@@ -24,8 +25,8 @@ function getBase64Image(src, callback) {
         }
         canvas.height = size;
         canvas.width = size;
-        ctx.drawImage(img, -(img.naturalWidth/2 - size/2),
-            -(img.naturalHeight/2 - size/2));
+        ctx.drawImage(img, -(img.naturalWidth / 2 - size / 2),
+            -(img.naturalHeight / 2 - size / 2));
         dataURL = canvas.toDataURL('image/jpeg');
         callback(dataURL);
     };
@@ -59,12 +60,12 @@ class SideOptionContainerChangeCover extends React.Component {
         });
     }
 
-    onclickUploadCover(){
+    onclickUploadCover() {
         var playlist_id = localStorage.getItem("selected_playlist_id")
         let myImage = document.getElementById("myimage").src;
         getBase64Image(
             myImage,
-            function(dataUrl) {
+            function (dataUrl) {
                 localStorage.setItem("selected_playlist_image", dataUrl);
                 spotifyApi.uploadCustomPlaylistCoverImage(
                     playlist_id,
@@ -82,14 +83,14 @@ class SideOptionContainerChangeCover extends React.Component {
         var imgtag = document.getElementById("myimage");
         imgtag.title = selectedFile.name;
 
-        reader.onload = function(event) {
+        reader.onload = function (event) {
             imgtag.src = event.target.result;
         };
 
         reader.readAsDataURL(selectedFile);
     }
 
-    onClickChooseStyle(){
+    onClickChooseStyle() {
         window.location.assign(`http://localhost:3000/style_gallery`);
     }
 
@@ -102,12 +103,34 @@ class SideOptionContainerChangeCover extends React.Component {
                 return <SideOptionsCreateCustomStyle/>
             }
             default: {
+
                 return <div id="side-options-container">
-                    <input type="file" onChange={this.onFileSelected} name="photo" multiple accept="image/*,image/jpeg" id = "myInput"/>
-                    <img id="myimage" alt="Test image"/>
-                    <button className="side-options" onClick={(e) => this.onclickUploadCover(e)}>
-                        Upload cover
-                    </button>
+                    <Popup
+                        trigger={<button className="side-options"> Upload cover </button>}
+                        modal
+                        nested>
+                        {close => (
+                            <div className="modal">
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="header"> Choose cover from your PC</div>
+                                <div className="content">
+                                    {' '}
+                                    <input type="file" onChange={this.onFileSelected} name="photo" multiple accept="image/*,image/jpeg" id="myInput"/>
+                                    <img id="myimage"/>
+                                </div>
+                                <div className="actions">
+                                    <button className="button" onClick={(e) => this.onclickUploadCover(e)}>
+                                        UPLOAD
+                                    </button>
+                                    <button className="button" onClick={() => {close();}}>
+                                        CANCEL
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </Popup>
                     <button className="side-options" onClick={(e) => this.onClickChooseStyle(e)}>
                         Choose style template
                     </button>
