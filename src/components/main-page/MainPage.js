@@ -5,6 +5,10 @@ import {authEndpoint, clientId, redirectUri, scopes} from "../../service/config.
 
 
 class MainPage extends React.Component {
+    constructor(props) {
+        super(props);
+        localStorage.setItem('textToken', "none");
+    }
 
     onclick() {
         window.location.assign(`${authEndpoint}?client_id=${clientId}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`);
