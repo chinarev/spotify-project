@@ -123,3 +123,17 @@ button.side-options {
     width: 200px;
     height: 200px;
 }
+
+#nameInput{
+    width: 450px;
+    height: 60px;
+    border: none;
+    background-color: whitesmoke;
+    color: black;
+    text-align: center;
+    font-family: 'Comfortaa', cursive;
+    -webkit-border-radius: 50px;
+    font-size: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+}

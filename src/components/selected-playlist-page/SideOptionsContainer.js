@@ -1,10 +1,10 @@
 import React from "react";
 import SideOptionContainerChangeCover from "../side-options/SideOptionContainerChangeCover";
 import SpotifyWebApi from "spotify-web-api-js";
+import Popup from "reactjs-popup";
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
-
 export const PAGE_STATE = {
     SELECTED_PLAYLIST : "selected_playlist",
     CHANGE_COVER : "change_cover",
@@ -32,9 +32,8 @@ class SideOptionsContainer extends React.Component {
     }
 
     onclickName() {
-        var curr_name = localStorage.getItem("selected_playlist_name")
         var playlist_id = localStorage.getItem("selected_playlist_id")
-        var new_name = prompt('Enter a new name', curr_name)
+        var new_name=document.getElementById("nameInput").value;
         if (new_name) {
             spotifyApi.changePlaylistDetails(
                 playlist_id,
@@ -59,9 +58,32 @@ class SideOptionsContainer extends React.Component {
             }
             default: {
                 return <div id="side-options-container">
-                    <button className="side-options" onClick={(e) => this.onclickName(e)}>
-                        Change name
-                    </button>
+
+                    <Popup
+                        trigger={<button className="side-options"> Change name </button>}
+                        modal
+                        nested>
+                        {close => (
+                            <div className="modal">
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="header">New name:</div>
+                                <div className="content">
+                                    <input type="text" id="nameInput"/>
+                                </div>
+                                <div className="actions">
+                                    <button className="button" onClick={(e) => this.onclickName(e)}>
+                                        SAVE
+                                    </button>
+                                    <button className="button" onClick={() => {close();}}>
+                                        CANCEL
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </Popup>
+
                     <button onClick={(e) => this.onclickChangeCover(e)} className="side-options" >
                         Change cover
                     </button>
