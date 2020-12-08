@@ -6,6 +6,7 @@ import BackgroundsContainer from "./StylesContainer";
 class StyleGalleryPage extends React.Component {
     constructor(props) {
         super(props);
+        console.log("constructor page")
     }
 
     componentDidMount() {
