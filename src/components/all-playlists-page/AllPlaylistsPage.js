@@ -2,16 +2,25 @@ import React from "react";
 import Header from "./Header";
 import PlaylistContainer from "./PlaylistContainer";
 import '../../assets/allPlaylistsStyle.css'
+import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 
 class AllPlaylistsPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            token: new URL(window.location).hash.split('&').filter(function (el) {
-                if (el.match('access_token') !== null) return true;
-            })[0].split('=')[1],
-        };
-        localStorage.setItem('textToken', this.state.token);
+        let curr_token = localStorage.getItem('textToken');
+        if (curr_token === "none") {
+            this.state = {
+                token: new URL(window.location).hash.split('&').filter(function (el) {
+                    if (el.match('access_token') !== null) return true;
+                })[0].split('=')[1],
+            };
+            localStorage.setItem('textToken', this.state.token);
+            document.location.reload();
+        } else {
+            this.state = {
+                token: curr_token
+            };
+        }
     }
 
     componentDidMount() {
