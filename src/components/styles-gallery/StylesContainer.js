@@ -44,7 +44,8 @@ class StylesContainer extends React.Component {
         super(props);
         console.log("constructor container")
         this.state = {
-            styles: []
+            styles: [],
+            pictures: [back1, back2, back3, back4, back5, back6]
         }
     }
 

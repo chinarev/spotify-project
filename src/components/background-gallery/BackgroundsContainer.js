@@ -8,10 +8,12 @@ import back6 from  '../../assets/img/background_gallery/background_gallery6.jpg'
 
 class BackgroundsContainer extends React.Component {
 
-    // onclick(img, playlist_name, playlist_id) {
-    //
-    //     //window.location.assign('http://localhost:3000/playlist/');
-    // }
+    onclickGallery(img) {
+        //TODO: перевести img в base64
+        localStorage.setItem("preview_background", img);
+        console.log("preview background: " + img);
+        window.location.assign(`http://localhost:3000/constructor/`);
+    }
 
     GetBackground(image, i) {
         const background_image = React.createElement(
@@ -27,7 +29,7 @@ class BackgroundsContainer extends React.Component {
 
         return React.createElement(
             'div',
-            {className: "grid-item playlist"},
+            {className: "grid-item playlist", onClick: () => this.onclickGallery(image)},
             [background_image, name],
         );
     }

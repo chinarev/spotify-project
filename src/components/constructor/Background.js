@@ -12,7 +12,7 @@ class Background extends React.Component {
             background: pic,
             text_size: localStorage.getItem("preview_text_size"),
             text_font: localStorage.getItem("preview_text_font"),
-            text_color: localStorage.getItem("preview_text_font"),
+            text_color: localStorage.getItem("preview_text_color"),
         }
     }
 
@@ -26,7 +26,7 @@ class Background extends React.Component {
         let text_props = {
             text_size: localStorage.getItem("preview_text_size"),
             text_font: localStorage.getItem("preview_text_font"),
-            text_color: localStorage.getItem("preview_text_font"),
+            text_color: localStorage.getItem("preview_text_color"),
         }
         if (this.state.text_size !== text_props.text_size) {
             this.setState({
