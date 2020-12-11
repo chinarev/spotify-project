@@ -4,11 +4,7 @@
 }
 
 div.all-playlists-page {
-    background-color: #FF7C30;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), rgba(138, 51, 51, 0.67)), url(img/background2.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-size: cover;
+    background: #ACACC4;
     font-family: 'Comfortaa', cursive;
     text-align: center;
 }
@@ -16,14 +12,14 @@ div.all-playlists-page {
 header.all-playlists-page {
     position: fixed;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.15);
+    background: linear-gradient(to bottom, rgba(255,255,255, 0.3) 0%, rgba(255,255,255,0) 100%);
 }
 
 #log_out, #user_info {
     width: auto;
     height: 60px;
     border: none;
-    background-color: #DF8661;
+    background-color: #786AB3;
     color: white;
     font-family: 'Comfortaa', cursive;
     -webkit-border-radius: 50px;
@@ -31,11 +27,10 @@ header.all-playlists-page {
     margin: 5px;
     padding-left: 10px;
     padding-right: 10px;
+    box-shadow: 0 0 0 3px white;
 }
 
 #log_out {
-    box-shadow: 1px 1px 3px gray;
-
     float: right;
 }
 
@@ -60,7 +55,6 @@ header.all-playlists-page {
     grid-gap: 120px;
     padding-top: 120px;
     padding-bottom: 15px;
-
 }
 
 .grid-item {
@@ -70,13 +64,16 @@ header.all-playlists-page {
     align-items: center;
     font-size: 30px;
     color: white;
+    transition: 0.3s;
+    cursor: pointer;
 }
+
+.grid-item:hover {filter: brightness(110%);}
 
 .playlist-name {
     color: white;
     text-shadow: 3px 2px 2px black;
 }
-
 
 .album-cover {
     width: 500px;
@@ -85,9 +82,10 @@ header.all-playlists-page {
     margin-bottom: 10px;
 }
 
-#playlists_title {
+.playlists_title {
     font-size: 50px;
     padding-top: 150px;
-    text-shadow: 3px 2px 2px black;
+    text-shadow: 3px 3px 3px black;
     color: white;
+    font-family: 'Comfortaa', cursive;
 }

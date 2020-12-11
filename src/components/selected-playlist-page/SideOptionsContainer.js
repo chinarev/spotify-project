@@ -61,23 +61,23 @@ class SideOptionsContainer extends React.Component {
                         modal
                         nested>
                         {close => (
-                            <div className="modal">
-                                <button className="close" onClick={close}>
-                                    &times;
-                                </button>
-                                <div className="header">New name:</div>
-                                <div className="content">
+                            <div id="page-mask">
+                                <div className="modal">
+                                    <button className="close" onClick={close}>
+                                        &times;
+                                    </button>
+                                    <div className="playlists_title header">New name:</div>
                                     <input type="text" id="nameInput"/>
-                                </div>
-                                <div className="actions">
-                                    <button className="button" onClick={(e) => this.onclickName(e)}>
-                                        SAVE
-                                    </button>
-                                    <button className="button" onClick={() => {
-                                        close();
-                                    }}>
-                                        CANCEL
-                                    </button>
+                                    <div className="actions">
+                                        <button className="button" onClick={(e) => this.onclickName(e)}>
+                                            Save
+                                        </button>
+                                        <button className="button" onClick={() => {
+                                            close();
+                                        }}>
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}

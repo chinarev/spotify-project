@@ -5,6 +5,7 @@ import back3 from '../../assets/img/background_gallery/background_gallery3.jpg'
 import back4 from '../../assets/img/background_gallery/background_gallery4.jpg'
 import back5 from '../../assets/img/background_gallery/background_gallery5.jpg'
 import back6 from '../../assets/img/background_gallery/background_gallery6.jpg'
+import text_properties from './DefinedStyles'
 
 import SpotifyWebApi from "spotify-web-api-js";
 
@@ -79,50 +80,6 @@ class StylesContainer extends React.Component {
 
     componentDidMount() {
         console.log("component did mount container")
-        //TODO: перенести эти стили в файл и импортировать сюда массив
-        //предопределенные вручную стили для галереи готовых стилей
-        let text_prop1 = {
-            font_size: 40,
-            text_color: "SlateBlue",
-            font: "Brush Script MT",
-        }
-
-        //блестящие штуки
-        let text_prop2 = {
-            font_size: 30,
-            text_color: "#625c8a",
-            font: "Lucida Handwriting",
-        }
-
-        //гора
-        let text_prop3 = {
-            font_size: 70,
-            text_color: "black",
-            font: "Copperplate",
-        }
-
-        //лес
-        let text_prop4 = {
-            font_size: 50,
-            text_color: "WhiteSmoke",
-            font: "Papyrus",
-        }
-
-        //небо
-        let text_prop5 = {
-            font_size: 60,
-            text_color: "white",
-            font: "Brush Script MT",
-        }
-
-        //кислотный микс
-        let text_prop6 = {
-            font_size: 40,
-            text_color: "#3366cc",
-            font: "Comic Sans MS",
-        }
-
-        let text_properties = [text_prop1, text_prop2, text_prop3, text_prop4, text_prop5, text_prop6];
         for (let i = 0; i < this.state.pictures.length; i++) {
             getBase64Image(this.state.pictures[i], text_properties[i].font_size,
                 text_properties[i].text_color, text_properties[i].font).then(url => {
