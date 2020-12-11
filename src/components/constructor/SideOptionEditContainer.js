@@ -15,14 +15,13 @@ class SideOptionEditContainer extends React.Component {
                 modal
                 nested>
                 {close => (
-                    <div className="modal_text">
+                    <div className="modal">
                         <button className="close" onClick={close}>
                             &times;
                         </button>
                         <div className="header"> Edit text</div>
                         <div className="content">
                             {' '}
-                            {/*<img src = {pic} id="myimage"/>*/}
                             <BackgroundsContainer/>
                         </div>
                     </div>
