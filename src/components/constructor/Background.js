@@ -9,7 +9,7 @@ class Background extends React.Component {
         console.log("constructor container")
         this.state = {
             preview: pic,
-            background: pic,
+            background: localStorage.getItem("preview_background"),
             text_size: localStorage.getItem("preview_text_size"),
             text_font: localStorage.getItem("preview_text_font"),
             text_color: localStorage.getItem("preview_text_color"),
@@ -18,6 +18,7 @@ class Background extends React.Component {
 
     componentDidMount() {
         console.log("component background DidMount");
+        console.log("back: " + localStorage.getItem("preview_background"));
         console.log("text_size: " + localStorage.getItem("preview_text_size"));
         console.log("text_font: " + localStorage.getItem("preview_text_font"));
         console.log("text_color: " + localStorage.getItem("preview_text_color"));

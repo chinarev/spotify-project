@@ -5,14 +5,17 @@ import back3 from  '../../assets/img/background_gallery/background_gallery3.jpg'
 import back4 from  '../../assets/img/background_gallery/background_gallery4.jpg'
 import back5 from  '../../assets/img/background_gallery/background_gallery5.jpg'
 import back6 from  '../../assets/img/background_gallery/background_gallery6.jpg'
+import {getBase64Image} from '../styles-gallery/StylesContainer'
+
 
 class BackgroundsContainer extends React.Component {
 
     onclickGallery(img) {
-        //TODO: перевести img в base64
-        localStorage.setItem("preview_background", img);
-        console.log("preview background: " + img);
-        window.location.assign(`http://localhost:3000/constructor/`);
+            getBase64Image(img, 0, "black", "Arial").then(url =>{
+            localStorage.setItem("preview_background", url);
+            console.log("preview background: " + url);
+            window.location.assign(`http://localhost:3000/constructor/`);
+        });
     }
 
     GetBackground(image, i) {
