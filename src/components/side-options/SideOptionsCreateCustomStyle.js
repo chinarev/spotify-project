@@ -13,18 +13,34 @@ var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 var myImg=localStorage.getItem("selected_playlist_image")
-let text_settings = {
-    font_size: localStorage.getItem("preview_playlist_size"),
-    text_color: localStorage.getItem("preview_playlist_color"),
-    font: localStorage.getItem("preview_playlist_font"),
-}
 
 class SideOptionsCreateCustomStyle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            curr_page_state: PAGE_STATE.CREATE_CUSTOM_STYLE
+            curr_page_state: PAGE_STATE.CREATE_CUSTOM_STYLE,
+            preview_img: localStorage.getItem("selected_playlist_image")
         };
+    }
+
+    componentDidMount() {
+
+        // getBase64Image(
+        //     myImage,
+        //     function (dataUrl) {
+        //         localStorage.setItem("selected_playlist_image", dataUrl);
+        //         spotifyApi.uploadCustomPlaylistCoverImage(
+        //             playlist_id,
+        //             dataUrl.substring(dataUrl.indexOf(",") + 1)
+        //         ).then(() => document.location.reload())
+        //     }
+        // );
+
+        let text_settings = {
+            font_size: localStorage.getItem("preview_playlist_size"),
+            text_color: localStorage.getItem("preview_playlist_color"),
+            font: localStorage.getItem("preview_playlist_font"),
+        }
     }
 
     onclickBack() {

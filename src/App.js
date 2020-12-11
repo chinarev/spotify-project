@@ -5,6 +5,7 @@ import AllPlaylistsPage from "./components/all-playlists-page/AllPlaylistsPage";
 import SelectedPlaylistPage from "./components/selected-playlist-page/SelectedPlaylistPage";
 import BackgroundGalleryPage from "./components/background-gallery/BackgroundGalleryPage";
 import StyleGalleryPage from "./components/styles-gallery/StyleGalleryPage";
+import Constructor from "./components/constructor/Constructor";
 
 class App extends React.Component {
     render() {
@@ -15,6 +16,7 @@ class App extends React.Component {
                 <Route path="/playlist" exact component={SelectedPlaylistPage}/>
                 <Route path="/background_gallery" exact component={BackgroundGalleryPage}/>
                 <Route path="/style_gallery" exact component={StyleGalleryPage}/>
+                <Route path="/constructor" exact component={Constructor}/>
             </Router>
         )
     }
