@@ -15,7 +15,7 @@ class BackgroundGalleryPage extends React.Component {
     render() {
         return <div className="all-playlists-page">
             <Header/>
-            <h1 id="playlists_title">Available background images</h1>
+            <h1 className="playlists_title">Available background images</h1>
             <BackgroundsContainer/>
         </div>
     }

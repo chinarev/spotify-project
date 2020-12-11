@@ -110,23 +110,27 @@ class SideOptionContainerChangeCover extends React.Component {
                         modal
                         nested>
                         {close => (
-                            <div className="modal">
-                                <button className="close" onClick={close}>
-                                    &times;
-                                </button>
-                                <div className="header"> Choose cover from your PC</div>
-                                <div className="content">
-                                    {' '}
-                                    <input type="file" onChange={this.onFileSelected} name="photo" multiple accept="image/*,image/jpeg" id="myInput"/>
-                                    <img id="myimage"/>
-                                </div>
-                                <div className="actions">
-                                    <button className="button" onClick={(e) => this.onclickUploadCover(e)}>
-                                        UPLOAD
+                            <div id="page-mask">
+                                <div className="modal">
+                                    <button className="close" onClick={close}>
+                                        &times;
                                     </button>
-                                    <button className="button" onClick={() => {close();}}>
-                                        CANCEL
-                                    </button>
+                                    <div className="playlists_title header"> Choose cover from your device</div>
+                                    <div className="content">
+                                        <input type="file" onChange={this.onFileSelected} name="photo" multiple
+                                               accept="image/*,image/jpeg" id="myInput"/>
+                                        <img id="myimage"/>
+                                    </div>
+                                    <div className="actions">
+                                        <button className="button" onClick={(e) => this.onclickUploadCover(e)}>
+                                            Upload
+                                        </button>
+                                        <button className="button" onClick={() => {
+                                            close();
+                                        }}>
+                                            Cancel
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         )}

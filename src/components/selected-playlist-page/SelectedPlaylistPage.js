@@ -16,10 +16,12 @@ class SelectedPlaylistPage extends React.Component {
         console.log("selected_playlist_id: " + localStorage.getItem("selected_playlist_id"));
         return <div className="selected-playlist-page">
             <Header/>
+            <h1 className="playlists_title" id="edit_title">Edit your playlist</h1>
             <div id="playlist-page-container">
                 <Playlist/>
                 <SideOptionsContainer/>
             </div>
+
         </div>
     }
 }

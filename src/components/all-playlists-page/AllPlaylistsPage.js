@@ -2,7 +2,6 @@ import React from "react";
 import Header from "./Header";
 import PlaylistContainer from "./PlaylistContainer";
 import '../../assets/allPlaylistsStyle.css'
-import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 
 class AllPlaylistsPage extends React.Component {
     constructor(props) {
@@ -32,7 +31,7 @@ class AllPlaylistsPage extends React.Component {
 
         return <div className="all-playlists-page">
             <Header/>
-            <h1 id="playlists_title">Your playlists</h1>
+            <h1 className="playlists_title">Your playlists</h1>
             <PlaylistContainer/>
         </div>
     }

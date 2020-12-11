@@ -19,7 +19,7 @@ class StyleGalleryPage extends React.Component {
 
         return <div className="all-playlists-page">
             <Header/>
-            <h1 id="playlists_title">Available styles</h1>
+            <h1 className="playlists_title">Available styles</h1>
             <BackgroundsContainer/>
         </div>
     }

@@ -1,29 +1,32 @@
+
+
 div.selected-playlist-page {
-    background-color: #FF7C30;
-    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.50), rgba(138, 51, 51, 0.67)), url(img/background2.jpg);
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: #ACACC4;
     background-size: cover;
     font-family: 'Comfortaa', cursive;
     text-align: center;
     display: block;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
+    position: fixed;
+}
+
+button {
+    background-color: #645895;
+    color: white;
+    font-family: 'Comfortaa', cursive;
+    box-shadow: 0 0 0 3px white;
+    -webkit-border-radius: 50px;
+    font-size: 30px;
 }
 
 button.side-options {
     width: 450px;
     height: 60px;
     border: none;
-    background-color: #DF8661;
-    color: white;
-    font-family: 'Comfortaa', cursive;
-    -webkit-border-radius: 50px;
-    font-size: 30px;
     padding-left: 10px;
     padding-right: 10px;
 
-    box-shadow: 1px 1px 3px gray;
     display: block;
     margin-left: 15px;
     margin-bottom: 15px;
@@ -60,31 +63,44 @@ button.side-options {
 }
 
 #playlist-page-container {
-    height: 100%;
-    width: 100%;
+    margin-top: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .modal {
-    font-size: 12px;
-    background-color: bisque;
+    background-color: #645895;
+    border-radius: 18px;
+    display: inline-block;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 .modal > .header {
-    color: black;
-    font-family: 'Comfortaa', cursive;
     width: 100%;
     font-size: 30px;
     text-align: center;
-    padding: 5px;
+    padding-top: 10px;
 }
 .modal > .content {
     width: 100%;
     padding: 10px 5px;
+    display: flex;
+    align-items: center;
 }
+
+.modal > input {
+    width: 100%;
+    margin: 15px 15px;
+}
+
 .modal > .actions {
     width: 100%;
-    padding: 10px 5px;
+    padding-top: 10px;
+    padding-bottom: 5px;
     margin: auto;
     text-align: center;
 }
@@ -92,12 +108,11 @@ button.side-options {
     cursor: pointer;
     position: absolute;
     display: block;
-    padding: 2px 5px;
+    padding: 0 5px;
     line-height: 20px;
     right: -10px;
     top: -10px;
     font-size: 24px;
-    background: #ffffff;
     border-radius: 18px;
     border: 1px solid #cfcece;
 }
@@ -105,15 +120,8 @@ button.side-options {
     width: 450px;
     height: 60px;
     border: none;
-    background-color: #DF8661;
-    color: white;
-    font-family: 'Comfortaa', cursive;
-    -webkit-border-radius: 50px;
-    font-size: 20px;
     padding-left: 10px;
     padding-right: 10px;
-
-    box-shadow: 1px 1px 3px gray;
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -130,6 +138,7 @@ button.side-options {
 #myInput {
     margin-left: 15px;
 }
+
 #nameInput{
     width: 450px;
     height: 60px;
@@ -140,7 +149,18 @@ button.side-options {
     font-family: 'Comfortaa', cursive;
     -webkit-border-radius: 50px;
     font-size: 30px;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
+#edit_title{
+    padding-top: 100px;
+    padding-bottom: 50px;
+}
+
+#page-mask {
+    background: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
