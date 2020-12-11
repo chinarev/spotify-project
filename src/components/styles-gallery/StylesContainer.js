@@ -12,7 +12,7 @@ import SpotifyWebApi from "spotify-web-api-js";
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
-function getBase64Image(src, font_size, text_color, font) {
+export function getBase64Image(src, font_size, text_color, font) {
     return new Promise((resolve, reject) => {
         let playlist_name = localStorage.getItem("selected_playlist_name");
         let align = "center";
@@ -39,14 +39,12 @@ function getBase64Image(src, font_size, text_color, font) {
     })
 }
 
-
 class StylesContainer extends React.Component {
     constructor(props) {
         super(props);
         console.log("constructor container")
         this.state = {
-            styles: [],
-            pictures: [back1, back2, back3, back4, back5, back6]
+            styles: []
         }
     }
 

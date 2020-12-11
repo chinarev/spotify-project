@@ -25,8 +25,8 @@ export function getSelect(options, selectValue, handleChange, label) {
 class SetColorForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'Black'};
-
+        this.state = {value: 'black'};
+        localStorage.setItem("preview_text_color", this.state.value);
         this.handleChange = this.handleChange.bind(this);
         //this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -44,12 +44,12 @@ class SetColorForm extends React.Component {
 
 
     render() {
-        let options = {
-            text : ["Black", "Red", "Green", "Pink", "Purple"],
-            color : ["black", "red", "green", "pink", "purple"]
-        }
+        // let options = {
+        //     text : ["Black", "Red", "Green", "Pink", "Purple"],
+        //     color : ["black", "red", "green", "pink", "purple"]
+        // }
 
-        //let options = ["Black", "Red", "Green", "Pink", "Purple"];
+        let options = ["black", "red", "green", "pink", "purple"];
         return getSelect(options, this.state.value, this.handleChange, "Set text color: ")
     }
 }

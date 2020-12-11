@@ -5,8 +5,8 @@ import {getSelect} from "./SetColorForm"
 class SetTextSize extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'Efsd'};
-
+        this.state = {value: "30"};
+        localStorage.setItem("preview_text_size", this.state.value);
         this.handleChange = this.handleChange.bind(this);
   //      this.handleSubmit = this.handleSubmit.bind(this);
     }

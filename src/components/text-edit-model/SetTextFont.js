@@ -6,15 +6,14 @@ import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 class SetTextFont extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'Mem'};
-
+        this.state = {value: 'Brush Script MT'};
+        localStorage.setItem("preview_text_font", this.state.value);
         this.handleChange = this.handleChange.bind(this);
  //       this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         this.setState({value: event.target.value});
-        console.log("value:" + event.target.value);
         localStorage.setItem("preview_text_font", event.target.value);
     }
 
