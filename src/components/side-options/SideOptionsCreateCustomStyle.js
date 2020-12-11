@@ -7,6 +7,17 @@ import SetColorForm from "../text-edit-model/SetColorForm";
 import Popup from "reactjs-popup";
 import SetTextFont from "../text-edit-model/SetTextFont";
 import SetTextSize from "../text-edit-model/SetTextSize";
+import SpotifyWebApi from "spotify-web-api-js";
+
+var spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+
+var myImg=localStorage.getItem("selected_playlist_image")
+let text_settings = {
+    font_size: localStorage.getItem("preview_playlist_size"),
+    text_color: localStorage.getItem("preview_playlist_color"),
+    font: localStorage.getItem("preview_playlist_font"),
+}
 
 class SideOptionsCreateCustomStyle extends React.Component {
     constructor(props) {
@@ -43,7 +54,6 @@ class SideOptionsCreateCustomStyle extends React.Component {
         window.location.assign(`http://localhost:3000/playlist`);
     }
 
-
     render() {
         switch (localStorage.getItem("page_state")) {
             case (PAGE_STATE.CHANGE_COVER): {
@@ -72,21 +82,23 @@ class SideOptionsCreateCustomStyle extends React.Component {
                                 <div className="header"> Edit text</div>
                                 <div className="content">
                                     {' '}
-                                    <img id="myimage"/>
+                                    <img src = {myImg} id="myimage"/>
                                     <div id="side-options-editText-container">
-                                        <button className="buttonEditText">
+                                        <div>
                                             <SetColorForm/>
-                                        </button>
-                                        <button className="buttonEditText">
+                                        </div>
+                                        <div>
                                             <SetTextFont/>
-                                        </button>
-                                        <button className="buttonEditText">
+                                        </div>
+                                        <div>
                                             <SetTextSize/>
-                                        </button>
+                                        </div>
                                         <button className="buttonEditText" onClick={(e) => this.onclickEditText(e)}>
                                             Apply
                                         </button>
-                                        <button className="buttonEditText" onClick={() => {close();}}>
+                                        <button className="buttonEditText" onClick={() => {
+                                            close();
+                                        }}>
                                             Cancel
                                         </button>
                                     </div>

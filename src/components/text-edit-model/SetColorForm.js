@@ -33,6 +33,7 @@ class SetColorForm extends React.Component {
 
     handleChange(event) {
         this.setState({value: event.target.value});
+        localStorage.setItem("preview_text_color", event.target.value);
     }
 
     // handleSubmit(event) {
@@ -40,8 +41,15 @@ class SetColorForm extends React.Component {
     //     event.preventDefault();
     // }
 
+
+
     render() {
-        let options = ["Black", "Red", "Green", "Pink", "Purple"];
+        let options = {
+            text : ["Black", "Red", "Green", "Pink", "Purple"],
+            color : ["black", "red", "green", "pink", "purple"]
+        }
+
+        //let options = ["Black", "Red", "Green", "Pink", "Purple"];
         return getSelect(options, this.state.value, this.handleChange, "Set text color: ")
     }
 }

@@ -26,15 +26,6 @@ class SideOptionEditText extends React.Component {
             return <SideOptionsCreateCustomStyle/>
         } else {
             return <div id="side-options-container">
-                <button className="side-options">
-                    Set text color
-                </button>
-                <button className="side-options">
-                    Set text font
-                </button>
-                <button className="side-options">
-                    Set text size
-                </button>
                 <button className="side-options" onClick={(e) => this.onclickSave(e)}>
                     Save
                 </button>

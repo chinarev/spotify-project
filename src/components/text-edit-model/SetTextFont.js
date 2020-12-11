@@ -1,6 +1,7 @@
 import React from "react";
 import SideOptionsCreateCustomStyle from "../side-options/SideOptionsCreateCustomStyle";
 import {getSelect} from "./SetColorForm"
+import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 
 class SetTextFont extends React.Component {
     constructor(props) {
@@ -13,6 +14,8 @@ class SetTextFont extends React.Component {
 
     handleChange(event) {
         this.setState({value: event.target.value});
+        console.log("value:" + event.target.value);
+        localStorage.setItem("preview_text_font", event.target.value);
     }
 
     // handleSubmit(event) {
@@ -21,7 +24,7 @@ class SetTextFont extends React.Component {
     // }
 
     render() {
-        let options = ["Mem", "Kek", "Puk", "Lol", "Bam"];
+        let options = ["Brush Script MT", "Lucida Handwriting", "Copperplate", "WhiteSmoke", "Comic Sans MS"];
         return getSelect(options, this.state.value, this.handleChange, "Set text font: ")
     }
 }

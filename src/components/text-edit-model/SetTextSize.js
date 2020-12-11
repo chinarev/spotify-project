@@ -13,6 +13,7 @@ class SetTextSize extends React.Component {
 
     handleChange(event) {
         this.setState({value: event.target.value});
+        localStorage.setItem("preview_text_size", event.target.value);
     }
 
     // handleSubmit(event) {
@@ -21,7 +22,7 @@ class SetTextSize extends React.Component {
     // }
 
     render() {
-        let options = ["Efsd", "fsdf", "gdfgf", "gdf", "gfdg"];
+        let options = ["30", "40", "50", "60", "70", "80"];
         return getSelect(options, this.state.value, this.handleChange, "Set text size: ")
     }
 }
