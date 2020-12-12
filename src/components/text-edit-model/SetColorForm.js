@@ -1,10 +1,9 @@
 import React from "react";
-import SideOptionsCreateCustomStyle from "../side-options/SideOptionsCreateCustomStyle";
 
 export function getSelect(options, selectValue, handleChange, label) {
-    let childrens = [];
+    let children = [];
     for (let i = 0; i < options.length; i++) {
-        childrens[i] = React.createElement(
+        children[i] = React.createElement(
             'option',
             {value: options[i], key: i},
             options[i]
@@ -13,7 +12,7 @@ export function getSelect(options, selectValue, handleChange, label) {
     const select = React.createElement(
         'select',
         {value: selectValue, onChange: handleChange, key: label},
-        childrens
+        children
     )
     return React.createElement(
         'label',
@@ -25,8 +24,13 @@ export function getSelect(options, selectValue, handleChange, label) {
 class SetColorForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'black'};
-        localStorage.setItem("preview_text_color", this.state.value);
+        let selectedValue =  localStorage.getItem("preview_text_color");
+        // if (selectedValue === "none"){
+        //     selectedValue = "black"
+        //     localStorage.setItem("preview_text_color", selectedValue);
+        // }
+        this.state = {value: selectedValue};
+        //localStorage.setItem("preview_text_color", this.state.value);
         this.handleChange = this.handleChange.bind(this);
         //this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -34,6 +38,8 @@ class SetColorForm extends React.Component {
     handleChange(event) {
         this.setState({value: event.target.value});
         localStorage.setItem("preview_text_color", event.target.value);
+        console.log("color updated.");
+        document.location.reload();
     }
 
     // handleSubmit(event) {
@@ -41,6 +47,9 @@ class SetColorForm extends React.Component {
     //     event.preventDefault();
     // }
 
+    componentDidMount() {
+        console.log("color did mount.");
+    }
 
 
     render() {

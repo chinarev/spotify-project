@@ -6,8 +6,15 @@ import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 class SetTextFont extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {value: 'Brush Script MT'};
-        localStorage.setItem("preview_text_font", this.state.value);
+
+        let selectedValue =  localStorage.getItem("preview_text_font");
+        // if (selectedValue === "none"){
+        //     selectedValue = "Brush Script MT"
+        //     localStorage.setItem("preview_text_font", selectedValue);
+        // }
+        this.state = {value: selectedValue};
+
+        //localStorage.setItem("preview_text_font", this.state.value);
         this.handleChange = this.handleChange.bind(this);
  //       this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -15,6 +22,7 @@ class SetTextFont extends React.Component {
     handleChange(event) {
         this.setState({value: event.target.value});
         localStorage.setItem("preview_text_font", event.target.value);
+        document.location.reload();
     }
 
     // handleSubmit(event) {

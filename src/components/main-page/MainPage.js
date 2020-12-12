@@ -7,6 +7,8 @@ import {authEndpoint, clientId, redirectUri, scopes} from "../../service/config.
 class MainPage extends React.Component {
     constructor(props) {
         super(props);
+        localStorage.clear()
+        //TODO: check if null
         localStorage.setItem('textToken', "none");
     }
 
