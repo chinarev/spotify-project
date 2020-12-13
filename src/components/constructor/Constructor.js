@@ -9,14 +9,19 @@ class Constructor extends React.Component {
     constructor(props) {
         super(props);
         console.log("constructor container")
+        const search = props.location.search; // returns the URL query String
+        const params = new URLSearchParams(search);
+        let IdFromURL = params.get('background');
+        if(IdFromURL === null) {
+            IdFromURL = pic;
+        }
         this.state = {
             preview: pic,
-            background: pic,
+            background: IdFromURL,
             text_size: 30,
             text_font: 'Brush Script MT',
             text_color: 'black',
         }
-
         this.handleChangeColor = this.handleChangeColor.bind(this);
         this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
 

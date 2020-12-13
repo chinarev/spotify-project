@@ -5,14 +5,26 @@ import back3 from  '../../assets/img/background_gallery/background_gallery3.jpg'
 import back4 from  '../../assets/img/background_gallery/background_gallery4.jpg'
 import back5 from  '../../assets/img/background_gallery/background_gallery5.jpg'
 import back6 from  '../../assets/img/background_gallery/background_gallery6.jpg'
+import pic from "../../assets/img/white_background.jpg";
+import BackgroundGalleryPage from "./BackgroundGalleryPage";
 
 class BackgroundsContainer extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            background: pic
+        }
+    }
+
     onclickGallery(img) {
         //TODO: перевести img в base64
+        this.setState({background: img})
+        //this.setState({text_color: color.hex});
         localStorage.setItem("preview_background", img);
         console.log("preview background: " + img);
-        window.location.assign(`http://localhost:3000/constructor/`);
+        window.location.assign(`http://localhost:3000/constructor?background=${img}`);
+
     }
 
     GetBackground(image, i) {
@@ -36,18 +48,20 @@ class BackgroundsContainer extends React.Component {
 
     render() {
         let backgrounds = [];
-        let backgrounds_gallery = [back1, back2, back3, back4, back5, back6]
+        let backgrounds_gallery = [back1, back2, back3, back4, back5, back6];
         let i;
         let list_size = 6;
             for (i = 1; i <= list_size; i++) {
                 backgrounds[i] = this.GetBackground(backgrounds_gallery[i - 1], i);
             }
-
         return React.createElement(
             'div',
             {className: "grid-container backgrounds-page"},
             backgrounds
         );
+
+
+
     }
 }
 
