@@ -17,6 +17,10 @@ class Constructor extends React.Component {
             text_color: 'black',
         }
         this.handleChangeColor = this.handleChangeColor.bind(this);
+        getBase64Image(this.state.background, this.state.text_size,
+            this.state.text_color, this.state.text_font).then(url => {
+            this.setState({preview: url})
+        })
     }
 
     componentDidMount() {
@@ -26,38 +30,11 @@ class Constructor extends React.Component {
         console.log("text_font: " + localStorage.getItem("preview_text_font"));
         console.log("text_color: " + localStorage.getItem("preview_text_color"));
 
-
-        let text_props = {
-            text_size: localStorage.getItem("preview_text_size"),
-            text_font: localStorage.getItem("preview_text_font"),
-            text_color: localStorage.getItem("preview_text_color"),
-        }
-        // if (this.state.text_size !== text_props.text_size) {
-        //     this.setState({
-        //         text_size: localStorage.getItem("preview_text_size"),
-        //     });
-        // }
-        // if (this.state.text_font !== text_props.text_font) {
-        //     this.setState({
-        //         text_font: localStorage.getItem("preview_text_font"),
-        //     });
-        // }
-        // if (this.state.text_color !== text_props.text_color) {
-        //     this.setState({
-        //         text_color: localStorage.getItem("preview_text_color"),
-        //     });
-        // }
-
-
         // this.setState({
         //     text_size: localStorage.getItem("preview_text_size"),
         //     text_font: localStorage.getItem("preview_text_font"),
         //     text_color: localStorage.getItem("preview_text_font")
         // });
-        getBase64Image(this.state.preview, this.state.text_size,
-            this.state.text_color, this.state.text_font).then(url => {
-            this.setState({preview: url})
-        })
     }
 
     handleChangeColor(color, event) {
@@ -65,7 +42,7 @@ class Constructor extends React.Component {
         localStorage.setItem("preview_text_color", color.hex);
         console.log("color changed")
 
-        getBase64Image(this.state.preview, this.state.text_size,
+        getBase64Image(this.state.background, this.state.text_size,
             this.state.text_color, this.state.text_font).then(url => {
             this.setState({preview: url})
         })
