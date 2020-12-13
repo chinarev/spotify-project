@@ -55,7 +55,7 @@ class SideOptionsContainer extends React.Component {
                 return <SideOptionContainerChangeCover/>
             }
             default: {
-                return <div id="side-options-container">
+                return <div className="side-options-container">
 
                     <Popup
                         trigger={<button className="side-options"> Change name </button>}

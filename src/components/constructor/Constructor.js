@@ -3,6 +3,8 @@ import SideOptionEditContainer from "./SideOptionEditContainer";
 import Header from "../all-playlists-page/Header";
 import pic from "../../assets/img/white_background.jpg";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
+import '../../assets/constructorStyle.css'
+
 
 class Constructor extends React.Component {
 
@@ -41,8 +43,6 @@ class Constructor extends React.Component {
 
     handleChangeColor(color, event) {
         this.setState({text_color: color.hex});
-        console.log("color changed")
-
         getBase64Image(this.state.background, this.state.text_size,
             this.state.text_color, this.state.text_font).then(url => {
             this.setState({preview: url})
@@ -71,6 +71,7 @@ class Constructor extends React.Component {
     render() {
         return <div className="selected-playlist-page">
             <Header/>
+            <h1 className="playlists_title" id="edit_title">Create custom style</h1>
             <div id="playlist-page-container">
                 <div className="playlist-info">
                     <img src={this.state.preview} id="playlist-cover" alt="Playlist cover"/>

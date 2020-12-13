@@ -1,0 +1,34 @@
+#constructor_text{
+    padding-top: 0;
+    padding-bottom: 15px;
+    font-size: 25px;
+}
+
+#select-container{
+    float: left;
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#select-label {
+    display: flex;
+    float: left;
+    margin: 5px;
+}
+
+select {
+    margin-left: 5px;
+    width: 180px;
+}
+
+#text-edit-container{
+    display: flex;
+    margin: 0 15px 15px;
+}
+
+#edit-container > button {
+    width: 100%;
+}

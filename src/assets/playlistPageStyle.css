@@ -1,5 +1,3 @@
-
-
 div.selected-playlist-page {
     background: #ACACC4;
     background-size: cover;
@@ -32,12 +30,12 @@ button.side-options {
     margin-bottom: 15px;
 }
 
-#side-options-container {
+.side-options-container {
     display: block;
     align-items: center;
     position: relative;
-    margin-left: auto;
-    margin-right: 10px;
+    margin-left: 10px;
+    margin-right: auto;
 }
 
 .playlist-info {
@@ -152,8 +150,8 @@ button.side-options {
 }
 
 #edit_title{
-    padding-top: 100px;
-    padding-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 25px;
 }
 
 #page-mask {
