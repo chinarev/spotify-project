@@ -1,23 +1,85 @@
 import React from "react";
 import SideOptionEditContainer from "./SideOptionEditContainer";
-import Background from "./Background";
 import Header from "../all-playlists-page/Header";
+import pic from "../../assets/img/white_background.jpg";
+import {getBase64Image} from "../styles-gallery/StylesContainer";
 
 class Constructor extends React.Component {
 
-    onclick() {
+    constructor(props) {
+        super(props);
+        console.log("constructor container")
+        this.state = {
+            preview: pic,
+            background: pic,
+            text_size: localStorage.getItem("preview_text_size"),
+            text_font: localStorage.getItem("preview_text_font"),
+            text_color: 'black',
+        }
+        this.handleChangeColor = this.handleChangeColor.bind(this);
     }
 
     componentDidMount() {
-        document.title = 'SPALCO - Main page';
+        document.title = 'SPALCO - Cover constructor';
+        console.log("constructor DidMount");
+        console.log("text_size: " + localStorage.getItem("preview_text_size"));
+        console.log("text_font: " + localStorage.getItem("preview_text_font"));
+        console.log("text_color: " + localStorage.getItem("preview_text_color"));
+
+
+        let text_props = {
+            text_size: localStorage.getItem("preview_text_size"),
+            text_font: localStorage.getItem("preview_text_font"),
+            text_color: localStorage.getItem("preview_text_color"),
+        }
+        // if (this.state.text_size !== text_props.text_size) {
+        //     this.setState({
+        //         text_size: localStorage.getItem("preview_text_size"),
+        //     });
+        // }
+        // if (this.state.text_font !== text_props.text_font) {
+        //     this.setState({
+        //         text_font: localStorage.getItem("preview_text_font"),
+        //     });
+        // }
+        // if (this.state.text_color !== text_props.text_color) {
+        //     this.setState({
+        //         text_color: localStorage.getItem("preview_text_color"),
+        //     });
+        // }
+
+
+        // this.setState({
+        //     text_size: localStorage.getItem("preview_text_size"),
+        //     text_font: localStorage.getItem("preview_text_font"),
+        //     text_color: localStorage.getItem("preview_text_font")
+        // });
+        getBase64Image(this.state.preview, this.state.text_size,
+            this.state.text_color, this.state.text_font).then(url => {
+            this.setState({preview: url})
+        })
     }
+
+    handleChangeColor(color, event) {
+        this.setState({text_color: color.hex});
+        localStorage.setItem("preview_text_color", color.hex);
+        console.log("color changed")
+
+        getBase64Image(this.state.preview, this.state.text_size,
+            this.state.text_color, this.state.text_font).then(url => {
+            this.setState({preview: url})
+        })
+    };
 
     render() {
         return <div className="selected-playlist-page">
             <Header/>
             <div id="playlist-page-container">
-                <Background/>
-                <SideOptionEditContainer/>
+                <div className="playlist-info">
+                    <img src={this.state.preview} id="playlist-cover" alt="Playlist cover"/>
+                    <p id="playlist-name">{localStorage.getItem("selected_playlist_name")}</p>
+                </div>
+                <SideOptionEditContainer onChange={this.handleChangeColor} currColor={this.state.text_color}/>
             </div>
         </div>;
     }
