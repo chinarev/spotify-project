@@ -25,7 +25,7 @@ class SideOptionEditText extends React.Component {
         if (localStorage.getItem("page_state") === PAGE_STATE.CREATE_CUSTOM_STYLE) {
             return <SideOptionsCreateCustomStyle/>
         } else {
-            return <div id="side-options-container">
+            return <div className="side-options-container">
                 <button className="side-options" onClick={(e) => this.onclickSave(e)}>
                     Save
                 </button>

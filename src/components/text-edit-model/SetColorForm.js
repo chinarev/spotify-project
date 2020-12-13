@@ -1,22 +1,40 @@
 import React from "react";
 
-export function getSelect(options, selectValue, handleChange, label) {
+export function getSelect(options, selectValue, handleChange, label, font) {
     let children = [];
-    for (let i = 0; i < options.length; i++) {
-        children[i] = React.createElement(
-            'option',
-            {value: options[i], key: i},
-            options[i]
+    let select;
+    if (font !== null) {
+        for (let i = 0; i < options.length; i++) {
+            children[i] = React.createElement(
+                'option',
+                {value: options[i], key: i, style: {fontFamily: options[i]}},
+                options[i]
+            )
+        }
+        select = React.createElement(
+            'select',
+            {value: selectValue, onChange: handleChange, key: label, style: {fontFamily: selectValue}},
+            children
+        )
+
+    } else {
+        for (let i = 0; i < options.length; i++) {
+            children[i] = React.createElement(
+                'option',
+                {value: options[i], key: i},
+                options[i]
+            )
+        }
+        select = React.createElement(
+            'select',
+            {value: selectValue, onChange: handleChange, key: label},
+            children
         )
     }
-    const select = React.createElement(
-        'select',
-        {value: selectValue, onChange: handleChange, key: label},
-        children
-    )
+
     return React.createElement(
         'label',
-        {},
+        {id: "select-label"},
         [label, select]
     )
 }

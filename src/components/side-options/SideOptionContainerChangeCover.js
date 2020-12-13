@@ -2,7 +2,6 @@ import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
-import pic from '../../assets/img/test_album_cover.jpg'
 import SpotifyWebApi from "spotify-web-api-js";
 import Popup from "reactjs-popup";
 
@@ -20,13 +19,18 @@ function getBase64Image(src, callback) {
 
         //to crop image into square:
         let size = img.naturalHeight;
+        let sy = 0;
+        let sx = (img.naturalWidth - size) / 2;
         if (size > img.naturalWidth) {
+            sy = (size - img.naturalWidth) / 2;
             size = img.naturalWidth;
+            sx = 0;
         }
-        canvas.height = size;
-        canvas.width = size;
-        ctx.drawImage(img, -(img.naturalWidth / 2 - size / 2),
-            -(img.naturalHeight / 2 - size / 2));
+        canvas.height = 500;
+        canvas.width = 500;
+
+       ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
+
         dataURL = canvas.toDataURL('image/jpeg');
         callback(dataURL);
     };
@@ -63,6 +67,7 @@ class SideOptionContainerChangeCover extends React.Component {
     onclickUploadCover() {
         var playlist_id = localStorage.getItem("selected_playlist_id")
         let myImage = document.getElementById("myimage").src;
+        console.log("upload clicked")
         getBase64Image(
             myImage,
             function (dataUrl) {
@@ -104,7 +109,7 @@ class SideOptionContainerChangeCover extends React.Component {
             }
             default: {
 
-                return <div id="side-options-container">
+                return <div className="side-options-container">
                     <Popup
                         trigger={<button className="side-options"> Upload cover </button>}
                         modal

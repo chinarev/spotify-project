@@ -82,7 +82,7 @@ class SideOptionsCreateCustomStyle extends React.Component {
                 return <SideOptionEditText/>
             }
             default: {
-                return <div id="side-options-container">
+                return <div className="side-options-container">
                     <button className="side-options" onClick={(e) => this.onclickSetBackgroundImage(e)}>
                         Set background image
                     </button>

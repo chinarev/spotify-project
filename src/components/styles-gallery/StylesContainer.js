@@ -22,8 +22,8 @@ export function getBase64Image(src, font_size, text_color, font) {
             const canvas = document.createElement('canvas');
             const ctx = canvas.getContext('2d');
             let dataURL;
-            //to resize image into 300x300 square:
-            let size = 300;
+            //to resize image into 500x500 square:
+            let size = 500;
             canvas.height = size;
             canvas.width = size;
             ctx.drawImage(img, 0, 0, size, size);
