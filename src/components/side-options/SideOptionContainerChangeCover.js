@@ -37,6 +37,36 @@ function getBase64Image(src, callback) {
     }
 }
 
+export function onclickUploadCover() {
+    var playlist_id = localStorage.getItem("selected_playlist_id")
+    let myImage = document.getElementById("myimage").src;
+    getBase64Image(
+        myImage,
+        function (dataUrl) {
+            localStorage.setItem("selected_playlist_image", dataUrl);
+            spotifyApi.uploadCustomPlaylistCoverImage(
+                playlist_id,
+                dataUrl.substring(dataUrl.indexOf(",") + 1)
+            ).then(() => document.location.reload())
+        }
+    );
+
+}
+
+export function onFileSelected(event) {
+    var selectedFile = event.target.files[0];
+    var reader = new FileReader();
+
+    var imgtag = document.getElementById("myimage");
+    imgtag.title = selectedFile.name;
+
+    reader.onload = function (event) {
+        imgtag.src = event.target.result;
+    };
+
+    reader.readAsDataURL(selectedFile);
+}
+
 class SideOptionContainerChangeCover extends React.Component {
     constructor(props) {
         super(props);
@@ -58,36 +88,7 @@ class SideOptionContainerChangeCover extends React.Component {
         this.setState({
             curr_page_state: PAGE_STATE.CREATE_CUSTOM_STYLE
         });
-    }
-
-    onclickUploadCover() {
-        var playlist_id = localStorage.getItem("selected_playlist_id")
-        let myImage = document.getElementById("myimage").src;
-        getBase64Image(
-            myImage,
-            function (dataUrl) {
-                localStorage.setItem("selected_playlist_image", dataUrl);
-                spotifyApi.uploadCustomPlaylistCoverImage(
-                    playlist_id,
-                    dataUrl.substring(dataUrl.indexOf(",") + 1)
-                ).then(() => document.location.reload())
-            }
-        );
-
-    }
-
-    onFileSelected(event) {
-        var selectedFile = event.target.files[0];
-        var reader = new FileReader();
-
-        var imgtag = document.getElementById("myimage");
-        imgtag.title = selectedFile.name;
-
-        reader.onload = function (event) {
-            imgtag.src = event.target.result;
-        };
-
-        reader.readAsDataURL(selectedFile);
+        window.location.assign('http://localhost:3000/constructor');
     }
 
     onClickChooseStyle() {
@@ -117,12 +118,12 @@ class SideOptionContainerChangeCover extends React.Component {
                                     </button>
                                     <div className="playlists_title header"> Choose cover from your device</div>
                                     <div className="content">
-                                        <input type="file" onChange={this.onFileSelected} name="photo" multiple
+                                        <input type="file" onChange={onFileSelected} name="photo" multiple
                                                accept="image/*,image/jpeg" id="myInput"/>
                                         <img id="myimage"/>
                                     </div>
                                     <div className="actions">
-                                        <button className="button" onClick={(e) => this.onclickUploadCover(e)}>
+                                        <button className="button" onClick={(e) => onclickUploadCover(e)}>
                                             Upload
                                         </button>
                                         <button className="button" onClick={() => {
