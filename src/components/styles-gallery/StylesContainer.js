@@ -30,7 +30,7 @@ export function getBase64Image(src, font_size, text_color, font) {
             ctx.font = font_size + "px " + font;
             ctx.fillStyle = text_color;
             ctx.textAlign = align;
-            ctx.fillText(playlist_name, size / 2, size / 2 + font_size / 2);
+            ctx.fillText(playlist_name, size / 2, size / 2 + font_size / 4);
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
         };

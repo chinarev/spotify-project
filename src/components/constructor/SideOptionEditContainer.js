@@ -14,7 +14,6 @@ class SideOptionEditContainer extends React.Component {
 
     render() {
         return <div id="side-options-container">
-
             <button className="side-options" onClick={(e) => this.onclickGallery(e)}> Choose from gallery</button>
             <button className="side-options">Upload background</button>
             <div>
@@ -23,10 +22,10 @@ class SideOptionEditContainer extends React.Component {
                               disableAlpha={true}/>
             </div>
             <div>
-                <SetTextFont/>
+                <SetTextFont font={this.props.currFont} onChange={this.props.onChangeFont}/>
             </div>
             <div>
-                <SetTextSize/>
+                <SetTextSize size={this.props.currSize} onChange={this.props.onChangeSize}/>
             </div>
 
             <button className="side-options">Save</button>

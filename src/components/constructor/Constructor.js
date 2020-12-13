@@ -12,11 +12,14 @@ class Constructor extends React.Component {
         this.state = {
             preview: pic,
             background: pic,
-            text_size: localStorage.getItem("preview_text_size"),
-            text_font: localStorage.getItem("preview_text_font"),
+            text_size: 30,
+            text_font: 'Brush Script MT',
             text_color: 'black',
         }
+
         this.handleChangeColor = this.handleChangeColor.bind(this);
+        this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
+
         getBase64Image(this.state.background, this.state.text_size,
             this.state.text_color, this.state.text_font).then(url => {
             this.setState({preview: url})
@@ -29,17 +32,10 @@ class Constructor extends React.Component {
         console.log("text_size: " + localStorage.getItem("preview_text_size"));
         console.log("text_font: " + localStorage.getItem("preview_text_font"));
         console.log("text_color: " + localStorage.getItem("preview_text_color"));
-
-        // this.setState({
-        //     text_size: localStorage.getItem("preview_text_size"),
-        //     text_font: localStorage.getItem("preview_text_font"),
-        //     text_color: localStorage.getItem("preview_text_font")
-        // });
     }
 
     handleChangeColor(color, event) {
         this.setState({text_color: color.hex});
-        localStorage.setItem("preview_text_color", color.hex);
         console.log("color changed")
 
         getBase64Image(this.state.background, this.state.text_size,
@@ -47,6 +43,25 @@ class Constructor extends React.Component {
             this.setState({preview: url})
         })
     };
+
+    handleChangeTextSize = async event => {
+        await this.setState({text_size: event.target.value});
+
+        getBase64Image(this.state.background, this.state.text_size,
+            this.state.text_color, this.state.text_font).then(url => {
+            this.setState({preview: url})
+        })
+    }
+
+    handleChangeTextFont = async event => {
+        await this.setState({text_font: event.target.value});
+
+        getBase64Image(this.state.background, this.state.text_size,
+            this.state.text_color, this.state.text_font).then(url => {
+            this.setState({preview: url})
+        })
+    }
+
 
     render() {
         return <div className="selected-playlist-page">
@@ -56,7 +71,12 @@ class Constructor extends React.Component {
                     <img src={this.state.preview} id="playlist-cover" alt="Playlist cover"/>
                     <p id="playlist-name">{localStorage.getItem("selected_playlist_name")}</p>
                 </div>
-                <SideOptionEditContainer onChange={this.handleChangeColor} currColor={this.state.text_color}/>
+                <SideOptionEditContainer onChange={this.handleChangeColor}
+                                         currColor={this.state.text_color}
+                                         onChangeSize={this.handleChangeTextSize}
+                                         currSize={this.state.text_size}
+                                         onChangeFont={this.handleChangeTextFont}
+                                         currFont={this.state.text_font}/>
             </div>
         </div>;
     }

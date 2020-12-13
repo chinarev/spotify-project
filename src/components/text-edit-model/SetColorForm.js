@@ -1,10 +1,9 @@
 import React from "react";
-import SideOptionsCreateCustomStyle from "../side-options/SideOptionsCreateCustomStyle";
 
 export function getSelect(options, selectValue, handleChange, label) {
-    let childrens = [];
+    let children = [];
     for (let i = 0; i < options.length; i++) {
-        childrens[i] = React.createElement(
+        children[i] = React.createElement(
             'option',
             {value: options[i], key: i},
             options[i]
@@ -13,7 +12,7 @@ export function getSelect(options, selectValue, handleChange, label) {
     const select = React.createElement(
         'select',
         {value: selectValue, onChange: handleChange, key: label},
-        childrens
+        children
     )
     return React.createElement(
         'label',
@@ -28,7 +27,6 @@ class SetColorForm extends React.Component {
         this.state = {value: 'black'};
         localStorage.setItem("preview_text_color", this.state.value);
         this.handleChange = this.handleChange.bind(this);
-        //this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
@@ -36,19 +34,7 @@ class SetColorForm extends React.Component {
         localStorage.setItem("preview_text_color", event.target.value);
     }
 
-    // handleSubmit(event) {
-    //     alert('Your favorite flavor is: ' + this.state.value);
-    //     event.preventDefault();
-    // }
-
-
-
     render() {
-        // let options = {
-        //     text : ["Black", "Red", "Green", "Pink", "Purple"],
-        //     color : ["black", "red", "green", "pink", "purple"]
-        // }
-
         let options = ["black", "red", "green", "pink", "purple"];
         return getSelect(options, this.state.value, this.handleChange, "Set text color: ")
     }
