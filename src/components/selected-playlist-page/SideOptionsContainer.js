@@ -8,10 +8,7 @@ var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 export const PAGE_STATE = {
     SELECTED_PLAYLIST: "selected_playlist",
-    CHANGE_COVER: "change_cover",
-    CREATE_CUSTOM_STYLE: "create_custom_style",
-    SET_BACKGROUND_IMAGE: "set_background_image",
-    EDIT_TEXT_PROPERTIES: "edit_text_properties"
+    CHANGE_COVER: "change_cover"
 };
 
 class SideOptionsContainer extends React.Component {

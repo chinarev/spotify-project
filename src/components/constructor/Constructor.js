@@ -5,7 +5,6 @@ import pic from "../../assets/img/white_background.jpg";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
 import '../../assets/constructorStyle.css'
 
-
 class Constructor extends React.Component {
 
     constructor(props) {

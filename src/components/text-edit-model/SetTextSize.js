@@ -1,5 +1,5 @@
 import React from "react";
-import {getSelect} from "./SetColorForm"
+import {getSelect} from "./SetTextFont"
 
 class SetTextSize extends React.Component {
     constructor(props) {

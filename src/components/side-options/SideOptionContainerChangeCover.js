@@ -1,7 +1,6 @@
 import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
-import SideOptionsCreateCustomStyle from "./SideOptionsCreateCustomStyle";
 import SpotifyWebApi from "spotify-web-api-js";
 import Popup from "reactjs-popup";
 
@@ -29,7 +28,7 @@ function getBase64Image(src, callback) {
         canvas.height = 500;
         canvas.width = 500;
 
-       ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
 
         dataURL = canvas.toDataURL('image/jpeg');
         callback(dataURL);
@@ -88,10 +87,6 @@ class SideOptionContainerChangeCover extends React.Component {
     }
 
     onClickCreateCustomStyle() {
-        localStorage.setItem("page_state", PAGE_STATE.CREATE_CUSTOM_STYLE);
-        this.setState({
-            curr_page_state: PAGE_STATE.CREATE_CUSTOM_STYLE
-        });
         window.location.assign('http://localhost:3000/constructor');
     }
 
@@ -100,57 +95,50 @@ class SideOptionContainerChangeCover extends React.Component {
     }
 
     render() {
-        switch (localStorage.getItem("page_state")) {
-            case (PAGE_STATE.SELECTED_PLAYLIST): {
-                return <SideOptionsContainer/>
-            }
-            case (PAGE_STATE.CREATE_CUSTOM_STYLE): {
-                return <SideOptionsCreateCustomStyle/>
-            }
-            default: {
-
-                return <div className="side-options-container">
-                    <Popup
-                        trigger={<button className="side-options"> Upload cover </button>}
-                        modal
-                        nested>
-                        {close => (
-                            <div id="page-mask">
-                                <div className="modal">
-                                    <button className="close" onClick={close}>
-                                        &times;
+        if (localStorage.getItem("page_state") === PAGE_STATE.SELECTED_PLAYLIST) {
+            return <SideOptionsContainer/>
+        } else {
+            return <div className="side-options-container">
+                <Popup
+                    trigger={<button className="side-options"> Upload cover </button>}
+                    modal
+                    nested>
+                    {close => (
+                        <div id="page-mask">
+                            <div className="modal">
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="playlists_title header"> Choose cover from your device</div>
+                                <div className="content">
+                                    <input type="file" onChange={onFileSelected} name="photo" multiple
+                                           accept="image/*,image/jpeg" id="myInput"/>
+                                    <img id="myimage"/>
+                                </div>
+                                <div className="actions">
+                                    <button className="button" onClick={(e) => onclickUploadCover(e)}>
+                                        Upload
                                     </button>
-                                    <div className="playlists_title header"> Choose cover from your device</div>
-                                    <div className="content">
-                                        <input type="file" onChange={onFileSelected} name="photo" multiple
-                                               accept="image/*,image/jpeg" id="myInput"/>
-                                        <img id="myimage"/>
-                                    </div>
-                                    <div className="actions">
-                                        <button className="button" onClick={(e) => onclickUploadCover(e)}>
-                                            Upload
-                                        </button>
-                                        <button className="button" onClick={() => {
-                                            close();
-                                        }}>
-                                            Cancel
-                                        </button>
-                                    </div>
+                                    <button className="button" onClick={() => {
+                                        close();
+                                    }}>
+                                        Cancel
+                                    </button>
                                 </div>
                             </div>
-                        )}
-                    </Popup>
-                    <button className="side-options" onClick={(e) => this.onClickChooseStyle(e)}>
-                        Choose style template
-                    </button>
-                    <button className="side-options" onClick={(e) => this.onClickCreateCustomStyle(e)}>
-                        Create custom style
-                    </button>
-                    <button className="side-options" onClick={(e) => this.onclickBack(e)}>
-                        Back
-                    </button>
-                </div>
-            }
+                        </div>
+                    )}
+                </Popup>
+                <button className="side-options" onClick={(e) => this.onClickChooseStyle(e)}>
+                    Choose style template
+                </button>
+                <button className="side-options" onClick={(e) => this.onClickCreateCustomStyle(e)}>
+                    Create custom style
+                </button>
+                <button className="side-options" onClick={(e) => this.onclickBack(e)}>
+                    Back
+                </button>
+            </div>
         }
     }
 }

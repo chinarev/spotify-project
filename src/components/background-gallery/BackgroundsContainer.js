@@ -6,7 +6,6 @@ import back4 from  '../../assets/img/background_gallery/background_gallery4.jpg'
 import back5 from  '../../assets/img/background_gallery/background_gallery5.jpg'
 import back6 from  '../../assets/img/background_gallery/background_gallery6.jpg'
 import pic from "../../assets/img/white_background.jpg";
-import BackgroundGalleryPage from "./BackgroundGalleryPage";
 
 class BackgroundsContainer extends React.Component {
 

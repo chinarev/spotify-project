@@ -2,8 +2,6 @@ import React from "react";
 import Header from "../all-playlists-page/Header";
 import '../../assets/allPlaylistsStyle.css'
 import BackgroundsContainer from "./BackgroundsContainer";
-import pic from "../../assets/img/white_background.jpg";
-import {getBase64Image} from "../styles-gallery/StylesContainer";
 
 class BackgroundGalleryPage extends React.Component {
 
