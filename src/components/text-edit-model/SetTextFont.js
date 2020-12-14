@@ -45,7 +45,7 @@ class SetTextFont extends React.Component {
     }
 
     render() {
-        let options = ["Brush Script MT", "Lucida Handwriting", "Copperplate", "WhiteSmoke", "Comic Sans MS"];
+        let options = ["Arial", "Times New Roman", "WhiteSmoke", "Lucida Handwriting", "Copperplate", "Brush Script MT", "Comic Sans MS", "Lucida Console", "Georgia"];
         return getSelect(options, this.props.font, this.props.onChange, "Set text font: ", true)
     }
 }
