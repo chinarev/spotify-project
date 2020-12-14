@@ -1,83 +1,83 @@
 let text_prop1 = {
-    font_size: 40,
+    font_size: 90,
     text_color: "SlateBlue",
     font: "Brush Script MT",
 }
 
 //блестящие штуки
 let text_prop2 = {
-    font_size: 40,
+    font_size: 80,
     text_color: "#625c8a",
     font: "Lucida Handwriting",
 }
 
 //гора
 let text_prop3 = {
-    font_size: 70,
+    font_size: 80,
     text_color: "black",
     font: "Copperplate",
 }
 
 //лес
 let text_prop4 = {
-    font_size: 50,
+    font_size: 80,
     text_color: "WhiteSmoke",
     font: "Papyrus",
 }
 
 //небо
 let text_prop5 = {
-    font_size: 60,
+    font_size: 120,
     text_color: "white",
     font: "Brush Script MT",
 }
 
 //кислотный микс
 let text_prop6 = {
-    font_size: 40,
+    font_size: 60,
     text_color: "#3366cc",
     font: "Comic Sans MS",
 }
 
 //фиолетовый закат
 let text_prop7 = {
-    font_size: 60,
+    font_size: 90,
     text_color: "#4B0082",
-    font: "Times New Roman",
+    font: "Copperplate Gothic",
 }
 
 //серые горы
 let text_prop8 = {
-    font_size: 60,
-    text_color: "#a80f0f",
-    font: "Comic Sans MS",
+    font_size: 80,
+    text_color: "#5e241c",
+    font: "Lucida Console",
 }
 
 //олины елки
 let text_prop9 = {
-    font_size: 70,
+    font_size: 90,
     text_color: "#c5c8d9",
     font: "Georgia",
 }
 
 //горы и елки
 let text_prop10 = {
-    font_size: 60,
+    font_size: 110,
     text_color: "#000000",
-    font: "Arial",
+    font: "Brush Script MT",
 }
 
 //фонарики
 let text_prop11 = {
     font_size: 60,
-    text_color: "#FFFFE0",
-    font: "Arial",
+    text_color: "white",
+    font: "Fantasy",
 }
 
 //санки и снег
 let text_prop12 = {
     font_size: 70,
-    text_color: "#B22222",
+    text_color: "white",
     font: "Lucida Handwriting",
 }
 
