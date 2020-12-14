@@ -23,16 +23,26 @@ export function getBase64Image(src, font_size, text_color, font) {
             const ctx = canvas.getContext('2d');
             let dataURL;
             //to resize image into 500x500 square:
-            let size = 500;
-            canvas.height = size;
-            canvas.width = size;
-            ctx.drawImage(img, 0, 0, size, size);
+            let size = img.naturalHeight;
+            let sy = 0;
+            let sx = (img.naturalWidth - size) / 2;
+            if (size > img.naturalWidth) {
+                sy = (size - img.naturalWidth) / 2;
+                size = img.naturalWidth;
+                sx = 0;
+            }
+            canvas.height = 500;
+            canvas.width = 500;
+
+            ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
             ctx.font = font_size + "px " + font;
             ctx.fillStyle = text_color;
             ctx.textAlign = align;
-            ctx.fillText(playlist_name, size / 2, size / 2 + font_size / 4);
+            ctx.fillText(playlist_name, canvas.height / 2, canvas.height / 2 + font_size / 4);
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
+
+            //to crop image into square:
         };
         img.onerror = reject;
         img.src = src;

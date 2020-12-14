@@ -4,6 +4,10 @@ import Header from "../all-playlists-page/Header";
 import pic from "../../assets/img/white_background.jpg";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
 import '../../assets/constructorStyle.css'
+import SpotifyWebApi from "spotify-web-api-js";
+
+var spotifyApi = new SpotifyWebApi();
+spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 class Constructor extends React.Component {
 
@@ -25,11 +29,14 @@ class Constructor extends React.Component {
         }
         this.handleChangeColor = this.handleChangeColor.bind(this);
         this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
+        this.handleUploadClick = this.handleUploadClick.bind(this);
 
         getBase64Image(this.state.background, this.state.text_size,
             this.state.text_color, this.state.text_font).then(url => {
             this.setState({preview: url})
         })
+
+        //localStorage.setItem("new_background", this.state.preview);
     }
 
     componentDidMount() {
@@ -46,7 +53,7 @@ class Constructor extends React.Component {
             this.state.text_color, this.state.text_font).then(url => {
             this.setState({preview: url})
         })
-    };
+    }
 
     handleChangeTextSize = async event => {
         await this.setState({text_size: event.target.value});
@@ -66,6 +73,20 @@ class Constructor extends React.Component {
         })
     }
 
+    async handleUploadClick() {
+        if (document.getElementById("myimage") != null) {
+            await this.setState({background: document.getElementById("myimage").src});
+
+            getBase64Image(this.state.background, this.state.text_size,
+                this.state.text_color, this.state.text_font).then(url => {
+                this.setState({preview: url})
+
+                document.getElementById("closeID").click();
+            })
+
+        }
+
+    }
 
     render() {
         return <div className="selected-playlist-page">
@@ -81,7 +102,9 @@ class Constructor extends React.Component {
                                          onChangeSize={this.handleChangeTextSize}
                                          currSize={this.state.text_size}
                                          onChangeFont={this.handleChangeTextFont}
-                                         currFont={this.state.text_font}/>
+                                         currFont={this.state.text_font}
+                                         onClickUpload={this.handleUploadClick}
+                                         currPreview={this.state.preview}/>
             </div>
         </div>;
     }

@@ -50,9 +50,9 @@ class BackgroundsContainer extends React.Component {
         let backgrounds_gallery = [back1, back2, back3, back4, back5, back6];
         let i;
         let list_size = 6;
-            for (i = 1; i <= list_size; i++) {
-                backgrounds[i] = this.GetBackground(backgrounds_gallery[i - 1], i);
-            }
+        for (i = 1; i <= list_size; i++) {
+            backgrounds[i] = this.GetBackground(backgrounds_gallery[i - 1], i);
+        }
         return React.createElement(
             'div',
             {className: "grid-container backgrounds-page"},

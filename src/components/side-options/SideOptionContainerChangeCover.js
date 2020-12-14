@@ -7,7 +7,7 @@ import Popup from "reactjs-popup";
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
-function getBase64Image(src, callback) {
+export function getBase64Image(src, callback) {
     const img = new Image();
     img.crossOrigin = 'Anonymous';
     img.src = src;

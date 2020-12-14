@@ -5,6 +5,7 @@ import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
 import SpotifyWebApi from "spotify-web-api-js";
 import {onFileSelected} from "../side-options/SideOptionContainerChangeCover";
+import {getBase64Image} from "../side-options/SideOptionContainerChangeCover";
 
 var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
@@ -22,12 +23,19 @@ class SideOptionEditContainer extends React.Component {
         window.location.assign(`http://localhost:3000/playlist/`);
     }
 
-    onclickUploadCover() {
+    onclickSave() {
         var playlist_id = localStorage.getItem("selected_playlist_id")
-        spotifyApi.uploadCustomPlaylistCoverImage(
-            playlist_id,
-            document.getElementById("myimage").src
-        ).then(() => document.location.reload())
+
+        getBase64Image(
+            this.props.currPreview,
+            function (dataUrl) {
+                localStorage.setItem("selected_playlist_image", dataUrl);
+                spotifyApi.uploadCustomPlaylistCoverImage(
+                    playlist_id,
+                    dataUrl.substring(dataUrl.indexOf(",") + 1)
+                ).then(() =>  window.location.assign(`http://localhost:3000/playlist/`))
+            }
+        );
     }
 
     render() {
@@ -51,10 +59,10 @@ class SideOptionEditContainer extends React.Component {
                                 <img id="myimage"/>
                             </div>
                             <div className="actions">
-                                <button className="button" onClick={(e) => this.onclickUploadCover(e)}>
+                                <button className="button" onClick={this.props.onClickUpload} >
                                     Upload
                                 </button>
-                                <button className="button" onClick={() => {
+                                <button className="button" id="closeID" onClick={() => {
                                     close();
                                 }}>
                                     Cancel
@@ -77,7 +85,7 @@ class SideOptionEditContainer extends React.Component {
                 </div>
             </div>
 
-            <button className="side-options">Save</button>
+            <button className="side-options" onClick={(e) => this.onclickSave(e)}>Save</button>
             <button className="side-options" onClick={(e) => this.onclickBack(e)}>Back</button>
         </div>;
     }
