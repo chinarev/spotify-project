@@ -1,10 +1,17 @@
 import React from "react";
-import back1 from  '../../assets/img/background_gallery/background_gallery1.jpg'
-import back2 from  '../../assets/img/background_gallery/background_gallery2.jpg'
-import back3 from  '../../assets/img/background_gallery/background_gallery3.jpg'
-import back4 from  '../../assets/img/background_gallery/background_gallery4.jpg'
-import back5 from  '../../assets/img/background_gallery/background_gallery5.jpg'
-import back6 from  '../../assets/img/background_gallery/background_gallery6.jpg'
+import back1 from '../../assets/img/background_gallery/background_gallery1.jpg'
+import back2 from '../../assets/img/background_gallery/background_gallery2.jpg'
+import back3 from '../../assets/img/background_gallery/background_gallery3.jpg'
+import back4 from '../../assets/img/background_gallery/background_gallery4.jpg'
+import back5 from '../../assets/img/background_gallery/background_gallery5.jpg'
+import back6 from '../../assets/img/background_gallery/background_gallery6.jpg'
+import back7 from '../../assets/img/background_gallery/background_gallery7.jpg'
+import back8 from '../../assets/img/background_gallery/background_gallery8.jpg'
+import back9 from '../../assets/img/background_gallery/background_gallery9.jpg'
+import back10 from '../../assets/img/background_gallery/background_gallery10.jpg'
+import back11 from '../../assets/img/background_gallery/background_gallery11.jpg'
+import back12 from '../../assets/img/background_gallery/background_gallery12.jpg'
+import back13 from '../../assets/img/background_gallery/background_gallery13.jpg'
 import pic from "../../assets/img/white_background.jpg";
 
 class BackgroundsContainer extends React.Component {
@@ -47,7 +54,7 @@ class BackgroundsContainer extends React.Component {
 
     render() {
         let backgrounds = [];
-        let backgrounds_gallery = [back1, back2, back3, back4, back5, back6];
+        let backgrounds_gallery = [back1, back2, back3, back4, back5, back6, back7, back8, back9, back10, back11, back12, back13];
         let i;
         let list_size = 6;
         for (i = 1; i <= list_size; i++) {

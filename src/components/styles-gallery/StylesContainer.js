@@ -5,6 +5,14 @@ import back3 from '../../assets/img/background_gallery/background_gallery3.jpg'
 import back4 from '../../assets/img/background_gallery/background_gallery4.jpg'
 import back5 from '../../assets/img/background_gallery/background_gallery5.jpg'
 import back6 from '../../assets/img/background_gallery/background_gallery6.jpg'
+import back7 from '../../assets/img/background_gallery/background_gallery7.jpg'
+import back8 from '../../assets/img/background_gallery/background_gallery8.jpg'
+import back9 from '../../assets/img/background_gallery/background_gallery9.jpg'
+import back10 from '../../assets/img/background_gallery/background_gallery10.jpg'
+import back11 from '../../assets/img/background_gallery/background_gallery11.jpg'
+import back12 from '../../assets/img/background_gallery/background_gallery12.jpg'
+import back13 from '../../assets/img/background_gallery/background_gallery13.jpg'
+
 import text_properties from './DefinedStyles'
 
 import SpotifyWebApi from "spotify-web-api-js";
@@ -55,7 +63,7 @@ class StylesContainer extends React.Component {
         console.log("constructor container")
         this.state = {
             styles: [],
-            pictures: [back1, back2, back3, back4, back5, back6]
+            pictures: [back1, back2, back3, back4, back5, back6, back7, back8, back9, back10, back11, back12, back13]
         }
     }
 
