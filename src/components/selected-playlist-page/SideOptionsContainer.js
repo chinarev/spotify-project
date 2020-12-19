@@ -38,6 +38,7 @@ class SideOptionsContainer extends React.Component {
             }
         )
         localStorage.setItem("selected_playlist_name", document.getElementById("nameInput").value);
+        console.log("selected_playlist_name: " + localStorage.getItem("selected_playlist_id"))
         document.location.reload()
     }
 
