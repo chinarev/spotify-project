@@ -25,7 +25,6 @@ class BackgroundsContainer extends React.Component {
     onclickGallery(img) {
         this.setState({background: img})
         localStorage.setItem("preview_background", img);
-        console.log("preview background: " + img);
         window.location.assign(`http://localhost:3000/constructor?background=${img}`);
     }
 

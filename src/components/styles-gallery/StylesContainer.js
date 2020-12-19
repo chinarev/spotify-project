@@ -40,7 +40,6 @@ export function getBase64Image(src, font_size, text_color, font) {
 class StylesContainer extends React.Component {
     constructor(props) {
         super(props);
-        console.log("constructor container")
         this.state = {
             styles: []
         }
@@ -75,7 +74,6 @@ class StylesContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log("component did mount container")
         for (let i = 0; i < text_properties.length; i++) {
             getBase64Image(text_properties[i].img, text_properties[i].font_size,
                 text_properties[i].text_color, text_properties[i].font).then(url => {
@@ -86,7 +84,6 @@ class StylesContainer extends React.Component {
     }
 
     render() {
-        console.log("render container")
         let styles_elements = [];
 
         for (let i = 1; i <= this.state.styles.length; i++) {

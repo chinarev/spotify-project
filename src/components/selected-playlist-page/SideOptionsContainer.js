@@ -23,17 +23,15 @@ class SideOptionsContainer extends React.Component {
             curr_page_state: PAGE_STATE.CHANGE_COVER
         });
         localStorage.setItem("page_state", PAGE_STATE.CHANGE_COVER);
-        console.log("onclickChangeCover state:" + localStorage.getItem("page_state"));
 
     }
 
-    onclickName() {
+    async onclickName() {
         let playlist_id = localStorage.getItem("selected_playlist_id")
         spotifyApi.changePlaylistDetails(
             playlist_id,
-            {name: document.getElementById("nameInput").value});
+            {name: document.getElementById("nameInput").value}).then(() =>  window.location.assign(`http://localhost:3000/playlist/`));
         localStorage.setItem("selected_playlist_name", document.getElementById("nameInput").value);
-        console.log("selected_playlist_name: " + localStorage.getItem("selected_playlist_id"))
         document.location.reload()
     }
 
@@ -42,7 +40,6 @@ class SideOptionsContainer extends React.Component {
     }
 
     render() {
-        console.log("state in render: " + localStorage.getItem("page_state"))
         if (localStorage.getItem("page_state") === PAGE_STATE.CHANGE_COVER) {
             return <SideOptionContainerChangeCover/>
         } else {

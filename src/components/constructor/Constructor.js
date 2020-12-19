@@ -8,7 +8,7 @@ import '../../assets/constructorStyle.css'
 class Constructor extends React.Component {
     constructor(props) {
         super(props);
-        console.log("constructor container")
+
         const search = props.location.search; // returns the URL query String
         const params = new URLSearchParams(search);
         let IdFromURL = params.get('background');
@@ -34,10 +34,6 @@ class Constructor extends React.Component {
 
     componentDidMount() {
         document.title = 'SPALCO - Cover constructor';
-        console.log("constructor DidMount");
-        console.log("text_size: " + localStorage.getItem("preview_text_size"));
-        console.log("text_font: " + localStorage.getItem("preview_text_font"));
-        console.log("text_color: " + localStorage.getItem("preview_text_color"));
     }
 
     handleChangeColor(color) {
