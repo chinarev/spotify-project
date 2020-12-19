@@ -1,8 +1,5 @@
 import React from "react";
-import SpotifyWebApi from "spotify-web-api-js";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+import {spotifyApi} from "./Header";
 
 class PlaylistContainer extends React.Component {
     constructor(props) {
@@ -16,10 +13,11 @@ class PlaylistContainer extends React.Component {
     }
 
     onclick(img, playlist_name, playlist_id) {
+        //TODO: убрать selected_playlist_name и selected_playlist_image
         localStorage.setItem("selected_playlist_name", playlist_name);
         localStorage.setItem("selected_playlist_image", img);
-        localStorage.setItem("selected_playlist_id", playlist_id);
-        window.location.assign('http://localhost:3000/playlist/');
+
+        window.location.assign(`http://localhost:3000/playlist?id=${playlist_id}`);
     }
 
     GetPlaylist(album_cover, album_name, album_id) {
@@ -33,7 +31,6 @@ class PlaylistContainer extends React.Component {
             {className: "playlist-name"},
             album_name
         )
-
 
         return React.createElement(
             'div',
@@ -62,9 +59,6 @@ class PlaylistContainer extends React.Component {
     }
 
     render() {
-        console.log("getUserID: " + this.state.user_id);
-        console.log("getPlaylists: " + this.state.playlists);
-
         let albums = [];
         let i;
         let list_size = 0;

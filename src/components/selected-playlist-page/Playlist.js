@@ -1,11 +1,28 @@
 import React from "react";
+import {spotifyApi} from "../all-playlists-page/Header";
 
 class Playlist extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            img: null,
+            name: null,
+            id: this.props.id
+        }
+        this.getPlaylist();
+    }
+
+    getPlaylist = () => {
+        spotifyApi.getPlaylist(this.state.id).then(playlist => this.setState({
+            img: playlist.images[0].url,
+            name: playlist.name
+        }));
+    }
 
     render() {
         return <div className="playlist-info">
-            <img src={localStorage.getItem("selected_playlist_image")} id="playlist-cover" alt="Playlist cover"/>
-            <p id="playlist-name">{localStorage.getItem("selected_playlist_name")}</p>
+            <img src={this.state.img} id="playlist-cover" alt="Playlist cover"/>
+            <p id="playlist-name">{this.state.name}</p>
         </div>
     }
 }

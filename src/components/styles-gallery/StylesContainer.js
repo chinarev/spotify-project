@@ -1,9 +1,6 @@
 import React from "react";
 import text_properties from './DefinedStyles'
-import SpotifyWebApi from "spotify-web-api-js";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+import {spotifyApi} from "../all-playlists-page/Header";
 
 export function getBase64Image(src, font_size, text_color, font) {
     return new Promise((resolve, reject) => {
@@ -50,12 +47,12 @@ class StylesContainer extends React.Component {
     }
 
     onclick(img) {
-        let playlist_id = localStorage.getItem("selected_playlist_id")
+        let playlist_id = this.props.playlistID
         localStorage.setItem("selected_playlist_image", img);
         spotifyApi.uploadCustomPlaylistCoverImage(
             playlist_id,
             img.substring(img.indexOf(",") + 1)
-        ).then(() => window.location.assign('http://localhost:3000/playlist/'))
+        ).then(() => window.location.assign(`http://localhost:3000/playlist?id=${playlist_id}`));
     }
 
     GetStyle(image, i) {
@@ -88,6 +85,8 @@ class StylesContainer extends React.Component {
         }
     }
 
+    detailedReactHTMLElement;
+
     render() {
         console.log("render container")
         let styles_elements = [];
@@ -96,11 +95,12 @@ class StylesContainer extends React.Component {
             styles_elements[i - 1] = this.GetStyle(this.state.styles[i - 1], i);
         }
 
-        return React.createElement(
+        this.detailedReactHTMLElement = React.createElement(
             'div',
             {className: "grid-container styles-page"},
             styles_elements
         );
+        return this.detailedReactHTMLElement;
     }
 }
 

@@ -4,28 +4,25 @@ import Header from "../all-playlists-page/Header";
 import pic from "../../assets/img/white_background.jpg";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
 import '../../assets/constructorStyle.css'
-import SpotifyWebApi from "spotify-web-api-js";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 class Constructor extends React.Component {
     constructor(props) {
         super(props);
-        console.log("constructor container")
         const search = props.location.search; // returns the URL query String
         const params = new URLSearchParams(search);
-        let IdFromURL = params.get('background');
-        if (IdFromURL === null) {
-            IdFromURL = pic;
+        let backgroundFromURL = params.get('background');
+        if (backgroundFromURL === null) {
+            backgroundFromURL = pic;
         }
         this.state = {
             preview: pic,
-            background: IdFromURL,
+            background: backgroundFromURL,
             text_size: 30,
             text_font: 'Brush Script MT',
             text_color: 'black',
+            playlistID: params.get('playlistID')
         }
+
         this.handleChangeColor = this.handleChangeColor.bind(this);
         this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
         this.handleUploadClick = this.handleUploadClick.bind(this);
@@ -99,7 +96,8 @@ class Constructor extends React.Component {
                                          onChangeFont={this.handleChangeTextFont}
                                          currFont={this.state.text_font}
                                          onClickUpload={this.handleUploadClick}
-                                         currPreview={this.state.preview}/>
+                                         currPreview={this.state.preview}
+                                         playlistID={this.state.playlistID}/>
             </div>
         </div>;
     }

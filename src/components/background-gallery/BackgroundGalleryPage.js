@@ -4,9 +4,13 @@ import '../../assets/allPlaylistsStyle.css'
 import BackgroundsContainer from "./BackgroundsContainer";
 
 class BackgroundGalleryPage extends React.Component {
-
     constructor(props) {
         super(props);
+        const search = props.location.search; // returns the URL query String
+        const params = new URLSearchParams(search);
+        this.state = {
+            playlistID: params.get('playlistID')
+        }
     }
 
     componentDidMount() {
@@ -17,7 +21,7 @@ class BackgroundGalleryPage extends React.Component {
         return <div className="all-playlists-page">
             <Header/>
             <h1 className="playlists_title">Available background images</h1>
-            <BackgroundsContainer onClick={this.props.onclickGallery}/>
+            <BackgroundsContainer onClick={this.props.onclickGallery} playlistID={this.state.playlistID}/>
         </div>
     }
 }

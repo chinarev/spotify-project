@@ -3,12 +3,9 @@ import SetTextFont from "../text-edit-model/SetTextFont";
 import SetTextSize from "../text-edit-model/SetTextSize";
 import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import {onFileSelected} from "../side-options/SideOptionContainerChangeCover";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 class SideOptionEditContainer extends React.Component {
     constructor(props) {
@@ -16,22 +13,22 @@ class SideOptionEditContainer extends React.Component {
     }
 
     onclickGallery() {
-        window.location.assign(`http://localhost:3000/background_gallery/`);
+        window.location.assign(`http://localhost:3000/background_gallery?playlistID=${this.props.playlistID}`);
     }
 
     onclickBack() {
-        window.location.assign(`http://localhost:3000/playlist/`);
+        window.location.assign(`http://localhost:3000/playlist?id=${this.props.playlistID}`);
     }
 
     onclickSave() {
-        let playlist_id = localStorage.getItem("selected_playlist_id")
+        let playlist_id = this.props.playlistID;
 
         getBase64Image(this.props.currPreview).then(url => {
             localStorage.setItem("selected_playlist_image", url);
                     spotifyApi.uploadCustomPlaylistCoverImage(
                         playlist_id,
                         url.substring(url.indexOf(",") + 1)
-                    ).then(() =>  window.location.assign(`http://localhost:3000/playlist/`))
+                    ).then(() =>  window.location.assign(`http://localhost:3000/playlist?id=${this.props.playlistID}`))
         });
     }
 

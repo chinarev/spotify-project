@@ -1,15 +1,12 @@
 import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import Popup from "reactjs-popup";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
 
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
-
 export function onclickUploadCover() {
-    let playlist_id = localStorage.getItem("selected_playlist_id")
+    let playlist_id = this.props.id
     let myImage = document.getElementById("myImage").src;
 
     getBase64Image(myImage).then(url => {
@@ -45,15 +42,14 @@ class SideOptionContainerChangeCover extends React.Component {
         this.setState({
             curr_page_state: PAGE_STATE.SELECTED_PLAYLIST
         });
-        console.log("state in onclickBack: " + localStorage.getItem("page_state"))
     }
 
     onClickCreateCustomStyle() {
-        window.location.assign('http://localhost:3000/constructor');
+        window.location.assign(`http://localhost:3000/constructor?playlistID=${this.props.id}`);
     }
 
     onClickChooseStyle() {
-        window.location.assign(`http://localhost:3000/style_gallery`);
+        window.location.assign(`http://localhost:3000/style_gallery?playlistID=${this.props.id}`);
     }
 
     render() {
