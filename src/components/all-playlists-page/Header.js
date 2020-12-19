@@ -1,9 +1,9 @@
 import React from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 
-var spotifyApi = new SpotifyWebApi();
+let spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
-console.log("token in header: " + localStorage.getItem("textToken"))
+export {spotifyApi};
 
 class Header extends React.Component {
     constructor(props) {
@@ -26,7 +26,6 @@ class Header extends React.Component {
 
     componentDidMount() {
         this.getUser();
-        console.log("name in mount: " + this.state.user_name);
     }
 
     onclick() {

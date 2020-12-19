@@ -1,9 +1,6 @@
 import React from "react";
 import text_properties from './DefinedStyles'
-import SpotifyWebApi from "spotify-web-api-js";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+import {spotifyApi} from "../all-playlists-page/Header";
 
 export function getBase64Image(src, font_size, text_color, font) {
     return new Promise((resolve, reject) => {

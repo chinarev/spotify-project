@@ -1,11 +1,9 @@
 import React from "react";
 import SideOptionContainerChangeCover from "../side-options/SideOptionContainerChangeCover";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import '../../assets/editTextModal.css'
 import Popup from "reactjs-popup";
 
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 export const PAGE_STATE = {
     SELECTED_PLAYLIST: "selected_playlist",
     CHANGE_COVER: "change_cover"

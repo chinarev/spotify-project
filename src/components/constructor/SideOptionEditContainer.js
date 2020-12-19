@@ -3,12 +3,9 @@ import SetTextFont from "../text-edit-model/SetTextFont";
 import SetTextSize from "../text-edit-model/SetTextSize";
 import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import {onFileSelected} from "../side-options/SideOptionContainerChangeCover";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 class SideOptionEditContainer extends React.Component {
     constructor(props) {

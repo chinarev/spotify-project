@@ -4,7 +4,6 @@ import '../../assets/allPlaylistsStyle.css'
 import BackgroundsContainer from "./BackgroundsContainer";
 
 class BackgroundGalleryPage extends React.Component {
-
     constructor(props) {
         super(props);
     }

@@ -4,7 +4,6 @@ import Playlist from "./Playlist";
 import SideOptionsContainer from "./SideOptionsContainer";
 import '../../assets/playlistPageStyle.css'
 
-
 class SelectedPlaylistPage extends React.Component {
     componentDidMount() {
         document.title = 'SPALCO - Playlist page';

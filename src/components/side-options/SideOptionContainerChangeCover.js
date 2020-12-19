@@ -1,12 +1,11 @@
 import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import Popup from "reactjs-popup";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
 
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+
 
 export function onclickUploadCover() {
     let playlist_id = localStorage.getItem("selected_playlist_id")

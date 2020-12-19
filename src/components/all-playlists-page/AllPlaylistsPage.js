@@ -27,8 +27,6 @@ class AllPlaylistsPage extends React.Component {
     }
 
     render() {
-        console.log("Token in all playlists render: " + this.state.token);
-
         return <div className="all-playlists-page">
             <Header/>
             <h1 className="playlists_title">Your playlists</h1>
