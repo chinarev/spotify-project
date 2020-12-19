@@ -10,14 +10,13 @@ var spotifyApi = new SpotifyWebApi();
 spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
 class Constructor extends React.Component {
-
     constructor(props) {
         super(props);
         console.log("constructor container")
         const search = props.location.search; // returns the URL query String
         const params = new URLSearchParams(search);
         let IdFromURL = params.get('background');
-        if(IdFromURL === null) {
+        if (IdFromURL === null) {
             IdFromURL = pic;
         }
         this.state = {
@@ -35,8 +34,6 @@ class Constructor extends React.Component {
             this.state.text_color, this.state.text_font).then(url => {
             this.setState({preview: url})
         })
-
-        //localStorage.setItem("new_background", this.state.preview);
     }
 
     componentDidMount() {
@@ -47,7 +44,7 @@ class Constructor extends React.Component {
         console.log("text_color: " + localStorage.getItem("preview_text_color"));
     }
 
-    handleChangeColor(color, event) {
+    handleChangeColor(color) {
         this.setState({text_color: color.hex});
         getBase64Image(this.state.background, this.state.text_size,
             this.state.text_color, this.state.text_font).then(url => {
@@ -74,8 +71,8 @@ class Constructor extends React.Component {
     }
 
     async handleUploadClick() {
-        if (document.getElementById("myimage") != null) {
-            await this.setState({background: document.getElementById("myimage").src});
+        if (document.getElementById("myImage") != null) {
+            await this.setState({background: document.getElementById("myImage").src});
 
             getBase64Image(this.state.background, this.state.text_size,
                 this.state.text_color, this.state.text_font).then(url => {
@@ -83,9 +80,7 @@ class Constructor extends React.Component {
 
                 document.getElementById("closeID").click();
             })
-
         }
-
     }
 
     render() {

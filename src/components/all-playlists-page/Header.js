@@ -25,7 +25,6 @@ class Header extends React.Component {
     }
 
     componentDidMount() {
-        spotifyApi.getPlaylist()
         this.getUser();
         console.log("name in mount: " + this.state.user_name);
     }

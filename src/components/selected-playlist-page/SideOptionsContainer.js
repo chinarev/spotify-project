@@ -30,13 +30,10 @@ class SideOptionsContainer extends React.Component {
     }
 
     onclickName() {
-        var playlist_id = localStorage.getItem("selected_playlist_id")
+        let playlist_id = localStorage.getItem("selected_playlist_id")
         spotifyApi.changePlaylistDetails(
             playlist_id,
-            {
-                name: document.getElementById("nameInput").value
-            }
-        )
+            {name: document.getElementById("nameInput").value});
         localStorage.setItem("selected_playlist_name", document.getElementById("nameInput").value);
         document.location.reload()
     }
@@ -47,48 +44,42 @@ class SideOptionsContainer extends React.Component {
 
     render() {
         console.log("state in render: " + localStorage.getItem("page_state"))
-        switch (localStorage.getItem("page_state")) {
-            case (PAGE_STATE.CHANGE_COVER): {
-                return <SideOptionContainerChangeCover/>
-            }
-            default: {
-                return <div className="side-options-container">
-
-                    <Popup
-                        trigger={<button className="side-options"> Change name </button>}
-                        modal
-                        nested>
-                        {close => (
-                            <div id="page-mask">
-                                <div className="modal">
-                                    <button className="close" onClick={close}>
-                                        &times;
+        if (localStorage.getItem("page_state") === PAGE_STATE.CHANGE_COVER) {
+            return <SideOptionContainerChangeCover/>
+        } else {
+            return <div className="side-options-container">
+                <Popup
+                    trigger={<button className="side-options"> Change name </button>}
+                    modal nested>
+                    {close => (
+                        <div id="page-mask">
+                            <div className="modal">
+                                <button className="close" onClick={close}>
+                                    &times;
+                                </button>
+                                <div className="playlists_title header">New name:</div>
+                                <input type="text" id="nameInput"/>
+                                <div className="actions">
+                                    <button className="button" onClick={(e) => this.onclickName(e)}>
+                                        Save
                                     </button>
-                                    <div className="playlists_title header">New name:</div>
-                                    <input type="text" id="nameInput"/>
-                                    <div className="actions">
-                                        <button className="button" onClick={(e) => this.onclickName(e)}>
-                                            Save
-                                        </button>
-                                        <button className="button" onClick={() => {
-                                            close();
-                                        }}>
-                                            Cancel
-                                        </button>
-                                    </div>
+                                    <button className="button" onClick={() => {
+                                        close();
+                                    }}>
+                                        Cancel
+                                    </button>
                                 </div>
                             </div>
-                        )}
-                    </Popup>
-
-                    <button onClick={(e) => this.onclickChangeCover(e)} className="side-options">
-                        Change cover
-                    </button>
-                    <button onClick={(e) => this.onclickChangeBackToAll(e)} className="side-options">
-                        Back to all playlists
-                    </button>
-                </div>
-            }
+                        </div>
+                    )}
+                </Popup>
+                <button onClick={(e) => this.onclickChangeCover(e)} className="side-options">
+                    Change cover
+                </button>
+                <button onClick={(e) => this.onclickChangeBackToAll(e)} className="side-options">
+                    Back to all playlists
+                </button>
+            </div>
         }
     }
 }
