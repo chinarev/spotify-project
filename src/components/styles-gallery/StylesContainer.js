@@ -2,6 +2,13 @@ import React from "react";
 import text_properties from './DefinedStyles'
 import {spotifyApi} from "../all-playlists-page/Header";
 
+let str = localStorage.getItem("selected_playlist_name");
+String.prototype.countWords = function(){
+    return this.split(/\s+/).length;
+}
+str.countWords();
+console.log("counter= " + str.countWords());
+
 export function getBase64Image(src, font_size, text_color, font) {
     return new Promise((resolve, reject) => {
         let playlist_name = localStorage.getItem("selected_playlist_name");
@@ -28,7 +35,30 @@ export function getBase64Image(src, font_size, text_color, font) {
             ctx.font = font_size + "px " + font;
             ctx.fillStyle = text_color;
             ctx.textAlign = align;
-            ctx.fillText(playlist_name, canvas.height / 2, canvas.height / 2 + font_size / 4);
+            //ctx.textBaseline = "middle";
+            var lines = playlist_name.split(' ');
+            var chars = playlist_name.split('');
+            var block_height = font_size * (lines.length  + (lines.length - 1));
+
+             if ( ((chars.length > 10) & (font_size > 80)) || ((chars.length > 15) & (font_size > 50)) || (chars.length > 27)) {
+                 for (var i = 0; i<lines.length; i++){
+                 ctx.fillText(lines[i], canvas.height / 2, (canvas.height / 2 + font_size / 4 ) + (i*font_size));
+                 }
+             }
+             else {
+                 ctx.fillText(playlist_name, canvas.height / 2, (canvas.height / 2 + font_size / 4));
+             }
+
+            //ctx.fillText(playlist_name, canvas.height / 2, (canvas.height / 2 + font_size / 4));
+
+            //ctx.fillText(playlist_name, canvas.height / 2, (canvas.height / 2 + font_size / 4));
+
+            //var block_height = font_size * (lines.length  + (lines.length - 1));
+
+            // for (var i = 0; i<lines.length; i++){
+            //         ctx.fillText(lines[i], canvas.height / 2, (canvas.height / 2 + font_size / 4 - block_height / 4) + (i*font_size));
+            //         }
+
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
         };
