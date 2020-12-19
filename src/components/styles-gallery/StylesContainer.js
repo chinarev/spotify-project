@@ -1,24 +1,6 @@
 import React from "react";
-import back1 from '../../assets/img/background_gallery/background_gallery1.jpg'
-import back2 from '../../assets/img/background_gallery/background_gallery2.jpg'
-import back3 from '../../assets/img/background_gallery/background_gallery3.jpg'
-import back4 from '../../assets/img/background_gallery/background_gallery4.jpg'
-import back5 from '../../assets/img/background_gallery/background_gallery5.jpg'
-import back6 from '../../assets/img/background_gallery/background_gallery6.jpg'
-import back7 from '../../assets/img/background_gallery/background_gallery7.jpg'
-import back8 from '../../assets/img/background_gallery/background_gallery8.jpg'
-import back9 from '../../assets/img/background_gallery/background_gallery9.jpg'
-import back10 from '../../assets/img/background_gallery/background_gallery10.jpg'
-import back11 from '../../assets/img/background_gallery/background_gallery11.jpg'
-import back12 from '../../assets/img/background_gallery/background_gallery12.jpg'
-import back13 from '../../assets/img/background_gallery/background_gallery13.jpg'
-
 import text_properties from './DefinedStyles'
-
-import SpotifyWebApi from "spotify-web-api-js";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+import {spotifyApi} from "../all-playlists-page/Header";
 
 export function getBase64Image(src, font_size, text_color, font) {
     return new Promise((resolve, reject) => {
@@ -49,8 +31,6 @@ export function getBase64Image(src, font_size, text_color, font) {
             ctx.fillText(playlist_name, canvas.height / 2, canvas.height / 2 + font_size / 4);
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
-
-            //to crop image into square:
         };
         img.onerror = reject;
         img.src = src;
@@ -62,13 +42,12 @@ class StylesContainer extends React.Component {
         super(props);
         console.log("constructor container")
         this.state = {
-            styles: [],
-            pictures: [back1, back2, back3, back4, back5, back6, back7, back8, back9, back10, back11, back12, back13]
+            styles: []
         }
     }
 
     onclick(img) {
-        var playlist_id = localStorage.getItem("selected_playlist_id")
+        let playlist_id = localStorage.getItem("selected_playlist_id")
         localStorage.setItem("selected_playlist_image", img);
         spotifyApi.uploadCustomPlaylistCoverImage(
             playlist_id,
@@ -97,19 +76,18 @@ class StylesContainer extends React.Component {
 
     componentDidMount() {
         console.log("component did mount container")
-        for (let i = 0; i < this.state.pictures.length; i++) {
-            getBase64Image(this.state.pictures[i], text_properties[i].font_size,
+        for (let i = 0; i < text_properties.length; i++) {
+            getBase64Image(text_properties[i].img, text_properties[i].font_size,
                 text_properties[i].text_color, text_properties[i].font).then(url => {
                 let joined = this.state.styles.concat(url);
                 this.setState({styles: joined})
-            })
+            });
         }
     }
 
     render() {
         console.log("render container")
         let styles_elements = [];
-
 
         for (let i = 1; i <= this.state.styles.length; i++) {
             styles_elements[i - 1] = this.GetStyle(this.state.styles[i - 1], i);

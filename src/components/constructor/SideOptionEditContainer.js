@@ -3,12 +3,9 @@ import SetTextFont from "../text-edit-model/SetTextFont";
 import SetTextSize from "../text-edit-model/SetTextSize";
 import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import {onFileSelected} from "../side-options/SideOptionContainerChangeCover";
-import {getBase64Image} from "../side-options/SideOptionContainerChangeCover";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+import {getBase64Image} from "../styles-gallery/StylesContainer";
 
 class SideOptionEditContainer extends React.Component {
     constructor(props) {
@@ -24,18 +21,15 @@ class SideOptionEditContainer extends React.Component {
     }
 
     onclickSave() {
-        var playlist_id = localStorage.getItem("selected_playlist_id")
+        let playlist_id = localStorage.getItem("selected_playlist_id")
 
-        getBase64Image(
-            this.props.currPreview,
-            function (dataUrl) {
-                localStorage.setItem("selected_playlist_image", dataUrl);
-                spotifyApi.uploadCustomPlaylistCoverImage(
-                    playlist_id,
-                    dataUrl.substring(dataUrl.indexOf(",") + 1)
-                ).then(() =>  window.location.assign(`http://localhost:3000/playlist/`))
-            }
-        );
+        getBase64Image(this.props.currPreview).then(url => {
+            localStorage.setItem("selected_playlist_image", url);
+                    spotifyApi.uploadCustomPlaylistCoverImage(
+                        playlist_id,
+                        url.substring(url.indexOf(",") + 1)
+                    ).then(() =>  window.location.assign(`http://localhost:3000/playlist/`))
+        });
     }
 
     render() {
@@ -56,7 +50,7 @@ class SideOptionEditContainer extends React.Component {
                             <div className="content">
                                 <input type="file" onChange={onFileSelected} name="photo" multiple
                                        accept="image/*,image/jpeg" id="myInput"/>
-                                <img id="myimage"/>
+                                <img id="myImage"/>
                             </div>
                             <div className="actions">
                                 <button className="button" onClick={this.props.onClickUpload} >

@@ -15,7 +15,6 @@ import back13 from '../../assets/img/background_gallery/background_gallery13.jpg
 import pic from "../../assets/img/white_background.jpg";
 
 class BackgroundsContainer extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -24,13 +23,10 @@ class BackgroundsContainer extends React.Component {
     }
 
     onclickGallery(img) {
-        //TODO: перевести img в base64
         this.setState({background: img})
-        //this.setState({text_color: color.hex});
         localStorage.setItem("preview_background", img);
         console.log("preview background: " + img);
         window.location.assign(`http://localhost:3000/constructor?background=${img}`);
-
     }
 
     GetBackground(image, i) {
@@ -65,9 +61,6 @@ class BackgroundsContainer extends React.Component {
             {className: "grid-container backgrounds-page"},
             backgrounds
         );
-
-
-
     }
 }
 

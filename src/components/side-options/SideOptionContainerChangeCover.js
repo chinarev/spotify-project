@@ -1,72 +1,33 @@
 import React from "react";
 import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
 import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
-import SpotifyWebApi from "spotify-web-api-js";
+import {spotifyApi} from "../all-playlists-page/Header";
 import Popup from "reactjs-popup";
+import {getBase64Image} from "../styles-gallery/StylesContainer";
 
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
 
-export function getBase64Image(src, callback) {
-    const img = new Image();
-    img.crossOrigin = 'Anonymous';
-    img.src = src;
-    img.onload = () => {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        let dataURL;
-
-        //to crop image into square:
-        let size = img.naturalHeight;
-        let sy = 0;
-        let sx = (img.naturalWidth - size) / 2;
-        if (size > img.naturalWidth) {
-            sy = (size - img.naturalWidth) / 2;
-            size = img.naturalWidth;
-            sx = 0;
-        }
-        canvas.height = 500;
-        canvas.width = 500;
-
-        ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
-
-        dataURL = canvas.toDataURL('image/jpeg');
-        callback(dataURL);
-    };
-
-    if (img.complete || img.complete === undefined) {
-        img.src = "data:image/jpeg;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
-        img.src = src;
-    }
-}
 
 export function onclickUploadCover() {
-    var playlist_id = localStorage.getItem("selected_playlist_id")
-    let myImage = document.getElementById("myimage").src;
-    getBase64Image(
-        myImage,
-        function (dataUrl) {
-            localStorage.setItem("selected_playlist_image", dataUrl);
-            spotifyApi.uploadCustomPlaylistCoverImage(
-                playlist_id,
-                dataUrl.substring(dataUrl.indexOf(",") + 1)
-            ).then(() => document.location.reload())
-        }
-    );
+    let playlist_id = localStorage.getItem("selected_playlist_id")
+    let myImage = document.getElementById("myImage").src;
 
+    getBase64Image(myImage).then(url => {
+        localStorage.setItem("selected_playlist_image", url);
+        spotifyApi.uploadCustomPlaylistCoverImage(
+            playlist_id,
+            url.substring(url.indexOf(",") + 1)
+        ).then(() => document.location.reload())
+    });
 }
 
 export function onFileSelected(event) {
-    var selectedFile = event.target.files[0];
-    var reader = new FileReader();
-
-    var imgtag = document.getElementById("myimage");
-    imgtag.title = selectedFile.name;
-
-    reader.onload = function (event) {
-        imgtag.src = event.target.result;
+    let selectedFile = event.target.files[0];
+    let reader = new FileReader();
+    let imgTag = document.getElementById("myImage");
+    imgTag.title = selectedFile.name;
+    reader.onload = function (e) {
+        imgTag.src = e.target.result;
     };
-
     reader.readAsDataURL(selectedFile);
 }
 
@@ -113,10 +74,10 @@ class SideOptionContainerChangeCover extends React.Component {
                                 <div className="content">
                                     <input type="file" onChange={onFileSelected} name="photo" multiple
                                            accept="image/*,image/jpeg" id="myInput"/>
-                                    <img id="myimage"/>
+                                    <img id="myImage"/>
                                 </div>
                                 <div className="actions">
-                                    <button className="button" onClick={(e) => onclickUploadCover(e)}>
+                                    <button className="button" onClick={() => onclickUploadCover()}>
                                         Upload
                                     </button>
                                     <button className="button" onClick={() => {

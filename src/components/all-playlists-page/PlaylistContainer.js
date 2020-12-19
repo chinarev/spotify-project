@@ -1,8 +1,5 @@
 import React from "react";
-import SpotifyWebApi from "spotify-web-api-js";
-
-var spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
+import {spotifyApi} from "./Header";
 
 class PlaylistContainer extends React.Component {
     constructor(props) {
@@ -34,7 +31,6 @@ class PlaylistContainer extends React.Component {
             album_name
         )
 
-
         return React.createElement(
             'div',
             {className: "grid-item playlist", onClick: () => this.onclick(album_cover, album_name, album_id)},
@@ -62,9 +58,6 @@ class PlaylistContainer extends React.Component {
     }
 
     render() {
-        console.log("getUserID: " + this.state.user_id);
-        console.log("getPlaylists: " + this.state.playlists);
-
         let albums = [];
         let i;
         let list_size = 0;
