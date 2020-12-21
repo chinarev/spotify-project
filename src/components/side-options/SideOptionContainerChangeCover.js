@@ -5,12 +5,10 @@ import {spotifyApi} from "../all-playlists-page/Header";
 import Popup from "reactjs-popup";
 import {getBase64Image} from "../styles-gallery/StylesContainer";
 
-export function onclickUploadCover() {
-    let playlist_id = this.props.id
+export function onclickUploadCover(playlist_id) {
     let myImage = document.getElementById("myImage").src;
 
     getBase64Image(myImage).then(url => {
-        localStorage.setItem("selected_playlist_image", url);
         spotifyApi.uploadCustomPlaylistCoverImage(
             playlist_id,
             url.substring(url.indexOf(",") + 1)
@@ -74,7 +72,7 @@ class SideOptionContainerChangeCover extends React.Component {
                                     <img id="myImage"/>
                                 </div>
                                 <div className="actions">
-                                    <button className="button" onClick={() => onclickUploadCover()}>
+                                    <button className="button" onClick={() => onclickUploadCover(this.props.id)}>
                                         Upload
                                     </button>
                                     <button className="button" onClick={() => {

@@ -19,6 +19,10 @@ class Playlist extends React.Component {
         }));
     }
 
+    componentDidUpdate() {
+        localStorage.setItem("selected_playlist_name", this.state.name);
+    }
+
     render() {
         return <div className="playlist-info">
             <img src={this.state.img} id="playlist-cover" alt="Playlist cover"/>

@@ -2,9 +2,8 @@ import React from "react";
 import text_properties from './DefinedStyles'
 import {spotifyApi} from "../all-playlists-page/Header";
 
-export function getBase64Image(src, font_size, text_color, font) {
+export function getBase64Image(src, font_size, text_color, font, text) {
     return new Promise((resolve, reject) => {
-        let playlist_name = localStorage.getItem("selected_playlist_name");
         let align = "center";
         const img = new Image();
         img.crossOrigin = 'Anonymous';
@@ -28,7 +27,7 @@ export function getBase64Image(src, font_size, text_color, font) {
             ctx.font = font_size + "px " + font;
             ctx.fillStyle = text_color;
             ctx.textAlign = align;
-            ctx.fillText(playlist_name, canvas.height / 2, canvas.height / 2 + font_size / 4);
+            ctx.fillText(text, canvas.height / 2, canvas.height / 2 + font_size / 4);
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
         };
@@ -48,7 +47,6 @@ class StylesContainer extends React.Component {
 
     onclick(img) {
         let playlist_id = this.props.playlistID
-        localStorage.setItem("selected_playlist_image", img);
         spotifyApi.uploadCustomPlaylistCoverImage(
             playlist_id,
             img.substring(img.indexOf(",") + 1)
@@ -75,14 +73,15 @@ class StylesContainer extends React.Component {
     }
 
     componentDidMount() {
-        console.log("component did mount container")
-        for (let i = 0; i < text_properties.length; i++) {
-            getBase64Image(text_properties[i].img, text_properties[i].font_size,
-                text_properties[i].text_color, text_properties[i].font).then(url => {
-                let joined = this.state.styles.concat(url);
-                this.setState({styles: joined})
-            });
-        }
+        spotifyApi.getPlaylist(this.props.playlistID).then(playlist =>  {
+            for (let i = 0; i < text_properties.length; i++) {
+                getBase64Image(text_properties[i].img, text_properties[i].font_size,
+                    text_properties[i].text_color, text_properties[i].font, playlist.name).then(url => {
+                    let joined = this.state.styles.concat(url);
+                    this.setState({styles: joined})
+                });
+            }
+        })
     }
 
     detailedReactHTMLElement;

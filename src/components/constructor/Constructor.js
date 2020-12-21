@@ -14,55 +14,51 @@ class Constructor extends React.Component {
         if (backgroundFromURL === null) {
             backgroundFromURL = pic;
         }
+
         this.state = {
             preview: pic,
             background: backgroundFromURL,
             text_size: 30,
             text_font: 'Brush Script MT',
             text_color: 'black',
-            playlistID: params.get('playlistID')
+            playlistID: params.get('playlistID'),
+            playlist_name: localStorage.getItem('selected_playlist_name')
         }
 
         this.handleChangeColor = this.handleChangeColor.bind(this);
         this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
-        this.handleUploadClick = this.handleUploadClick.bind(this);
+        this.handleUploadClick = this.handleUploadClick.bind(this)
 
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font).then(url => {
+            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
             this.setState({preview: url})
         })
     }
 
     componentDidMount() {
         document.title = 'SPALCO - Cover constructor';
-        console.log("constructor DidMount");
-        console.log("text_size: " + localStorage.getItem("preview_text_size"));
-        console.log("text_font: " + localStorage.getItem("preview_text_font"));
-        console.log("text_color: " + localStorage.getItem("preview_text_color"));
     }
 
     handleChangeColor(color) {
         this.setState({text_color: color.hex});
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font).then(url => {
+            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
             this.setState({preview: url})
         })
     }
 
     handleChangeTextSize = async event => {
         await this.setState({text_size: event.target.value});
-
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font).then(url => {
+            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
             this.setState({preview: url})
         })
     }
 
     handleChangeTextFont = async event => {
         await this.setState({text_font: event.target.value});
-
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font).then(url => {
+            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
             this.setState({preview: url})
         })
     }
@@ -72,7 +68,7 @@ class Constructor extends React.Component {
             await this.setState({background: document.getElementById("myImage").src});
 
             getBase64Image(this.state.background, this.state.text_size,
-                this.state.text_color, this.state.text_font).then(url => {
+                this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
                 this.setState({preview: url})
 
                 document.getElementById("closeID").click();

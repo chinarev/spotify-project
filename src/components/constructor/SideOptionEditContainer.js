@@ -24,7 +24,6 @@ class SideOptionEditContainer extends React.Component {
         let playlist_id = this.props.playlistID;
 
         getBase64Image(this.props.currPreview).then(url => {
-            localStorage.setItem("selected_playlist_image", url);
                     spotifyApi.uploadCustomPlaylistCoverImage(
                         playlist_id,
                         url.substring(url.indexOf(",") + 1)

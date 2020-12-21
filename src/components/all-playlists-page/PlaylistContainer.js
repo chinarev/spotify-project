@@ -13,10 +13,6 @@ class PlaylistContainer extends React.Component {
     }
 
     onclick(img, playlist_name, playlist_id) {
-        //TODO: убрать selected_playlist_name и selected_playlist_image
-        localStorage.setItem("selected_playlist_name", playlist_name);
-        localStorage.setItem("selected_playlist_image", img);
-
         window.location.assign(`http://localhost:3000/playlist?id=${playlist_id}`);
     }
 

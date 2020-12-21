@@ -31,7 +31,6 @@ class SideOptionsContainer extends React.Component {
         spotifyApi.changePlaylistDetails(
             playlist_id,
             {name: document.getElementById("nameInput").value});
-        localStorage.setItem("selected_playlist_name", document.getElementById("nameInput").value);
         document.location.reload()
     }
 
