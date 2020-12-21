@@ -28,18 +28,19 @@ export function getBase64Image(src, font_size, text_color, font, text) {
             ctx.fillStyle = text_color;
             ctx.textAlign = align;
             ctx.fillText(text, canvas.height / 2, canvas.height / 2 + font_size / 4);
-            var lines = text.split(' ');
-            var chars = text.split('');
-            var block_height = font_size * (lines.length  + (lines.length - 1));
+            if(text !== undefined) {
+                let lines = text.split(' ');
+                let chars = text.split('');
 
-             if ( ((chars.length > 10) & (font_size > 80)) || ((chars.length > 15) & (font_size > 50)) || (chars.length > 27)) {
-                 for (var i = 0; i<lines.length; i++){
-                 ctx.fillText(lines[i], canvas.height / 2, (canvas.height / 2 + font_size / 4 ) + (i*font_size));
-                 }
-             }
-             else {
-                 ctx.fillText(text, canvas.height / 2, (canvas.height / 2 + font_size / 4));
-             }
+                if ( ((chars.length > 10) & (font_size > 80)) || ((chars.length > 15) & (font_size > 50)) || (chars.length > 27)) {
+                    for (let i = 0; i<lines.length; i++){
+                        ctx.fillText(lines[i], canvas.height / 2, (canvas.height / 2 + font_size / 4 ) + (i*font_size));
+                    }
+                }
+                else {
+                    ctx.fillText(text, canvas.height / 2, (canvas.height / 2 + font_size / 4));
+                }
+            }
 
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);

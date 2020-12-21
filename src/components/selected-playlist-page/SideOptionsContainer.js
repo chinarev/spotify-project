@@ -26,12 +26,12 @@ class SideOptionsContainer extends React.Component {
         console.log("onclickChangeCover state:" + localStorage.getItem("page_state"));
     }
 
-    onclickName() {
+    async onclickName() {
         let playlist_id = this.props.id;
-        spotifyApi.changePlaylistDetails(
+        await spotifyApi.changePlaylistDetails(
             playlist_id,
             {name: document.getElementById("nameInput").value});
-        document.location.reload()
+        document.location.reload();
     }
 
     onclickChangeBackToAll() {
