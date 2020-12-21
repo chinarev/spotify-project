@@ -8,7 +8,7 @@ class SetTextSize extends React.Component {
 
     render() {
         let options = ["30", "40", "50", "60", "70", "80", "90", "100", "110", "120"];
-        return getSelect(options, this.props.size, this.props.onChange, "Set text size: ")
+        return getSelect(options, this.props.size, this.props.onChange, "Set text size:")
     }
 }
 

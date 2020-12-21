@@ -22,15 +22,16 @@ class Constructor extends React.Component {
             text_font: 'Brush Script MT',
             text_color: 'black',
             playlistID: params.get('playlistID'),
-            playlist_name: localStorage.getItem('selected_playlist_name')
+            text_input: localStorage.getItem('selected_playlist_name')
         }
 
         this.handleChangeColor = this.handleChangeColor.bind(this);
         this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
         this.handleUploadClick = this.handleUploadClick.bind(this)
+        this.handleChangeTextInput = this.handleChangeTextInput.bind(this)
 
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
+            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
             this.setState({preview: url})
         })
     }
@@ -42,7 +43,7 @@ class Constructor extends React.Component {
     handleChangeColor(color) {
         this.setState({text_color: color.hex});
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
+            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
             this.setState({preview: url})
         })
     }
@@ -50,7 +51,7 @@ class Constructor extends React.Component {
     handleChangeTextSize = async event => {
         await this.setState({text_size: event.target.value});
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
+            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
             this.setState({preview: url})
         })
     }
@@ -58,19 +59,25 @@ class Constructor extends React.Component {
     handleChangeTextFont = async event => {
         await this.setState({text_font: event.target.value});
         getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
+            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
             this.setState({preview: url})
         })
+    }
+
+    handleChangeTextInput = async event => {
+        await this.setState({text_input: event.target.value});
+        getBase64Image(this.state.background, this.state.text_size,
+            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
+            this.setState({preview: url})
+        });
     }
 
     async handleUploadClick() {
         if (document.getElementById("myImage") != null) {
             await this.setState({background: document.getElementById("myImage").src});
-
             getBase64Image(this.state.background, this.state.text_size,
-                this.state.text_color, this.state.text_font, this.state.playlist_name).then(url => {
+                this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
                 this.setState({preview: url})
-
                 document.getElementById("closeID").click();
             })
         }
@@ -93,7 +100,8 @@ class Constructor extends React.Component {
                                          currFont={this.state.text_font}
                                          onClickUpload={this.handleUploadClick}
                                          currPreview={this.state.preview}
-                                         playlistID={this.state.playlistID}/>
+                                         playlistID={this.state.playlistID}
+                                         changeInput={this.handleChangeTextInput}/>
             </div>
         </div>;
     }
