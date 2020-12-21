@@ -19,10 +19,11 @@
     margin: 5px;
 }
 
-select {
-    margin-left: 5px;
+select  {
+    margin-left: auto;
     width: 180px;
     height: 25px;
+
 }
 
 #text-edit-container{
@@ -32,4 +33,10 @@ select {
 
 #edit-container > button {
     width: 100%;
+}
+
+#textInput{
+    margin-left: auto;
+    width: 176px;
+    height: 20px;
 }

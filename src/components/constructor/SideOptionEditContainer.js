@@ -31,6 +31,10 @@ class SideOptionEditContainer extends React.Component {
         });
     }
 
+    componentDidMount() {
+        document.getElementById('textInput').addEventListener('input', this.props.changeInput);
+    }
+
     render() {
         return <div className="side-options-container" id="edit-container">
             <h1 className="playlists_title" id="constructor_text">Set background image</h1>
@@ -73,6 +77,10 @@ class SideOptionEditContainer extends React.Component {
                               onChange={this.props.onChange}
                               disableAlpha={true}/>
                 <div id="select-container">
+                    <label id="select-label">
+                        Enter text:
+                        <input type="text" id="textInput" defaultValue={localStorage.getItem('selected_playlist_name')}/>
+                    </label>
                     <SetTextFont font={this.props.currFont} onChange={this.props.onChangeFont}/>
                     <SetTextSize size={this.props.currSize} onChange={this.props.onChangeSize}/>
                 </div>
