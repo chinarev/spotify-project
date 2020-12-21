@@ -28,6 +28,19 @@ export function getBase64Image(src, font_size, text_color, font, text) {
             ctx.fillStyle = text_color;
             ctx.textAlign = align;
             ctx.fillText(text, canvas.height / 2, canvas.height / 2 + font_size / 4);
+            var lines = text.split(' ');
+            var chars = text.split('');
+            var block_height = font_size * (lines.length  + (lines.length - 1));
+
+             if ( ((chars.length > 10) & (font_size > 80)) || ((chars.length > 15) & (font_size > 50)) || (chars.length > 27)) {
+                 for (var i = 0; i<lines.length; i++){
+                 ctx.fillText(lines[i], canvas.height / 2, (canvas.height / 2 + font_size / 4 ) + (i*font_size));
+                 }
+             }
+             else {
+                 ctx.fillText(text, canvas.height / 2, (canvas.height / 2 + font_size / 4));
+             }
+
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
         };
@@ -39,7 +52,6 @@ export function getBase64Image(src, font_size, text_color, font, text) {
 class StylesContainer extends React.Component {
     constructor(props) {
         super(props);
-        console.log("constructor container")
         this.state = {
             styles: []
         }
@@ -87,7 +99,6 @@ class StylesContainer extends React.Component {
     detailedReactHTMLElement;
 
     render() {
-        console.log("render container")
         let styles_elements = [];
 
         for (let i = 1; i <= this.state.styles.length; i++) {
