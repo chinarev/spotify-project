@@ -2,13 +2,41 @@ import React from "react";
 import text_properties from './DefinedStyles'
 import {spotifyApi} from "../all-playlists-page/Header";
 
+function wrapText(context, text, x, maxWidth, maxHeight, lineHeight) {
+    let words = text.split(' ');
+    let line = '';
+    let lines = [];
+
+    for(let n = 0; n < words.length; n++) {
+        let testLine = line + words[n] + ' ';
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            lines.push(line);
+            line = words[n] + ' ';
+        }
+        else {
+            line = testLine;
+        }
+    }
+
+    lines.push(line);
+    let textBlockHeight = lines.length * lineHeight + (lines.length - 1) * 5;
+    let y = (maxHeight - textBlockHeight + lineHeight) / 2;
+
+    for (let i = 0; i < lines.length; i++){
+        context.fillText(lines[i], x, y);
+        y += lineHeight + 5;
+    }
+}
+
 export function getBase64Image(src, font_size, text_color, font, text) {
     return new Promise((resolve, reject) => {
         const img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
             let dataURL;
             //to resize image into 500x500 square:
             let size = img.naturalHeight;
@@ -25,65 +53,17 @@ export function getBase64Image(src, font_size, text_color, font, text) {
             ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
 
             if (text !== undefined) {
+                console.log("drawing. text: " + font_size);
                 ctx.font = font_size + "px " + font;
                 ctx.fillStyle = text_color;
                 ctx.textAlign = "center";
                 ctx.textBaseline = 'middle';
-                const drawMultilineText = require('canvas-multiline-text')
 
-                const fontSizeUsed = drawMultilineText(
-                    ctx,
-                    "Please could you stop the noise, I'm trying to get some rest from all the unborn chicken voices in my head. What's that? What's that?",
-                    {
-                        rect: {
-                            width:  canvas.width - 20,
-                            height: canvas.height - 20,
-                            x: canvas.width / 2,
-                            y: 0,
-                        },
-                        lineHeight: 0.5,
-                        font: font_size + "px " + font
-                    }
-                )
+                let maxWidth = 500;
+                let lineHeight = font_size - 1;
+                let x = canvas.width / 2;
 
-
-                // let maxWidth = 450;
-                // let lineHeight = font_size;
-                // let x = canvas.width / 2;
-                // let y = font_size/2;
-                // let words = text.split(' ');
-                // let line = '';
-                //
-                // //to calculate text height and y position
-                // for (let n = 0; n < words.length; n++) {
-                //     let testLine = line + words[n] + ' ';
-                //     let metrics = ctx.measureText(testLine);
-                //     let testWidth = metrics.width;
-                //     if (testWidth > maxWidth && n > 0) {
-                //         line = words[n] + ' ';
-                //         y += lineHeight;
-                //     } else {
-                //         line = testLine;
-                //     }
-                // }
-                //
-                // y = (canvas.height - y + font_size) / 2;
-                // words = text.split(' ');
-                // line = '';
-                //
-                // for (let n = 0; n < words.length; n++) {
-                //     let testLine = line + words[n] + ' ';
-                //     let metrics = ctx.measureText(testLine);
-                //     let testWidth = metrics.width;
-                //     if (testWidth > maxWidth && n > 0) {
-                //         ctx.fillText(line, x, y);
-                //         line = words[n] + ' ';
-                //         y += lineHeight;
-                //     } else {
-                //         line = testLine;
-                //     }
-                // }
-                // ctx.fillText(line, x, y);
+                wrapText(canvas.getContext('2d'), text, x,  maxWidth, canvas.height, lineHeight);
             }
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
