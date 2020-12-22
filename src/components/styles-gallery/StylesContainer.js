@@ -4,7 +4,6 @@ import {spotifyApi} from "../all-playlists-page/Header";
 
 export function getBase64Image(src, font_size, text_color, font, text) {
     return new Promise((resolve, reject) => {
-        let align = "center";
         const img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = () => {
@@ -24,24 +23,68 @@ export function getBase64Image(src, font_size, text_color, font, text) {
             canvas.width = 500;
 
             ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
-            ctx.font = font_size + "px " + font;
-            ctx.fillStyle = text_color;
-            ctx.textAlign = align;
-            ctx.fillText(text, canvas.height / 2, canvas.height / 2 + font_size / 4);
-            if(text !== undefined) {
-                let lines = text.split(' ');
-                let chars = text.split('');
 
-                if ( ((chars.length > 10) & (font_size > 80)) || ((chars.length > 15) & (font_size > 50)) || (chars.length > 27)) {
-                    for (let i = 0; i<lines.length; i++){
-                        ctx.fillText(lines[i], canvas.height / 2, (canvas.height / 2 + font_size / 4 ) + (i*font_size));
+            if (text !== undefined) {
+                ctx.font = font_size + "px " + font;
+                ctx.fillStyle = text_color;
+                ctx.textAlign = "center";
+                ctx.textBaseline = 'middle';
+                const drawMultilineText = require('canvas-multiline-text')
+
+                const fontSizeUsed = drawMultilineText(
+                    ctx,
+                    "Please could you stop the noise, I'm trying to get some rest from all the unborn chicken voices in my head. What's that? What's that?",
+                    {
+                        rect: {
+                            width:  canvas.width - 20,
+                            height: canvas.height - 20,
+                            x: canvas.width / 2,
+                            y: 0,
+                        },
+                        lineHeight: 0.5,
+                        font: font_size + "px " + font
                     }
-                }
-                else {
-                    ctx.fillText(text, canvas.height / 2, (canvas.height / 2 + font_size / 4));
-                }
-            }
+                )
 
+
+                // let maxWidth = 450;
+                // let lineHeight = font_size;
+                // let x = canvas.width / 2;
+                // let y = font_size/2;
+                // let words = text.split(' ');
+                // let line = '';
+                //
+                // //to calculate text height and y position
+                // for (let n = 0; n < words.length; n++) {
+                //     let testLine = line + words[n] + ' ';
+                //     let metrics = ctx.measureText(testLine);
+                //     let testWidth = metrics.width;
+                //     if (testWidth > maxWidth && n > 0) {
+                //         line = words[n] + ' ';
+                //         y += lineHeight;
+                //     } else {
+                //         line = testLine;
+                //     }
+                // }
+                //
+                // y = (canvas.height - y + font_size) / 2;
+                // words = text.split(' ');
+                // line = '';
+                //
+                // for (let n = 0; n < words.length; n++) {
+                //     let testLine = line + words[n] + ' ';
+                //     let metrics = ctx.measureText(testLine);
+                //     let testWidth = metrics.width;
+                //     if (testWidth > maxWidth && n > 0) {
+                //         ctx.fillText(line, x, y);
+                //         line = words[n] + ' ';
+                //         y += lineHeight;
+                //     } else {
+                //         line = testLine;
+                //     }
+                // }
+                // ctx.fillText(line, x, y);
+            }
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
         };
@@ -86,7 +129,7 @@ class StylesContainer extends React.Component {
     }
 
     componentDidMount() {
-        spotifyApi.getPlaylist(this.props.playlistID).then(playlist =>  {
+        spotifyApi.getPlaylist(this.props.playlistID).then(playlist => {
             for (let i = 0; i < text_properties.length; i++) {
                 getBase64Image(text_properties[i].img, text_properties[i].font_size,
                     text_properties[i].text_color, text_properties[i].font, playlist.name).then(url => {

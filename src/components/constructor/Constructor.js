@@ -52,7 +52,9 @@ class Constructor extends React.Component {
         await this.setState({text_size: event.target.value});
         getBase64Image(this.state.background, this.state.text_size,
             this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
-            this.setState({preview: url})
+            this.setState({preview: url});
+            console.log("size:" + this.state.text_size);
+            console.log("input:" + this.state.text_input);
         })
     }
 
