@@ -63,7 +63,7 @@ let text_prop6 = {
 let text_prop7 = {
     font_size: 90,
     text_color: "#4B0082",
-    font: "Copperplate Gothic",
+    font: "Comic Sans MS",
     img: back7
 }
 
