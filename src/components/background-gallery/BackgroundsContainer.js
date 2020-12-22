@@ -30,7 +30,7 @@ class BackgroundsContainer extends React.Component {
     GetBackground(image, i) {
         const background_image = React.createElement(
             'img',
-            {className: "album-cover", src: image, alt: "Album cover image"}
+            {className: "album-cover", src: image, alt: "Album cover image", style: {objectFit: "cover"}}
         )
 
         const name = React.createElement(
@@ -50,8 +50,7 @@ class BackgroundsContainer extends React.Component {
         let backgrounds = [];
         let backgrounds_gallery = [back1, back2, back3, back4, back5, back6, back7, back8, back9, back10, back11, back12, back13];
         let i;
-        let list_size = 6;
-        for (i = 1; i <= list_size; i++) {
+        for (i = 1; i <= backgrounds_gallery.length; i++) {
             backgrounds[i] = this.GetBackground(backgrounds_gallery[i - 1], i);
         }
         return React.createElement(
