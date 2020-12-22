@@ -2,6 +2,96 @@ import React from "react";
 import text_properties from './DefinedStyles'
 import {spotifyApi} from "../all-playlists-page/Header";
 
+var getLineMulti = function(ctx, text, opts) {
+
+    // Default options
+    if(!opts)
+        opts = {}
+    if (!opts.font)
+        opts.font = 'sans-serif'
+    if (typeof opts.stroke == 'undefined')
+        opts.stroke = false
+    if (typeof opts.verbose == 'undefined')
+        opts.verbose = false
+    if (!opts.rect)
+        opts.rect = {
+            x: 0,
+            y: 0,
+            width: ctx.canvas.width,
+            height: ctx.canvas.height
+        }
+    if (!opts.lineHeight)
+        opts.lineHeight = 1.1
+    if (!opts.minFontSize)
+        opts.minFontSize = 30
+    if (!opts.maxFontSize)
+        opts.maxFontSize = 100
+    // Default log function is console.log - Note: if verbose il false, nothing will be logged anyway
+    if (!opts.logFunction)
+        opts.logFunction = function(message) { console.log(message) }
+
+
+    const words = require('words-array')(text)
+    if (opts.verbose) opts.logFunction('Text contains ' + words.length + ' words')
+    var lines = []
+
+    // Finds max font size  which can be used to print whole text in opts.rec
+    for (var fontSize = opts.minFontSize; fontSize <= opts.maxFontSize; fontSize++) {
+
+        // Line height
+        var lineHeight = fontSize * opts.lineHeight
+
+        // Set font for testing with measureText()
+        ctx.font = " " + fontSize + "px " + opts.font
+
+        // Start
+        var x = opts.rect.x
+        var y = opts.rect.y + fontSize // It's the bottom line of the letters
+        lines = []
+        var line = ""
+
+        // Cycles on words
+        for (var word of words) {
+            // Add next word to line
+            var linePlus = line + word + " "
+            // If added word exceeds rect width...
+            if (ctx.measureText(linePlus).width > (opts.rect.width)) {
+                // ..."prints" (save) the line without last word
+                lines.push({ text: line, x: x, y: y })
+                // New line with ctx last word
+                line = word + " "
+                y += lineHeight
+            } else {
+                // ...continues appending words
+                line = linePlus
+            }
+        }
+
+        // "Print" (save) last line
+        lines.push({ text: line, x: x, y: y })
+
+        // If bottom of rect is reached then breaks "fontSize" cycle
+        if (y > opts.rect.height)
+            break
+
+    }
+
+    if (opts.verbose) opts.logFunction("Font used: " + ctx.font)
+
+    // Print lines
+    for (var line of lines)
+        // Fill or stroke
+        if (opts.stroke)
+            ctx.strokeText(line.text.trim(), line.x, line.y)
+        else
+            ctx.fillText(line.text.trim(), line.x, line.y)
+
+    // Returns font size
+    return fontSize
+
+}
+
+
 export function getBase64Image(src, font_size, text_color, font, text) {
     return new Promise((resolve, reject) => {
         const img = new Image();
@@ -29,17 +119,18 @@ export function getBase64Image(src, font_size, text_color, font, text) {
                 ctx.fillStyle = text_color;
                 ctx.textAlign = "center";
                 ctx.textBaseline = 'middle';
-                const drawMultilineText = require('canvas-multiline-text')
+                //const drawMultilineText = require('canvas-multiline-text')
 
-                const fontSizeUsed = drawMultilineText(
-                    ctx,
-                    "Please could you stop the noise, I'm trying to get some rest from all the unborn chicken voices in my head. What's that? What's that?",
+                const fontSizeUsed = getLineMulti(
+                    ctx, //"Please could you stop the noise, I'm trying to get some rest from all the unborn chicken voices in my head. What's that? What's that?",
+                    "mem",
                     {
                         rect: {
-                            width:  canvas.width - 20,
-                            height: canvas.height - 20,
                             x: canvas.width / 2,
-                            y: 0,
+                            y: canvas.height / 5,
+                            width:  canvas.width - 20,
+                            height: canvas.height,
+
                         },
                         lineHeight: 0.5,
                         font: font_size + "px " + font
