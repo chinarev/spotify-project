@@ -26,7 +26,14 @@ function wrapText(context, text, x, maxWidth, maxHeight, lineHeight) {
     let textBlockHeight = lines.length * lineHeight + (lines.length - 1) * 5;
     let y = (maxHeight - textBlockHeight + lineHeight) / 2;
 
+
     for (let i = 0; i < lines.length; i++) {
+        if (lines[i].charAt(0) === ' '){
+            lines[i] = lines[i].slice(1);
+        }
+        if (lines[i].charAt(lines[i].length - 1) === ' '){
+            lines[i] = lines[i].substring(0, lines[i].length - 1);
+        }
         context.fillText(lines[i], x, y);
         y += lineHeight + 5;
     }
