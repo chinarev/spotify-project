@@ -61,7 +61,7 @@ export function getBase64Image(src, font_size, text_color, font, text) {
 
                 let maxWidth = 500;
                 let lineHeight = font_size - 1;
-                let x = canvas.width / 2;
+                let x = lineHeight/10 + canvas.width / 2;
 
                 wrapText(canvas.getContext('2d'), text, x,  maxWidth, canvas.height, lineHeight);
             }
