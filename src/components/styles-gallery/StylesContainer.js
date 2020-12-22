@@ -7,24 +7,26 @@ function wrapText(context, text, x, maxWidth, maxHeight, lineHeight) {
     let line = '';
     let lines = [];
 
-    for(let n = 0; n < words.length; n++) {
-        let testLine = line + words[n] + ' ';
+    for (let n = 0; n < words.length; n++) {
+        let testLine = line + words[n];
+        if (n !== words.length - 1) {
+            testLine += ' ';
+        }
         let metrics = context.measureText(testLine);
         let testWidth = metrics.width;
         if (testWidth > maxWidth && n > 0) {
             lines.push(line);
             line = words[n] + ' ';
-        }
-        else {
+        } else {
             line = testLine;
         }
     }
-
     lines.push(line);
+
     let textBlockHeight = lines.length * lineHeight + (lines.length - 1) * 5;
     let y = (maxHeight - textBlockHeight + lineHeight) / 2;
 
-    for (let i = 0; i < lines.length; i++){
+    for (let i = 0; i < lines.length; i++) {
         context.fillText(lines[i], x, y);
         y += lineHeight + 5;
     }
@@ -59,11 +61,11 @@ export function getBase64Image(src, font_size, text_color, font, text) {
                 ctx.textAlign = "center";
                 ctx.textBaseline = 'middle';
 
-                let maxWidth = 500;
-                let lineHeight = font_size - 1;
+                let maxWidth = 490;
+                let lineHeight = font_size - 0.001;
                 let x = canvas.width / 2;
 
-                wrapText(canvas.getContext('2d'), text, x,  maxWidth, canvas.height, lineHeight);
+                wrapText(ctx, text, x, maxWidth, canvas.height, lineHeight);
             }
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
