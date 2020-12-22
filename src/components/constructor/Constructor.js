@@ -29,15 +29,14 @@ class Constructor extends React.Component {
         this.handleChangeTextSize = this.handleChangeTextSize.bind(this);
         this.handleUploadClick = this.handleUploadClick.bind(this)
         this.handleChangeTextInput = this.handleChangeTextInput.bind(this)
-
-        getBase64Image(this.state.background, this.state.text_size,
-            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
-            this.setState({preview: url})
-        })
     }
 
     componentDidMount() {
         document.title = 'SPALCO - Cover constructor';
+        getBase64Image(this.state.background, this.state.text_size,
+            this.state.text_color, this.state.text_font, this.state.text_input).then(url => {
+            this.setState({preview: url})
+        })
     }
 
     handleChangeColor(color) {

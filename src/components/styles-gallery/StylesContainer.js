@@ -2,103 +2,41 @@ import React from "react";
 import text_properties from './DefinedStyles'
 import {spotifyApi} from "../all-playlists-page/Header";
 
-var getLineMulti = function(ctx, text, opts) {
+function wrapText(context, text, x, maxWidth, maxHeight, lineHeight) {
+    let words = text.split(' ');
+    let line = '';
+    let lines = [];
 
-    // Default options
-    if(!opts)
-        opts = {}
-    if (!opts.font)
-        opts.font = 'sans-serif'
-    if (typeof opts.stroke == 'undefined')
-        opts.stroke = false
-    if (typeof opts.verbose == 'undefined')
-        opts.verbose = false
-    if (!opts.rect)
-        opts.rect = {
-            x: 0,
-            y: 0,
-            width: ctx.canvas.width,
-            height: ctx.canvas.height
+    for(let n = 0; n < words.length; n++) {
+        let testLine = line + words[n] + ' ';
+        let metrics = context.measureText(testLine);
+        let testWidth = metrics.width;
+        if (testWidth > maxWidth && n > 0) {
+            lines.push(line);
+            line = words[n] + ' ';
         }
-    if (!opts.lineHeight)
-        opts.lineHeight = 1.1
-    if (!opts.minFontSize)
-        opts.minFontSize = 30
-    if (!opts.maxFontSize)
-        opts.maxFontSize = 100
-    // Default log function is console.log - Note: if verbose il false, nothing will be logged anyway
-    if (!opts.logFunction)
-        opts.logFunction = function(message) { console.log(message) }
-
-
-    const words = require('words-array')(text)
-    if (opts.verbose) opts.logFunction('Text contains ' + words.length + ' words')
-    var lines = []
-
-    // Finds max font size  which can be used to print whole text in opts.rec
-    for (var fontSize = opts.minFontSize; fontSize <= opts.maxFontSize; fontSize++) {
-
-        // Line height
-        var lineHeight = fontSize * opts.lineHeight
-
-        // Set font for testing with measureText()
-        ctx.font = " " + fontSize + "px " + opts.font
-
-        // Start
-        var x = opts.rect.x
-        var y = opts.rect.y + fontSize // It's the bottom line of the letters
-        lines = []
-        var line = ""
-
-        // Cycles on words
-        for (var word of words) {
-            // Add next word to line
-            var linePlus = line + word + " "
-            // If added word exceeds rect width...
-            if (ctx.measureText(linePlus).width > (opts.rect.width)) {
-                // ..."prints" (save) the line without last word
-                lines.push({ text: line, x: x, y: y })
-                // New line with ctx last word
-                line = word + " "
-                y += lineHeight
-            } else {
-                // ...continues appending words
-                line = linePlus
-            }
+        else {
+            line = testLine;
         }
-
-        // "Print" (save) last line
-        lines.push({ text: line, x: x, y: y })
-
-        // If bottom of rect is reached then breaks "fontSize" cycle
-        if (y > opts.rect.height)
-            break
-
     }
 
-    if (opts.verbose) opts.logFunction("Font used: " + ctx.font)
+    lines.push(line);
+    let textBlockHeight = lines.length * lineHeight + (lines.length - 1) * 5;
+    let y = (maxHeight - textBlockHeight + lineHeight) / 2;
 
-    // Print lines
-    for (var line of lines)
-        // Fill or stroke
-        if (opts.stroke)
-            ctx.strokeText(line.text.trim(), line.x, line.y)
-        else
-            ctx.fillText(line.text.trim(), line.x, line.y)
-
-    // Returns font size
-    return fontSize
-
+    for (let i = 0; i < lines.length; i++){
+        context.fillText(lines[i], x, y);
+        y += lineHeight + 5;
+    }
 }
-
 
 export function getBase64Image(src, font_size, text_color, font, text) {
     return new Promise((resolve, reject) => {
         const img = new Image();
         img.crossOrigin = 'Anonymous';
         img.onload = () => {
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
+            let canvas = document.createElement('canvas');
+            let ctx = canvas.getContext('2d');
             let dataURL;
             //to resize image into 500x500 square:
             let size = img.naturalHeight;
@@ -115,66 +53,17 @@ export function getBase64Image(src, font_size, text_color, font, text) {
             ctx.drawImage(img, sx, sy, size, size, 0, 0, canvas.width, canvas.height);
 
             if (text !== undefined) {
+                console.log("drawing. text: " + font_size);
                 ctx.font = font_size + "px " + font;
                 ctx.fillStyle = text_color;
                 ctx.textAlign = "center";
                 ctx.textBaseline = 'middle';
-                //const drawMultilineText = require('canvas-multiline-text')
 
-                const fontSizeUsed = getLineMulti(
-                    ctx, //"Please could you stop the noise, I'm trying to get some rest from all the unborn chicken voices in my head. What's that? What's that?",
-                    "mem",
-                    {
-                        rect: {
-                            x: canvas.width / 2,
-                            y: canvas.height / 5,
-                            width:  canvas.width - 20,
-                            height: canvas.height,
+                let maxWidth = 500;
+                let lineHeight = font_size - 1;
+                let x = canvas.width / 2;
 
-                        },
-                        lineHeight: 0.5,
-                        font: font_size + "px " + font
-                    }
-                )
-
-
-                // let maxWidth = 450;
-                // let lineHeight = font_size;
-                // let x = canvas.width / 2;
-                // let y = font_size/2;
-                // let words = text.split(' ');
-                // let line = '';
-                //
-                // //to calculate text height and y position
-                // for (let n = 0; n < words.length; n++) {
-                //     let testLine = line + words[n] + ' ';
-                //     let metrics = ctx.measureText(testLine);
-                //     let testWidth = metrics.width;
-                //     if (testWidth > maxWidth && n > 0) {
-                //         line = words[n] + ' ';
-                //         y += lineHeight;
-                //     } else {
-                //         line = testLine;
-                //     }
-                // }
-                //
-                // y = (canvas.height - y + font_size) / 2;
-                // words = text.split(' ');
-                // line = '';
-                //
-                // for (let n = 0; n < words.length; n++) {
-                //     let testLine = line + words[n] + ' ';
-                //     let metrics = ctx.measureText(testLine);
-                //     let testWidth = metrics.width;
-                //     if (testWidth > maxWidth && n > 0) {
-                //         ctx.fillText(line, x, y);
-                //         line = words[n] + ' ';
-                //         y += lineHeight;
-                //     } else {
-                //         line = testLine;
-                //     }
-                // }
-                // ctx.fillText(line, x, y);
+                wrapText(canvas.getContext('2d'), text, x,  maxWidth, canvas.height, lineHeight);
             }
             dataURL = canvas.toDataURL('image/jpeg');
             resolve(dataURL);
