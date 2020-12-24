@@ -1,9 +1,9 @@
 import React from "react";
-import {PAGE_STATE} from "../selected-playlist-page/SideOptionsContainer";
-import SideOptionsContainer from "../selected-playlist-page/SideOptionsContainer";
+import {PAGE_STATE} from "./SideOptionsContainer";
+import SideOptionsContainer from "./SideOptionsContainer";
 import {spotifyApi} from "../all-playlists-page/Header";
 import Popup from "reactjs-popup";
-import {getBase64Image} from "../styles-gallery/StylesContainer";
+import {getBase64Image} from "../../service/drawText";
 
 export function onclickUploadCover(playlist_id) {
     let myImage = document.getElementById("myImage").src;

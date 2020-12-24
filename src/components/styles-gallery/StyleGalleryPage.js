@@ -15,10 +15,6 @@ class StyleGalleryPage extends React.Component {
         }
     }
 
-    getPlaylistName() {
-
-    }
-
     componentDidMount() {
         document.title = 'SPALCO - Cover style gallery';
         console.log("component did mount page")

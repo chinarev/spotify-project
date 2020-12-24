@@ -4,8 +4,8 @@ import SetTextSize from "../text-edit-model/SetTextSize";
 import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
 import {spotifyApi} from "../all-playlists-page/Header";
-import {onFileSelected} from "../side-options/SideOptionContainerChangeCover";
-import {getBase64Image} from "../styles-gallery/StylesContainer";
+import {onFileSelected} from "../selected-playlist-page/SideOptionContainerChangeCover";
+import {getBase64Image} from "../../service/drawText";
 
 class SideOptionEditContainer extends React.Component {
     constructor(props) {

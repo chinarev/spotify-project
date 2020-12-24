@@ -2,7 +2,7 @@ import React from "react";
 import SideOptionEditContainer from "./SideOptionEditContainer";
 import Header from "../all-playlists-page/Header";
 import pic from "../../assets/img/white_background.jpg";
-import {getBase64Image} from "../styles-gallery/StylesContainer";
+import {getBase64Image} from "../../service/drawText";
 import '../../assets/constructorStyle.css'
 
 class Constructor extends React.Component {

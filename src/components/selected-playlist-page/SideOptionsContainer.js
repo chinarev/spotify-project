@@ -1,5 +1,5 @@
 import React from "react";
-import SideOptionContainerChangeCover from "../side-options/SideOptionContainerChangeCover";
+import SideOptionContainerChangeCover from "./SideOptionContainerChangeCover";
 import {spotifyApi} from "../all-playlists-page/Header";
 import '../../assets/editTextModal.css'
 import Popup from "reactjs-popup";
