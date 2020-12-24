@@ -1,7 +1,7 @@
 import React from "react";
 import {PAGE_STATE} from "./SideOptionsContainer";
 import SideOptionsContainer from "./SideOptionsContainer";
-import {spotifyApi} from "../all-playlists-page/Header";
+import Header from "../all-playlists-page/Header";
 import Popup from "reactjs-popup";
 import {getBase64Image} from "../../service/drawText";
 
@@ -9,7 +9,7 @@ export function onclickUploadCover(playlist_id) {
     let myImage = document.getElementById("myImage").src;
 
     getBase64Image(myImage).then(url => {
-        spotifyApi.uploadCustomPlaylistCoverImage(
+        Header.spotifyApi.uploadCustomPlaylistCoverImage(
             playlist_id,
             url.substring(url.indexOf(",") + 1)
         ).then(() => document.location.reload())

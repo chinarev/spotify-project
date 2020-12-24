@@ -1,5 +1,5 @@
 import React from "react";
-import {spotifyApi} from "../all-playlists-page/Header";
+import Header from "../all-playlists-page/Header";
 
 class Playlist extends React.Component {
     constructor(props) {
@@ -13,7 +13,7 @@ class Playlist extends React.Component {
     }
 
     getPlaylist = () => {
-        spotifyApi.getPlaylist(this.state.id).then(playlist => this.setState({
+        Header.spotifyApi.getPlaylist(this.state.id).then(playlist => this.setState({
             img: playlist.images[0].url,
             name: playlist.name
         }));

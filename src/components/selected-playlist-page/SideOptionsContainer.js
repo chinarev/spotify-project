@@ -1,6 +1,6 @@
 import React from "react";
 import SideOptionContainerChangeCover from "./SideOptionContainerChangeCover";
-import {spotifyApi} from "../all-playlists-page/Header";
+import Header from "../all-playlists-page/Header";
 import '../../assets/editTextModal.css'
 import Popup from "reactjs-popup";
 
@@ -28,7 +28,7 @@ class SideOptionsContainer extends React.Component {
 
     async onclickName() {
         let playlist_id = this.props.id;
-        await spotifyApi.changePlaylistDetails(
+        await Header.spotifyApi.changePlaylistDetails(
             playlist_id,
             {name: document.getElementById("nameInput").value});
         document.location.reload();

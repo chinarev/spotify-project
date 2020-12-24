@@ -1,6 +1,6 @@
 import React from "react";
 import text_properties from './DefinedStyles'
-import {spotifyApi} from "../all-playlists-page/Header";
+import Header from "../all-playlists-page/Header";
 import {getBase64Image} from "../../service/drawText";
 
 class StylesContainer extends React.Component {
@@ -13,7 +13,7 @@ class StylesContainer extends React.Component {
 
     onclick(img) {
         let playlist_id = this.props.playlistID
-        spotifyApi.uploadCustomPlaylistCoverImage(
+        Header.spotifyApi.uploadCustomPlaylistCoverImage(
             playlist_id,
             img.substring(img.indexOf(",") + 1)
         ).then(() => window.location.assign(`http://localhost:3000/playlist?id=${playlist_id}`));
@@ -39,7 +39,7 @@ class StylesContainer extends React.Component {
     }
 
     componentDidMount() {
-        spotifyApi.getPlaylist(this.props.playlistID).then(playlist => {
+        Header.spotifyApi.getPlaylist(this.props.playlistID).then(playlist => {
             for (let i = 0; i < text_properties.length; i++) {
                 getBase64Image(text_properties[i].img, text_properties[i].font_size,
                     text_properties[i].text_color, text_properties[i].font, playlist.name).then(url => {

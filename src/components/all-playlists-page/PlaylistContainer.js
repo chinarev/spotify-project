@@ -1,5 +1,5 @@
 import React from "react";
-import {spotifyApi} from "./Header";
+import Header from "./Header";
 
 class PlaylistContainer extends React.Component {
     constructor(props) {
@@ -36,14 +36,14 @@ class PlaylistContainer extends React.Component {
     }
 
     getUserID = () => {
-        spotifyApi.getMe()
+        Header.spotifyApi.getMe()
             .then(data => this.setState({
                 user_id: data.id
             }));
     }
 
     getPlaylists = () => {
-        spotifyApi.getUserPlaylists(this.state.user_id)
+        Header.spotifyApi.getUserPlaylists(this.state.user_id)
             .then(data => this.setState({
                 playlists: data.items.filter(playlist =>  (playlist.owner.id === this.state.user_id))
             }));
