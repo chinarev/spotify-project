@@ -1,29 +1,15 @@
 import React from "react";
-import back1 from '../../assets/img/background_gallery/background_gallery1.jpg'
-import back2 from '../../assets/img/background_gallery/background_gallery2.jpg'
-import back3 from '../../assets/img/background_gallery/background_gallery3.jpg'
-import back4 from '../../assets/img/background_gallery/background_gallery4.jpg'
-import back5 from '../../assets/img/background_gallery/background_gallery5.jpg'
-import back6 from '../../assets/img/background_gallery/background_gallery6.jpg'
-import back7 from '../../assets/img/background_gallery/background_gallery7.jpg'
-import back8 from '../../assets/img/background_gallery/background_gallery8.jpg'
-import back9 from '../../assets/img/background_gallery/background_gallery9.jpg'
-import back10 from '../../assets/img/background_gallery/background_gallery10.jpg'
-import back11 from '../../assets/img/background_gallery/background_gallery11.jpg'
-import back12 from '../../assets/img/background_gallery/background_gallery12.jpg'
-import back13 from '../../assets/img/background_gallery/background_gallery13.jpg'
-import pic from "../../assets/img/white_background.jpg";
+import text_properties from "../styles-gallery/DefinedStyles";
 
 class BackgroundsContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            background: pic
+            backgrounds_gallery: text_properties.map(function(x){return x.img})
         }
     }
 
     onclickGallery(img) {
-        this.setState({background: img});
         window.location.assign(`http://localhost:3000/constructor?playlistID=${this.props.playlistID}&background=${img}`);
     }
 
@@ -48,10 +34,9 @@ class BackgroundsContainer extends React.Component {
 
     render() {
         let backgrounds = [];
-        let backgrounds_gallery = [back1, back2, back3, back4, back5, back6, back7, back8, back9, back10, back11, back12, back13];
         let i;
-        for (i = 1; i <= backgrounds_gallery.length; i++) {
-            backgrounds[i] = this.GetBackground(backgrounds_gallery[i - 1], i);
+        for (i = 1; i <= this.state.backgrounds_gallery.length; i++) {
+            backgrounds[i] = this.GetBackground(this.state.backgrounds_gallery[i - 1], i);
         }
         return React.createElement(
             'div',
