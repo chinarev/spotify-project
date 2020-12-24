@@ -4,7 +4,7 @@ import SetTextSize from "../text-edit-model/SetTextSize";
 import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
 import Header from "../all-playlists-page/Header";
-import {onFileSelected} from "../selected-playlist-page/SideOptionContainerChangeCover";
+import SideOptionContainerChangeCover from "../selected-playlist-page/SideOptionContainerChangeCover";
 import {getBase64Image} from "../../service/drawText";
 
 class SideOptionEditContainer extends React.Component {
@@ -51,7 +51,7 @@ class SideOptionEditContainer extends React.Component {
                             </button>
                             <div className="playlists_title header"> Choose cover from your device</div>
                             <div className="content">
-                                <input type="file" onChange={onFileSelected} name="photo" multiple
+                                <input type="file" onChange={SideOptionContainerChangeCover.onFileSelected} name="photo" multiple
                                        accept="image/*,image/jpeg" id="myInput"/>
                                 <img id="myImage"/>
                             </div>
