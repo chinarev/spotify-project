@@ -51,7 +51,7 @@ class SideOptionContainerChangeCover extends React.Component {
 
     render() {
         if (localStorage.getItem("page_state") === PAGE_STATE.SELECTED_PLAYLIST) {
-            return <SideOptionsContainer/>
+            return <SideOptionsContainer id={this.props.id}/>
         } else {
             return <div className="side-options-container">
                 <Popup
