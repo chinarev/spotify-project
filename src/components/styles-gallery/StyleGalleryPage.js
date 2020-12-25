@@ -11,7 +11,6 @@ class StyleGalleryPage extends React.Component {
         const params = new URLSearchParams(search);
         this.state = {
             playlistID: params.get('playlistID'),
-            playlistName: null
         }
     }
 
@@ -26,7 +25,7 @@ class StyleGalleryPage extends React.Component {
         return <div className="all-playlists-page">
             <Header/>
             <h1 className="playlists_title">Available styles</h1>
-            <StylesContainer playlistID={this.state.playlistID} playlistName={this.state.playlistName}/>
+            <StylesContainer playlistID={this.state.playlistID}/>
         </div>
     }
 }

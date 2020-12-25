@@ -1,11 +1,9 @@
 import React from "react";
 import SpotifyWebApi from "spotify-web-api-js";
 
-let spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(localStorage.getItem("textToken"));
-export {spotifyApi};
-
 class Header extends React.Component {
+    static spotifyApi = new SpotifyWebApi();
+
     constructor(props) {
         super(props);
         this.state = {
@@ -13,10 +11,11 @@ class Header extends React.Component {
             image: null,
             user_id: null
         };
+        Header.spotifyApi.setAccessToken(localStorage.getItem("textToken"));
     }
 
     getUser = () => {
-        spotifyApi.getMe()
+        Header.spotifyApi.getMe()
             .then(data => this.setState({
                 user_name: data.display_name,
                 image: data.images[0].url,

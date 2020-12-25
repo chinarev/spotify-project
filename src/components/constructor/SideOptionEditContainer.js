@@ -3,8 +3,8 @@ import SetTextFont from "../text-edit-model/SetTextFont";
 import SetTextSize from "../text-edit-model/SetTextSize";
 import {ChromePicker} from 'react-color';
 import Popup from "reactjs-popup";
-import {spotifyApi} from "../all-playlists-page/Header";
-import {onFileSelected} from "../selected-playlist-page/SideOptionContainerChangeCover";
+import Header from "../all-playlists-page/Header";
+import SideOptionContainerChangeCover from "../selected-playlist-page/SideOptionContainerChangeCover";
 import {getBase64Image} from "../../service/drawText";
 
 class SideOptionEditContainer extends React.Component {
@@ -24,7 +24,7 @@ class SideOptionEditContainer extends React.Component {
         let playlist_id = this.props.playlistID;
 
         getBase64Image(this.props.currPreview).then(url => {
-                    spotifyApi.uploadCustomPlaylistCoverImage(
+                    Header.spotifyApi.uploadCustomPlaylistCoverImage(
                         playlist_id,
                         url.substring(url.indexOf(",") + 1)
                     ).then(() =>  window.location.assign(`http://localhost:3000/playlist?id=${this.props.playlistID}`))
@@ -51,7 +51,7 @@ class SideOptionEditContainer extends React.Component {
                             </button>
                             <div className="playlists_title header"> Choose cover from your device</div>
                             <div className="content">
-                                <input type="file" onChange={onFileSelected} name="photo" multiple
+                                <input type="file" onChange={SideOptionContainerChangeCover.onFileSelected} name="photo" multiple
                                        accept="image/*,image/jpeg" id="myInput"/>
                                 <img id="myImage"/>
                             </div>
